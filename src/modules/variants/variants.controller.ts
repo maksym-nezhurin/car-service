@@ -1,4 +1,20 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
+import { VariantsService } from './variants.service';
 
-@Controller('variants')
-export class VariantsController {}
+@Controller('models/:id/variants')
+export class VariantsController {
+  constructor(private readonly variantsService: VariantsService) {}
+
+  @Get()
+  async getVariants(@Param('id') modelId: string) {
+     return this.variantsService.getVariantsByModel(modelId);
+  }
+
+  @Get('by-year/:year')
+  async getVariantsByYear(
+    @Param('id') modelId: string,
+    @Param('year') year: string,
+  ) {
+    return this.variantsService.getVariantsByModelAndYear(modelId, year);
+  }
+}

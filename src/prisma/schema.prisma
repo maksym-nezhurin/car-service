@@ -16,6 +16,7 @@ datasource db {
 model Car {
   id             String   @id @default(uuid())
   ownerId        String
+  brand          String   @default("unknown")
   complectation  String
   engine         Float
   model          String

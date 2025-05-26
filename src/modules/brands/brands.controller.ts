@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { BrandsService } from './brands.service';
 
 @Controller('brands')
@@ -8,5 +8,10 @@ export class BrandsController {
   @Get()
   async getBrands() {
     return this.brandsService.getAllBrands();
+  }
+
+  @Get('by-year/:year')
+  async getBrandsByYear(@Param('year') year: string) {
+    return this.brandsService.getBrandsByYear(year);
   }
 }

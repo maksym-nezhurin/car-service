@@ -18,4 +18,13 @@ export class ModelsService {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return response.data.Models;
   }
+
+  async getModelsByBrandAndYear(brandId: string, year: string) {
+    const apiUrl = this.configService.get<string>('CARQUERY_API_URL');
+    const url = `${apiUrl}?cmd=getModels&make=${brandId}&year=${year}`;
+    const response = await firstValueFrom(this.httpService.get(url));
+    // Adjust parsing as needed based on API response structure
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return response.data.Models;
+  }
 }

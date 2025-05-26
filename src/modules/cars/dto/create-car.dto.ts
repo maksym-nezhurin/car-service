@@ -18,9 +18,11 @@ export class CreateCarDto {
   engine: number;
 
   @IsString()
+  brand: string;
+
+  @IsString()
   model: string;
 
-//   @IsEnum(CarType)
   @IsString()
   type: string;
 

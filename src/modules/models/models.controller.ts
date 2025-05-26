@@ -9,4 +9,12 @@ export class ModelsController {
   async getModels(@Param('id') brandId: string) {
     return this.modelsService.getModelsByBrand(brandId);
   }
+
+  @Get('by-year/:year')
+  async getModelsByYear(
+    @Param('id') brandId: string,
+    @Param('year') year: string
+  ) {
+    return this.modelsService.getModelsByBrandAndYear(brandId, year);
+  }
 }

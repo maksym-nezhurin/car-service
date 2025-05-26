@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
 
@@ -7,9 +8,11 @@ export class CarsController {
   constructor(private readonly carsService: CarsService) {}
 
   @Post()
-  create(@Body() data: CreateCarDto) {
-    console.log('Creating car with data:', data);
-    return this.carsService.create(data);
+  create(@Body() data: CreateCarDto, @Req() req: Request) {
+    const ownerId = req.header('x-user-id') as string;
+    const carData = { ...data, ownerId };
+    console.log('Creating car with data:', carData);
+    return this.carsService.create(carData);
   }
 
   @Get()

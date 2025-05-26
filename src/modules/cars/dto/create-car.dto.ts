@@ -20,8 +20,9 @@ export class CreateCarDto {
   @IsString()
   model: string;
 
-  @IsEnum(CarType)
-  type: CarType;
+//   @IsEnum(CarType)
+  @IsString()
+  type: string;
 
   @IsNumber()
   price: number;

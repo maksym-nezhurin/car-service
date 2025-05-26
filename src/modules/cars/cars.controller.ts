@@ -8,6 +8,7 @@ export class CarsController {
 
   @Post()
   create(@Body() data: CreateCarDto) {
+    console.log('Creating car with data:', data);
     return this.carsService.create(data);
   }
 

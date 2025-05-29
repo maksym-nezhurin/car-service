@@ -1,23 +1,34 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, Req, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { Request } from 'express';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('cars')
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
 
   @Post()
-  create(@Body() data: CreateCarDto, @Req() req: Request) {
+  @UseInterceptors(FilesInterceptor('images'))
+  async create(
+    @Body() data: CreateCarDto,
+    @UploadedFiles() images: Express.Multer.File[],
+    @Req() req: Request,
+  ) {
     const ownerId = req.header('x-user-id') as string;
-    const carData = { ...data, ownerId };
-    console.log('Creating car with data:', carData);
-    return this.carsService.create(carData);
+    // Передаємо DTO і файли окремо
+    return this.carsService.create({ ...data, ownerId }, images);
   }
 
   @Get()
   findAll() {
     return this.carsService.findAll();
+  }
+
+  @Get('my')
+  my(@Req() req: Request) {
+    const ownerId = req.header('x-user-id') as string;
+    return this.carsService.findByOwner(ownerId);
   }
 
   @Get(':id')

@@ -6,6 +6,8 @@ import { BrandsModule } from './modules/brands/brands.module';
 import { ModelsModule } from './modules/models/models.module';
 import { VariantsModule } from './modules/variants/variants.module';
 import { CarsModule } from './modules/cars/cars.module';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { UploadController } from './modules/upload/upload.controller';
 
 @Module({
   imports: [
@@ -14,8 +16,9 @@ import { CarsModule } from './modules/cars/cars.module';
     ModelsModule,
     VariantsModule,
     CarsModule,
+    CloudinaryModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UploadController],
   providers: [AppService],
 })
 export class AppModule {}

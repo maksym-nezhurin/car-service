@@ -13,7 +13,7 @@ export class ModelsController {
   @Get('by-year/:year')
   async getModelsByYear(
     @Param('id') brandId: string,
-    @Param('year') year: string
+    @Param('year') year: string,
   ) {
     return this.modelsService.getModelsByBrandAndYear(brandId, year);
   }

@@ -1,7 +1,18 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete, Req, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Patch,
+  Delete,
+  Req,
+  UseInterceptors,
+  UploadedFiles,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { CarsService } from './cars.service';
-import { CreateCarDto } from './dto/create-car.dto';
+import { CarDto } from './dto/car.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('cars')
@@ -11,7 +22,7 @@ export class CarsController {
   @Post()
   @UseInterceptors(FilesInterceptor('images'))
   async create(
-    @Body() data: CreateCarDto,
+    @Body() data: CarDto,
     @UploadedFiles() images: Express.Multer.File[],
     @Req() req: Request,
   ) {
@@ -37,9 +48,19 @@ export class CarsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: Partial<CreateCarDto>) {
-    return this.carsService.update(id, data);
+  @UseInterceptors(FilesInterceptor('images'))
+  async update(
+    @Param('id') id: string,
+    @Body() data: Partial<CarDto>,
+    @UploadedFiles() images: Express.Multer.File[],
+  ) {
+    return this.carsService.update(id, data, images);
   }
+
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() data: Partial<CarDto>) {
+  //   return this.carsService.update(id, data);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

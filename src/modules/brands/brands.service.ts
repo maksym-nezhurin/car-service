@@ -15,7 +15,10 @@ export class BrandsService {
     const apiUrl = this.configService.get<string>('CARQUERY_API_URL');
     const url = `${apiUrl}?cmd=getMakes`;
     const response = await firstValueFrom(this.httpService.get(url));
-    const data = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+    const data =
+      typeof response.data === 'string'
+        ? JSON.parse(response.data)
+        : response.data;
     return data.Makes || data.makes || data;
   }
 
@@ -23,7 +26,10 @@ export class BrandsService {
     const apiUrl = this.configService.get<string>('CARQUERY_API_URL');
     const url = `${apiUrl}?cmd=getMakes&year=${year}`;
     const response = await firstValueFrom(this.httpService.get(url));
-    const data = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+    const data =
+      typeof response.data === 'string'
+        ? JSON.parse(response.data)
+        : response.data;
     return data.Makes || data.makes || data;
   }
 }

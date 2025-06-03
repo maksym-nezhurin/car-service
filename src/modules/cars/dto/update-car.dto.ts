@@ -1,4 +1,9 @@
-// import { PartialType } from '@nestjs/mapped-types';
-import { CreateCarDto } from './create-car.dto';
+// update-car.dto.ts
+import { PartialType } from '@nestjs/mapped-types';
+import { CarDto } from './car.dto';
+import { Prisma } from '@prisma/client';
 
-export class UpdateCarDto extends CreateCarDto {}
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+export class UpdateCarDto extends PartialType(CarDto) {}
+
+export type UpdateCarData = Partial<Prisma.CarUpdateInput>;

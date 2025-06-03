@@ -15,7 +15,7 @@ export class ModelsService {
     const url = `${apiUrl}?cmd=getModels&make=${brandId}`;
     const response = await firstValueFrom(this.httpService.get(url));
     // Adjust parsing as needed based on API response structure
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
     return response.data.Models;
   }
 
@@ -24,7 +24,7 @@ export class ModelsService {
     const url = `${apiUrl}?cmd=getModels&make=${brandId}&year=${year}`;
     const response = await firstValueFrom(this.httpService.get(url));
     // Adjust parsing as needed based on API response structure
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
     return response.data.Models;
   }
 }

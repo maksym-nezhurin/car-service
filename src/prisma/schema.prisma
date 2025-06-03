@@ -19,6 +19,8 @@ model Car {
   brand          String   @default("unknown")
   complectation  String
   engine         Float
+  isRentable     Boolean @default(false)
+  rentPricePerDay Float? @default(0)
   model          String
   type           String
   price          Float

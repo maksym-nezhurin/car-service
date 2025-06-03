@@ -13,7 +13,7 @@ export enum CarType {
   COUPE = 'coupe',
 }
 
-export class CreateCarDto {
+export class CarDto {
   @IsString()
   ownerId: string;
 
@@ -34,7 +34,7 @@ export class CreateCarDto {
 
   @IsString()
   @IsOptional()
-  rentPricePerDay?: number;
+  rentPricePerDay?: string;
 
   @IsString()
   type: string;

@@ -16,7 +16,7 @@ export class VariantsService {
     const response = await firstValueFrom(this.httpService.get(url));
 
     // Adjust parsing as needed based on API response structure
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
     return response.data.Trims;
   }
 
@@ -26,7 +26,7 @@ export class VariantsService {
     const response = await firstValueFrom(this.httpService.get(url));
 
     // Adjust parsing as needed based on API response structure
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
     return response.data.Trims;
   }
 }

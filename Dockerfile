@@ -26,4 +26,5 @@ ENV NODE_ENV=production
 
 EXPOSE 3002
 
-CMD ["node", "dist/src/main.js"]
+# Use the correct path based on your build output
+CMD ["node", "dist/main.js"]

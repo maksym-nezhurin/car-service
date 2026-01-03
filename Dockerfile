@@ -2,13 +2,17 @@ FROM node:20-bookworm AS builder
 WORKDIR /app
 
 COPY package*.json ./
-COPY prisma ./prisma/
+COPY src/prisma ./src/prisma
 
 # Install all dependencies (including dev)
 RUN npm install --legacy-peer-deps
 
 COPY . .
 
+RUN npx prisma generate
+RUN npm run build
+
+# Production image
 RUN npx prisma generate
 RUN npm run build
 
@@ -29,6 +33,3 @@ ENV NODE_ENV=production
 ENV PORT=3002
 # Expose the port the app runs on
 EXPOSE 3002
-
-# Use the correct path based on your build output
-CMD ["node", "dist/main.js"]

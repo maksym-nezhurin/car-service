@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { CarDto } from './dto/car.dto';
+import { CarDto, AttributeValueDto } from './dto/car.dto';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
@@ -8,106 +8,275 @@ export class CarsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly cloudinaryService: CloudinaryService,
-  ) {}
+  ) {
+    console.log('CarsService initialized');
+  }
 
-  async create(data: CarDto, images: Express.Multer.File[]) {
-    // 1. Завантажуємо всі файли у Cloudinary та отримуємо масив url-ів
-    let imageUrls: string[] = [];
-    if (images && images.length > 0) {
-      try {
-        imageUrls = await Promise.all(
-          images.map(async (file) => {
-            const res = await this.cloudinaryService.uploadImage(file);
-            return res.secure_url;
-          }),
-        );
-      } catch (error) {
-        // Логуємо і кидаємо помилку далі, щоб контролер повернув 500
-        console.error('Cloudinary upload error:', error);
-        throw new Error('Image upload failed. Announcement was not created.');
-      }
-    }
+  private async getCategoryId() {
+    const category = await this.prisma.category.findUnique({ where: { slug: 'cars' } });
+    if (!category) throw new Error('Cars category not found');
+    return category.id;
+  }
 
-    // Якщо все ок — створюємо запис у БД
-    return this.prisma.car.create({
-      data: {
-        ...data,
-        isRentable: data.isRentable === 'true' || data.isRentable === true,
-        rentPricePerDay: data.rentPricePerDay
-          ? Number(data.rentPricePerDay)
-          : 0,
-        engine: data.engine ? Number(data.engine) : 0,
-        price: data.price ? Number(data.price) : 0,
-        year: data.year ? Number(data.year) : 2025,
-        mileage: data.mileage ? Number(data.mileage) : 0,
-        images: imageUrls,
+  private async getAttributeId(categoryId: string, name: string) {
+    const attr = await this.prisma.attribute.findFirst({ where: { categoryId, name } });
+    if (!attr) throw new Error(`Attribute "${name}" not found`);
+    return attr.id;
+  }
+
+  private async enrichAds(ads: any[]) {
+    // Collect all option IDs from all attributes
+    const optionIds = ads
+      .flatMap((ad) => ad.attributes)
+      .map((attr) => attr.value)
+      .filter(
+        (val) => typeof val === 'string' && /^[0-9a-fA-F-]{36}$/.test(val),
+      );
+
+    // Fetch all relevant AttributeOptions
+    const options = await this.prisma.attributeOption.findMany({
+      where: { id: { in: optionIds } },
+    });
+
+    // Map optionId to option value for quick lookup
+    const optionMap = Object.fromEntries(
+      options.map((opt) => [opt.id, opt.value]),
+    );
+
+    // Enrich attributes for each ad
+    return ads.map((ad) => {
+      const {
+        media,
+        price,
+        currency,
+        title,
+        id,
+        userId,
+        description,
+        createdAt,
+        updatedAt,
+        attributes,
+      } = ad;
+      const attributesObj = Object.fromEntries(
+        attributes.map((attr) => [
+          attr.attribute?.key,
+          optionMap[attr.value] ?? attr.value,
+        ]),
+      );
+
+      return {
+        media,
+        price,
+        currency,
+        title,
+        id,
+        userId,
+        description,
+        createdAt,
+        updatedAt,
+        ...attributesObj,
+      };
+    });
+  }
+
+  async getAttributes() {
+    const categoryId = await this.getCategoryId();
+    const allowedAttributes = [
+      'Mileage',
+      'Engine Volume',
+      'Transmission',
+      'Fuel Type',
+      'Body Type',
+      'VIN',
+      'Condition',
+      'Drive',
+    ];
+
+    return this.prisma.attribute.findMany({
+      where: {
+        categoryId,
+        name: { in: allowedAttributes },
+      },
+      include: {
+        options: true,
       },
     });
   }
 
-  findAll() {
-    console.log('get all cars!');
-    return this.prisma.car.findMany();
+  // async findByOwner(ownerId: string) {
+  //   return this.prisma.ad.findMany({
+  //     where: { userId: ownerId },
+  //     include: {
+  //       attributes: true,
+  //       media: true,
+  //     },
+  //   });
+  // }
+
+  async findByOwner(ownerId: string) {
+    const ads = await this.prisma.ad.findMany({
+      where: { userId: ownerId },
+      include: {
+        attributes: { include: { attribute: true } },
+        media: true,
+      },
+    });
+    return await this.enrichAds(ads);
   }
 
-  findOne(id: string) {
-    return this.prisma.car.findUnique({ where: { id } });
+  async create(data: CarDto, images: Express.Multer.File[]) {
+    const categoryId = await this.getCategoryId();
+
+    // Завантаження файлів у Cloudinary
+    const media = images?.length
+      ? await Promise.all(
+          images.map(async (file, idx) => {
+            const res = await this.cloudinaryService.uploadImage(file);
+            return { url: res.secure_url, type: 'image', position: idx + 1 };
+          }),
+        )
+      : [];
+
+    // Створення Ad з attributes і media
+    console.log('Creating ad with data:', data);
+    const {
+      title,
+      ownerId,
+      description,
+      price,
+      currency = 'USD',
+      ...rest
+    } = data;
+
+    const attributes: AttributeValueDto[] =
+      typeof rest.attributes === 'string'
+        ? (JSON.parse(rest.attributes) as AttributeValueDto[])
+        : [];
+    const ad = await this.prisma.ad.create({
+      data: {
+        title,
+        description,
+        price,
+        currency,
+        userId: ownerId,
+        categoryId,
+        attributes: {
+          create: await Promise.all(
+            attributes.map((attr) => {
+              return {
+                attributeId: attr.attributeId,
+                value: attr.value,
+              };
+            }),
+          ),
+        },
+        media: {
+          create: media,
+        },
+      },
+    });
+
+    return ad;
+  }
+
+  async findAll(query: { page?: string; limit?: string; ownerId?: string }) {
+    const page = query.page ? parseInt(query.page) : 1;
+    const limit = query.limit ? parseInt(query.limit) : 10;
+    const skip = (page - 1) * limit;
+
+    const where: any = {};
+    if (query.ownerId) where.userId = query.ownerId;
+
+    const total = await this.prisma.ad.count({ where });
+    const ads = await this.prisma.ad.findMany({
+      where,
+      include: {
+        attributes: {
+          include: {
+            attribute: true,
+          },
+        },
+        media: true,
+      },
+      skip,
+      take: limit,
+    });
+
+    return { data: await this.enrichAds(ads), total, page, limit };
+  }
+
+  async findOne(id: string) {
+    const ad = await this.prisma.ad.findUnique({
+      where: { id },
+      include: { attributes: { include: { attribute: true } }, media: true },
+    });
+    console.log('Single ad:', ad);
+    const predaredAd = await this.enrichAds([ad]);
+
+    return predaredAd[0];
   }
 
   async update(
     id: string,
     data: Partial<CarDto>,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     images?: Express.Multer.File[],
   ) {
-    console.log('--- data ----', data);
+    const media = images?.length
+      ? await Promise.all(
+          images.map(async (file, idx) => {
+            const res = await this.cloudinaryService.uploadImage(file);
+            return { url: res.secure_url, type: 'image', position: idx + 1 };
+          }),
+        )
+      : [];
 
-    const newData = {
-      ...data,
-      ownerId: data.ownerId ? data.ownerId : '11-11',
-      isRentable: data.isRentable === 'true' || data.isRentable === true,
-      rentPricePerDay: data.rentPricePerDay ? Number(data.rentPricePerDay) : 0,
-      engine: data.engine ? Number(data.engine) : 0,
-      price: data.price ? Number(data.price) : 0,
-      year: data.year ? Number(data.year) : 2025,
-      mileage: data.mileage ? Number(data.mileage) : 0,
-    };
+    const ad = await this.prisma.ad.update({
+      where: { id },
+      data: {
+        title: data.title,
+        description: data.description,
+        price: data.price,
+        currency: data.currency,
+        attributes: {
+          // Тут можна реалізувати upsert атрибутів
+          deleteMany: {}, // спочатку видаляємо старі
+          // create: data.attributes?.map((attr) => ({
+          //   attributeId: attr.attributeId,
+          //   value: attr.value,
+          // })),
+        },
+        media: {
+          create: media,
+        },
+      },
+    });
 
-    return this.prisma.car.update({ where: { id }, data: newData });
+    return ad;
   }
 
   async remove(id: string) {
-    // 1. Get the car to access the image URLs
-    const car = await this.prisma.car.findUnique({ where: { id } });
+    const car = await this.prisma.ad.findUnique({
+      where: { id },
+      include: { media: true },
+    });
+    if (!car) throw new Error('Car not found');
 
-    if (!car) {
-      throw new Error('Car not found');
-    }
+    // Видалення з Cloudinary
+    await Promise.all(
+      car.media.map((m) => {
+        const publicId = this.cloudinaryService.getPublicIdFromUrl(m.url);
+        return this.cloudinaryService.deleteImage(publicId);
+      }),
+    );
 
-    // 2. Delete images from Cloudinary if any
-    if (car.images && car.images.length > 0) {
-      try {
-        await Promise.all(
-          car.images.map((url) => {
-            // Extract the public_id from the URL
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            const publicId = this.cloudinaryService.getPublicIdFromUrl(url);
-            console.log('publicId', publicId);
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-            return this.cloudinaryService.deleteImage(publicId);
-          }),
-        );
-      } catch (error) {
-        console.error('Failed to delete images from Cloudinary:', error);
-        // Continue deleting the DB record even if Cloudinary fails (optional)
-      }
-    }
+    await this.prisma.media.deleteMany({
+      where: { adId: id },
+    });
 
-    // 3. Delete the car from the database
-    return this.prisma.car.delete({ where: { id } });
-  }
+    await this.prisma.attributeValue.deleteMany({
+      where: { adId: id },
+    });
 
-  findByOwner(ownerId: string) {
-    return this.prisma.car.findMany({ where: { ownerId } });
+    return this.prisma.ad.delete({ where: { id } });
   }
 }

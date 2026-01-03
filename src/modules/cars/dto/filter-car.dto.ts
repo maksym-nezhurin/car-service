@@ -1,5 +1,5 @@
 import { IsOptional, IsUUID, IsEnum, IsInt, Min } from 'class-validator';
-import { CarType } from './create-car.dto';
+import { CarType } from './car.dto';
 
 export class FilterCarDto {
   @IsOptional()

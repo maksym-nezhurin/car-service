@@ -1,17 +1,19 @@
-FROM node:20-alpine AS builder
-
+FROM node:20-bookworm AS builder
 WORKDIR /app
 
 COPY package*.json ./
 COPY src/prisma ./src/prisma
-RUN npm install --production
+
+# Install all dependencies (including dev)
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
 RUN npx prisma generate
 RUN npm run build
 
-FROM node:20-alpine
+# Production image
+FROM node:20-bookworm
 
 WORKDIR /app
 
@@ -24,5 +26,4 @@ ENV NODE_ENV=production
 
 EXPOSE 3002
 
-CMD ["node", "dist/main.js"]
-
+CMD ["node", "dist/src/main.js"]

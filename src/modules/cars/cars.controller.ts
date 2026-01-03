@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
   Body,
   Param,
   Patch,
@@ -27,13 +28,18 @@ export class CarsController {
     @Req() req: Request,
   ) {
     const ownerId = req.header('x-user-id') as string;
-    // Передаємо DTO і файли окремо
+
     return this.carsService.create({ ...data, ownerId }, images);
   }
 
+  @Get('attributes')
+  getAttributes() {
+    return this.carsService.getAttributes();
+  }
+
   @Get()
-  findAll() {
-    return this.carsService.findAll();
+  findAll(@Query() query) {
+    return this.carsService.findAll(query);
   }
 
   @Get('my')
@@ -57,13 +63,20 @@ export class CarsController {
     return this.carsService.update(id, data, images);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() data: Partial<CarDto>) {
-  //   return this.carsService.update(id, data);
-  // }
-
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.carsService.remove(id);
   }
+
+  @Get('brands')
+  getAllBrands() {
+    console.log('getAllBrands');
+    // return this.brandService.getAllBrands();
+  }
+
+  // @Get('brands/:brand/models')
+  // getModelsByBrand(@Param('brand') brand: string) {
+  //   console.log('get models');
+  //   // return this.carsService.getModelsByBrand(brand);
+  // }
 }

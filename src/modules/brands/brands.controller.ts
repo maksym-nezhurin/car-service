@@ -7,6 +7,7 @@ export class BrandsController {
 
   @Get()
   async getBrands() {
+    console.log('getBrands');
     return this.brandsService.getAllBrands();
   }
 

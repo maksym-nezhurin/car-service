@@ -1,5 +1,6 @@
 // Example for brands.service.ts
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
@@ -7,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
 @Injectable()
 export class BrandsService {
   constructor(
+    private readonly prisma: PrismaService,
     private readonly httpService: HttpService,
     private readonly configService: ConfigService,
   ) {}

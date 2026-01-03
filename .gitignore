@@ -2,3 +2,12 @@ node_modules
 prisma/dev.db
 .env
 dist
+
+# Turbo cache
+.turbo/
+
+# Build artifacts
+*.log
+*.lock
+
+fly.toml

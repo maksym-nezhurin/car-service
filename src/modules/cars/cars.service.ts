@@ -126,12 +126,25 @@ export class CarsService {
 
   async create(data: CarDto, images: Express.Multer.File[]) {
     const categoryId = await this.getCategoryId();
+    const attributes: AttributeValueDto[] =
+      typeof data.attributes === 'string'
+        ? (JSON.parse(data.attributes) as AttributeValueDto[])
+        : (data.attributes ?? []);
+    const vinAttributeId = await this.getAttributeId(categoryId, 'VIN').catch(() => null);
+    const rawVin =
+      vinAttributeId
+        ? attributes.find((attr) => attr.attributeId === vinAttributeId)?.value
+        : undefined;
+    const vinFolderSafe = rawVin
+      ? rawVin.replace(/[^a-zA-Z0-9_-]/g, '').toUpperCase()
+      : 'unknown-vin';
+    const imageFolder = `cars/${vinFolderSafe}`;
 
     // Завантаження файлів у Cloudinary
     const media = images?.length
       ? await Promise.all(
           images.map(async (file, idx) => {
-            const res = await this.cloudinaryService.uploadImage(file);
+            const res = await this.cloudinaryService.uploadImage(file, imageFolder);
             return { url: res.secure_url, type: 'image', position: idx + 1 };
           }),
         )
@@ -148,10 +161,6 @@ export class CarsService {
       ...rest
     } = data;
 
-    const attributes: AttributeValueDto[] =
-      typeof rest.attributes === 'string'
-        ? (JSON.parse(rest.attributes) as AttributeValueDto[])
-        : [];
     const ad = await this.prisma.ad.create({
       data: {
         title,
@@ -221,10 +230,19 @@ export class CarsService {
     data: Partial<CarDto>,
     images?: Express.Multer.File[],
   ) {
+    const adWithAttributes = await this.prisma.ad.findUnique({
+      where: { id },
+      include: { attributes: { include: { attribute: true } } },
+    });
+    const currentVin =
+      adWithAttributes?.attributes.find((attr) => attr.attribute?.name === 'VIN')?.value ??
+      'unknown-vin';
+    const imageFolder = `cars/${currentVin.replace(/[^a-zA-Z0-9_-]/g, '').toUpperCase()}`;
+
     const media = images?.length
       ? await Promise.all(
           images.map(async (file, idx) => {
-            const res = await this.cloudinaryService.uploadImage(file);
+            const res = await this.cloudinaryService.uploadImage(file, imageFolder);
             return { url: res.secure_url, type: 'image', position: idx + 1 };
           }),
         )

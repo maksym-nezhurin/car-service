@@ -2,6 +2,7 @@ node_modules
 prisma/dev.db
 .env
 dist
+generated/
 
 # Turbo cache
 .turbo/

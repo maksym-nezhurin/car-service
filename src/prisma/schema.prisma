@@ -289,12 +289,14 @@ model VehicleOwnership {
   startedAt   DateTime  @default(now())
   endedAt     DateTime?
   isCurrent   Boolean   @default(true)
+  isPrimary   Boolean   @default(false)
   source      String    @default("manual")
   createdAt   DateTime  @default(now())
 
   vehicle     Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([ownerUserId, isCurrent], name: "ownership_owner_current_idx")
+  @@index([ownerUserId, isPrimary], name: "ownership_owner_primary_idx")
   @@index([vehicleId, isCurrent], name: "ownership_vehicle_current_idx")
 }
 

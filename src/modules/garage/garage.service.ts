@@ -101,11 +101,16 @@ export class GarageService {
       };
     }
 
+    const existingPrimaryCount = await this.prisma.vehicleOwnership.count({
+      where: { ownerUserId, isCurrent: true, isPrimary: true },
+    });
+
     const ownership = await this.prisma.vehicleOwnership.create({
       data: {
         vehicleId: vehicle.id,
         ownerUserId,
         isCurrent: true,
+        isPrimary: existingPrimaryCount === 0,
         source: 'manual',
       },
     });
@@ -124,13 +129,51 @@ export class GarageService {
   }
 
   async listMyVehicles(ownerUserId: string) {
-    return this.prisma.vehicleOwnership.findMany({
+    const items = await this.prisma.vehicleOwnership.findMany({
       where: { ownerUserId, isCurrent: true },
       include: {
         vehicle: true,
       },
-      orderBy: { startedAt: 'desc' },
+      orderBy: [{ isPrimary: 'desc' }, { startedAt: 'desc' }],
     });
+
+    const hasPrimary = items.some((item) => item.isPrimary);
+    if (!hasPrimary && items.length === 1) {
+      const updated = await this.prisma.vehicleOwnership.update({
+        where: { id: items[0].id },
+        data: { isPrimary: true },
+        include: { vehicle: true },
+      });
+      return [updated];
+    }
+
+    return items;
+  }
+
+  async setPrimaryVehicle(ownerUserId: string, vehicleId: string) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+
+    await this.prisma.$transaction([
+      this.prisma.vehicleOwnership.updateMany({
+        where: { ownerUserId, isCurrent: true },
+        data: { isPrimary: false },
+      }),
+      this.prisma.vehicleOwnership.updateMany({
+        where: { ownerUserId, vehicleId, isCurrent: true },
+        data: { isPrimary: true },
+      }),
+    ]);
+
+    const ownership = await this.prisma.vehicleOwnership.findFirst({
+      where: { ownerUserId, vehicleId, isCurrent: true },
+      include: { vehicle: true },
+    });
+
+    if (!ownership) {
+      throw new NotFoundException('Vehicle ownership not found');
+    }
+
+    return ownership;
   }
 
   async getVehicleDetails(ownerUserId: string, vehicleId: string) {
@@ -246,6 +289,28 @@ export class GarageService {
         }),
       ),
     );
+  }
+
+  async deleteVehiclePhoto(ownerUserId: string, vehicleId: string, photoId: string) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+
+    const photo = await this.prisma.vehiclePhoto.findFirst({
+      where: { id: photoId, vehicleId, ownerUserId },
+    });
+    if (!photo) {
+      throw new NotFoundException('Photo not found.');
+    }
+
+    if (photo.publicId) {
+      try {
+        await this.cloudinaryService.deleteImage(photo.publicId);
+      } catch {
+        // DB row is source of truth; orphan assets can be cleaned in Cloudinary later.
+      }
+    }
+
+    await this.prisma.vehiclePhoto.delete({ where: { id: photoId } });
+    return { deleted: true, id: photoId };
   }
 
   async addMaintenance(ownerUserId: string, vehicleId: string, dto: AddMaintenanceRecordDto) {

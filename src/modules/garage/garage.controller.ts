@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Headers,
   Param,
@@ -66,6 +67,14 @@ export class GarageController {
     return this.garageService.updateVehicle(this.requireUserId(headers), vehicleId, dto);
   }
 
+  @Patch('vehicles/:vehicleId/primary')
+  setPrimaryVehicle(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+  ) {
+    return this.garageService.setPrimaryVehicle(this.requireUserId(headers), vehicleId);
+  }
+
   @Post('vehicles/:vehicleId/photos')
   @UseInterceptors(FilesInterceptor('files', 12))
   addVehiclePhotos(
@@ -74,6 +83,19 @@ export class GarageController {
     @UploadedFiles() files: Express.Multer.File[],
   ) {
     return this.garageService.addVehiclePhotos(this.requireUserId(headers), vehicleId, files);
+  }
+
+  @Delete('vehicles/:vehicleId/photos/:photoId')
+  deleteVehiclePhoto(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+    @Param('photoId') photoId: string,
+  ) {
+    return this.garageService.deleteVehiclePhoto(
+      this.requireUserId(headers),
+      vehicleId,
+      photoId,
+    );
   }
 
   @Post('vehicles/:vehicleId/maintenance')

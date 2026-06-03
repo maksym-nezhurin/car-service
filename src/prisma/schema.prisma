@@ -396,3 +396,70 @@ model VehicleSaleContract {
 
   @@index([vehicleId, contractDate], name: "vehicle_sale_contract_idx")
 }
+
+// ---------------------------------------------------------------------------
+// Local vehicle catalog mirror (CarQuery → DB). Source of truth for community
+// generations + variant subgroups. Do not call CarQuery on every user request.
+// ---------------------------------------------------------------------------
+
+model CatalogMake {
+  id        String         @id
+  slug      String         @unique
+  name      String
+  logoUrl   String?        @map("logo_url")
+  syncedAt  DateTime       @default(now()) @map("synced_at")
+  models    CatalogModel[]
+
+  @@map("catalog_makes")
+}
+
+model CatalogModel {
+  id          String              @id
+  makeId      String              @map("make_id")
+  slug        String
+  name        String
+  syncedAt    DateTime            @default(now()) @map("synced_at")
+  make        CatalogMake         @relation(fields: [makeId], references: [id], onDelete: Cascade)
+  generations CatalogGeneration[]
+
+  @@unique([makeId, slug])
+  @@map("catalog_models")
+}
+
+/// Model line / generation (community GENERATION room), e.g. Tucson 2015–2018.
+model CatalogGeneration {
+  id              String       @id @default(uuid())
+  modelId         String       @map("model_id")
+  externalModelId String?      @map("external_model_id")
+  slug            String
+  displayName     String       @map("display_name")
+  yearFrom        Int?         @map("year_from")
+  yearTo          Int?         @map("year_to")
+  coverImageUrl   String?      @map("cover_image_url")
+  shortDescription String?     @map("short_description")
+  syncedAt        DateTime     @default(now()) @map("synced_at")
+  model           CatalogModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  trims           CatalogTrim[]
+
+  @@unique([modelId, slug])
+  @@index([externalModelId])
+  @@map("catalog_generations")
+}
+
+/// Engine subgroup (community VARIANT), e.g. 2.0 CRDi 185 KM — not trim package (Premium).
+model CatalogTrim {
+  id           String            @id
+  generationId String            @map("generation_id")
+  slug         String
+  displayName  String            @map("display_name")
+  modelYear    Int?              @map("model_year")
+  engine       String?
+  fuelType     String?           @map("fuel_type")
+  aspiration   String?
+  powerHp      Int?              @map("power_hp")
+  syncedAt     DateTime          @default(now()) @map("synced_at")
+  generation   CatalogGeneration @relation(fields: [generationId], references: [id], onDelete: Cascade)
+
+  @@unique([generationId, slug])
+  @@map("catalog_trims")
+}

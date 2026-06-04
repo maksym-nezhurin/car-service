@@ -8,14 +8,20 @@ import { VariantsModule } from './modules/variants/variants.module';
 import { CarsModule } from './modules/cars/cars.module';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 import { UploadController } from './modules/upload/upload.controller';
+import { GarageModule } from './modules/garage/garage.module';
+import { CatalogModule } from './modules/catalog/catalog.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    HealthModule,
     BrandsModule,
     ModelsModule,
     VariantsModule,
     CarsModule,
+    GarageModule,
+    CatalogModule,
     CloudinaryModule,
   ],
   controllers: [AppController, UploadController],

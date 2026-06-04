@@ -1,11 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
+  // Isolated client — monorepo root @prisma/client is overwritten by other services
+  output   = "../../generated/client"
 }
 
 datasource db {
@@ -13,22 +9,457 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Car {
-  id             String   @id @default(uuid())
-  ownerId        String
-  brand          String   @default("unknown")
-  complectation  String
-  engine         Float
-  isRentable     Boolean @default(false)
-  rentPricePerDay Float? @default(0)
-  model          String
-  type           String
-  price          Float
-  year           Int
-  mileage        Float
-  description    String
-  color          String?
-  images         String[] // масив URL-ів зображень
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  parentId  String?  
+  parent    Category? @relation("CategoryParent", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryParent")
+
+  attributes Attribute[]
+  ads        Ad[]
+}
+
+model Ad {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  price       Decimal    @db.Decimal(12,2)
+  currency    String     @default("USD")
+  userId      String
+  categoryId  String
+  category    Category   @relation(fields: [categoryId], references: [id])
+
+  attributes  AttributeValue[]
+  media       Media[]
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  publishedAt DateTime?
+}
+
+model Attribute {
+  id         String     @id @default(uuid())
+  categoryId String
+  name       String
+  key        String?
+  type       AttributeType
+  unit       String?
+
+  category   Category   @relation(fields: [categoryId], references: [id])
+  values     AttributeValue[]
+  options    AttributeOption[]
+
+  @@unique([categoryId, name], name: "categoryId_name")
+}
+
+enum AttributeType {
+  STRING
+  NUMBER
+  BOOLEAN
+  ENUM
+  DATE
+}
+
+model AttributeOption {
+  id          String     @id @default(uuid())
+  attributeId String
+  value       String
+
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+
+  @@unique([attributeId, value], name: "attributeId_value")
+}
+
+model AttributeValue {
+  id          String   @id @default(uuid())
+  adId        String
+  attributeId String
+  value       String   // зберігаємо як текст, конвертуємо на рівні бізнес-логіки
+
+  ad          Ad       @relation(fields: [adId], references: [id])
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  adId      String
+  url       String   // Cloudinary URL
+  type      String   // image, video, etc.
+  position  Int?
+
+  ad        Ad       @relation(fields: [adId], references: [id])
+}
+
+model Vehicle {
+  id                String                  @id @default(uuid())
+  vin               String                  @unique
+  year              Int?
+  plateNumber       String?
+  brandId           String?
+  modelId           String?
+  variantId         String?
+  vehicleType       String?
+  color             String?
+  engine            String?
+  transmission      String?
+  fuelType          String?
+  currentMileageKm  Int?
+  countryCode       String?                 @default("PL")
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+
+  ownerships        VehicleOwnership[]
+  photos            VehiclePhoto[]
+  saleListings      VehicleSaleListing[]
+  maintenance       MaintenanceRecord[]
+  odometerLogs      OdometerLog[]
+  registrationEvents VehicleRegistrationEvent[]
+  saleContracts     VehicleSaleContract[]
+  reports           VehicleReport[]
+  reportAccessGrants VehicleReportAccessGrant[]
+  profileViewLogs   VehicleProfileViewLog[]
+
+  @@index([brandId, modelId, variantId], name: "vehicle_brand_model_variant_idx")
+}
+
+model VehiclePhoto {
+  id          String   @id @default(uuid())
+  vehicleId   String
+  ownerUserId String
+  url         String
+  publicId    String?
+  createdAt   DateTime @default(now())
+
+  vehicle     Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, createdAt], name: "vehicle_photo_vehicle_idx")
+}
+
+enum SaleListingStatus {
+  DRAFT
+  READY
+  ACTIVE
+  PAUSED
+  SOLD
+  ARCHIVED
+}
+
+enum DistributionPlatform {
+  OUR_SITE
+  OTOMOTO
+  FACEBOOK_MARKETPLACE
+  OLX
+  AUTOBAZAR_SK
+  AUTORIA
+  TIKTOK
+  INSTAGRAM
+}
+
+enum ListingDistributionStatus {
+  PENDING
+  IN_PROGRESS
+  PUBLISHED
+  FAILED
+  UNPUBLISHED
+}
+
+model VehicleSaleListing {
+  id          String                  @id @default(uuid())
+  vehicleId   String
+  ownerUserId String
+  status      SaleListingStatus       @default(DRAFT)
+  title       String?
+  description String?
+  price       Decimal?                @db.Decimal(12,2)
+  currency    String?                 @default("PLN")
+  marketRegion String?
+  specsJson   Json?
+  appearanceJson Json?
+  featuresJson Json?
+  contactJson Json?
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+
+  vehicle     Vehicle                 @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  distributions ListingDistribution[]
+
+  @@index([vehicleId, ownerUserId], name: "sale_listing_vehicle_owner_idx")
+}
+
+model ListingDistribution {
+  id           String                    @id @default(uuid())
+  saleListingId String
+  platform     DistributionPlatform
+  status       ListingDistributionStatus @default(PENDING)
+  externalId   String?
+  externalUrl  String?
+  lastError    String?
+  payloadSnapshot Json?
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+
+  saleListing  VehicleSaleListing        @relation(fields: [saleListingId], references: [id], onDelete: Cascade)
+
+  @@unique([saleListingId, platform], name: "sale_listing_platform_unique")
+  @@index([saleListingId, status], name: "sale_distribution_status_idx")
+}
+
+enum VehicleProfileTier {
+  PUBLIC
+  OWNER
+  PAID
+}
+
+enum VehicleReportStatus {
+  PENDING
+  READY
+  FAILED
+  EXPIRED
+}
+
+model VehicleReport {
+  id         String             @id @default(uuid())
+  vehicleId  String
+  provider   String
+  tier       VehicleProfileTier @default(PUBLIC)
+  status     VehicleReportStatus @default(PENDING)
+  summary    Json?
+  rawPayload Json?
+  fetchedAt  DateTime?
+  expiresAt  DateTime?
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  vehicle    Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, provider, tier], name: "vehicle_report_lookup_idx")
+}
+
+model VehicleReportAccessGrant {
+  id          String             @id @default(uuid())
+  vehicleId   String
+  userId      String
+  provider    String
+  accessLevel VehicleProfileTier @default(PAID)
+  source      String             @default("purchase")
+  validUntil  DateTime?
+  createdAt   DateTime           @default(now())
+
+  vehicle     Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, userId, provider], name: "vehicle_report_access_lookup_idx")
+}
+
+model VehicleProfileViewLog {
+  id            String             @id @default(uuid())
+  vehicleId     String
+  viewerUserId  String?
+  requestedTier VehicleProfileTier @default(PUBLIC)
+  resolvedTier  VehicleProfileTier @default(PUBLIC)
+  meta          Json?
+  createdAt     DateTime           @default(now())
+
+  vehicle       Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, createdAt], name: "vehicle_profile_view_log_idx")
+}
+
+model OdometerLog {
+  id           String   @id @default(uuid())
+  vehicleId    String
+  ownerUserId  String
+  mileageKm    Int
+  recordedAt   DateTime @default(now())
+  notes        String?
+  source       String   @default("manual")
+
+  vehicle      Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, recordedAt], name: "odometer_vehicle_date_idx")
+  @@index([vehicleId, mileageKm], name: "odometer_vehicle_mileage_idx")
+}
+
+model VehicleOwnership {
+  id          String    @id @default(uuid())
+  vehicleId   String
+  ownerUserId String
+  cloudFolder String?
+  startedAt   DateTime  @default(now())
+  endedAt     DateTime?
+  isCurrent   Boolean   @default(true)
+  isPrimary   Boolean   @default(false)
+  source      String    @default("manual")
+  createdAt   DateTime  @default(now())
+
+  vehicle     Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([ownerUserId, isCurrent], name: "ownership_owner_current_idx")
+  @@index([ownerUserId, isPrimary], name: "ownership_owner_primary_idx")
+  @@index([vehicleId, isCurrent], name: "ownership_vehicle_current_idx")
+}
+
+enum MaintenanceType {
+  ENGINE_OIL
+  OIL_FILTER
+  AIR_FILTER
+  CABIN_FILTER
+  SPARK_PLUGS
+  CLUTCH_REPLACEMENT
+  BRAKE_PADS
+  BRAKE_FLUID
+  COOLANT
+  TIMING_BELT
+  TIRE_CHANGE
+  OTHER
+}
+
+model MaintenanceRecord {
+  id           String          @id @default(uuid())
+  vehicleId    String
+  ownerUserId  String
+  type         MaintenanceType
+  title        String
+  details      String?
+  mileageKm    Int
+  performedAt  DateTime
+  costAmount   Decimal?        @db.Decimal(12,2)
+  costCurrency String?         @default("PLN")
+  source       String          @default("manual")
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  vehicle      Vehicle         @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  attachments  MaintenanceAttachment[]
+
+  @@index([vehicleId, mileageKm], name: "maintenance_vehicle_mileage_idx")
+  @@index([vehicleId, performedAt], name: "maintenance_vehicle_date_idx")
+}
+
+model MaintenanceAttachment {
+  id                  String            @id @default(uuid())
+  maintenanceRecordId String
+  ownerUserId         String
+  url                 String
+  publicId            String?
+  originalName        String?
+  mimeType            String?
+  sizeBytes           Int?
+  createdAt           DateTime          @default(now())
+
+  maintenanceRecord   MaintenanceRecord @relation(fields: [maintenanceRecordId], references: [id], onDelete: Cascade)
+
+  @@index([maintenanceRecordId], name: "maintenance_attachment_record_idx")
+}
+
+enum RegistrationEventType {
+  REGISTERED
+  DEREGISTERED
+  OWNERSHIP_CHANGED
+  IMPORTED
+  EXPORTED
+  OTHER
+}
+
+model VehicleRegistrationEvent {
+  id          String                @id @default(uuid())
+  vehicleId   String
+  ownerUserId String
+  eventType   RegistrationEventType
+  eventDate   DateTime
+  countryCode String?
+  notes       String?
+  createdAt   DateTime              @default(now())
+
+  vehicle     Vehicle               @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, eventDate], name: "vehicle_registration_event_idx")
+}
+
+model VehicleSaleContract {
+  id                String    @id @default(uuid())
+  vehicleId         String
+  sellerUserId      String
+  buyerUserId       String?
+  sellerSnapshot    Json
+  buyerSnapshot     Json
+  salePriceAmount   Decimal?  @db.Decimal(12,2)
+  salePriceCurrency String?   @default("PLN")
+  contractDate      DateTime
+  generatedText     String
+  status            String    @default("draft")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  vehicle           Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, contractDate], name: "vehicle_sale_contract_idx")
+}
+
+// ---------------------------------------------------------------------------
+// Local vehicle catalog mirror (CarQuery → DB). Source of truth for community
+// generations + variant subgroups. Do not call CarQuery on every user request.
+// ---------------------------------------------------------------------------
+
+model CatalogMake {
+  id        String         @id
+  slug      String         @unique
+  name      String
+  logoUrl   String?        @map("logo_url")
+  syncedAt  DateTime       @default(now()) @map("synced_at")
+  models    CatalogModel[]
+
+  @@map("catalog_makes")
+}
+
+model CatalogModel {
+  id          String              @id
+  makeId      String              @map("make_id")
+  slug        String
+  name        String
+  syncedAt    DateTime            @default(now()) @map("synced_at")
+  make        CatalogMake         @relation(fields: [makeId], references: [id], onDelete: Cascade)
+  generations CatalogGeneration[]
+
+  @@unique([makeId, slug])
+  @@map("catalog_models")
+}
+
+/// Model line / generation (community GENERATION room), e.g. Tucson 2015–2018.
+model CatalogGeneration {
+  id              String       @id @default(uuid())
+  modelId         String       @map("model_id")
+  externalModelId String?      @map("external_model_id")
+  slug            String
+  displayName     String       @map("display_name")
+  yearFrom        Int?         @map("year_from")
+  yearTo          Int?         @map("year_to")
+  coverImageUrl   String?      @map("cover_image_url")
+  shortDescription String?     @map("short_description")
+  syncedAt        DateTime     @default(now()) @map("synced_at")
+  model           CatalogModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  trims           CatalogTrim[]
+
+  @@unique([modelId, slug])
+  @@index([externalModelId])
+  @@map("catalog_generations")
+}
+
+/// Engine subgroup (community VARIANT), e.g. 2.0 CRDi 185 KM — not trim package (Premium).
+model CatalogTrim {
+  id           String            @id
+  generationId String            @map("generation_id")
+  slug         String
+  displayName  String            @map("display_name")
+  modelYear    Int?              @map("model_year")
+  engine       String?
+  fuelType     String?           @map("fuel_type")
+  aspiration   String?
+  powerHp      Int?              @map("power_hp")
+  syncedAt     DateTime          @default(now()) @map("synced_at")
+  generation   CatalogGeneration @relation(fields: [generationId], references: [id], onDelete: Cascade)
+
+  @@unique([generationId, slug])
+  @@map("catalog_trims")
 }

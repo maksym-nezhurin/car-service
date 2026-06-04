@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CarsController } from './cars.controller';
 import { CarsService } from './cars.service';
 import { PrismaService } from '../../prisma/prisma.service';
-import { CloudinaryModule } from '../cloudinary/cloudinary.module'; // <-- ДОДАЙТЕ ІМПОРТ
+import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 
 @Module({
   imports: [CloudinaryModule],

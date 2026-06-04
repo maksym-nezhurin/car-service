@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: car-service
+    env: docker
+    region: frankfurt  # same region as other services
+    build:
+      dockerfile: ./Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: '3002'  # Different port than user service
+      - key: DATABASE_URL
+        value: ${DATABASE_URL}  # This should be set in Render's environment variables
+    healthCheckPath: /health
+    autoDeploy: true

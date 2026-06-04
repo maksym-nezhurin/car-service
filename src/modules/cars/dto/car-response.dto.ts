@@ -1,4 +1,4 @@
-import { CarType } from './create-car.dto';
+import { CarType } from './car.dto';
 
 export class CarResponseDto {
   id: string;

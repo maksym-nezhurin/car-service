@@ -114,8 +114,11 @@ model Vehicle {
   photos            VehiclePhoto[]
   saleListings      VehicleSaleListing[]
   maintenance       MaintenanceRecord[]
+  serviceVisits     GarageServiceVisit[]
   odometerLogs      OdometerLog[]
   registrationEvents VehicleRegistrationEvent[]
+  technicalInspection VehicleTechnicalInspection?
+  insurancePolicies   VehicleInsurancePolicy[]
   saleContracts     VehicleSaleContract[]
   reports           VehicleReport[]
   reportAccessGrants VehicleReportAccessGrant[]
@@ -353,6 +356,92 @@ model MaintenanceAttachment {
   @@index([maintenanceRecordId], name: "maintenance_attachment_record_idx")
 }
 
+enum VisitVerifiedBy {
+  OWNER
+  PARTNER
+}
+
+enum PartPurchasedBy {
+  OWNER
+  WORKSHOP
+}
+
+model GarageServiceVisit {
+  id               String            @id @default(uuid())
+  vehicleId        String            @map("vehicle_id")
+  ownerUserId      String            @map("owner_user_id")
+  performedAt      DateTime          @map("performed_at")
+  odometerKm       Int?              @map("odometer_km")
+  totalCost        Decimal?          @map("total_cost") @db.Decimal(12, 2)
+  costCurrency     String?           @default("PLN") @map("cost_currency")
+  notes            String?
+  organizationId   String?           @map("organization_id")
+  draftCompanyId   String?           @map("draft_company_id")
+  providerSnapshot Json              @map("provider_snapshot")
+  verifiedBy       VisitVerifiedBy   @default(OWNER) @map("verified_by")
+  workOrderId      String?           @map("work_order_id")
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+
+  vehicle          Vehicle           @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  lineItems        GarageServiceLineItem[]
+  attachments      GarageServiceVisitAttachment[]
+
+  @@index([vehicleId, performedAt], name: "garage_visit_vehicle_date_idx")
+  @@index([ownerUserId], name: "garage_visit_owner_idx")
+  @@map("garage_service_visits")
+}
+
+model GarageServiceLineItem {
+  id          String   @id @default(uuid())
+  visitId     String   @map("visit_id")
+  sortOrder   Int      @default(0) @map("sort_order")
+  name        String
+  description String?
+  laborCost   Decimal? @map("labor_cost") @db.Decimal(12, 2)
+  partsCost   Decimal? @map("parts_cost") @db.Decimal(12, 2)
+  lineTotal   Decimal? @map("line_total") @db.Decimal(12, 2)
+
+  visit       GarageServiceVisit @relation(fields: [visitId], references: [id], onDelete: Cascade)
+  parts       GarageServicePart[]
+
+  @@index([visitId, sortOrder], name: "garage_line_item_visit_idx")
+  @@map("garage_service_line_items")
+}
+
+model GarageServicePart {
+  id          String           @id @default(uuid())
+  lineItemId  String           @map("line_item_id")
+  name        String
+  purchasedBy PartPurchasedBy  @map("purchased_by")
+  brand       String?
+  productUrl  String?          @map("product_url")
+  partNumber  String?          @map("part_number")
+  cost        Decimal?         @db.Decimal(12, 2)
+
+  lineItem    GarageServiceLineItem @relation(fields: [lineItemId], references: [id], onDelete: Cascade)
+
+  @@index([lineItemId], name: "garage_part_line_item_idx")
+  @@map("garage_service_parts")
+}
+
+model GarageServiceVisitAttachment {
+  id           String             @id @default(uuid())
+  visitId      String             @map("visit_id")
+  ownerUserId  String             @map("owner_user_id")
+  url          String
+  publicId     String?            @map("public_id")
+  originalName String?            @map("original_name")
+  mimeType     String?            @map("mime_type")
+  sizeBytes    Int?               @map("size_bytes")
+  createdAt    DateTime           @default(now()) @map("created_at")
+
+  visit        GarageServiceVisit @relation(fields: [visitId], references: [id], onDelete: Cascade)
+
+  @@index([visitId], name: "garage_visit_attachment_visit_idx")
+  @@map("garage_service_visit_attachments")
+}
+
 enum RegistrationEventType {
   REGISTERED
   DEREGISTERED
@@ -375,6 +464,51 @@ model VehicleRegistrationEvent {
   vehicle     Vehicle               @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([vehicleId, eventDate], name: "vehicle_registration_event_idx")
+}
+
+enum InsurancePolicyType {
+  OC
+  AC
+}
+
+model VehicleTechnicalInspection {
+  id            String   @id @default(uuid())
+  vehicleId     String   @unique @map("vehicle_id")
+  ownerUserId   String   @map("owner_user_id")
+  performedAt   DateTime @map("performed_at")
+  validUntil    DateTime @map("valid_until")
+  stationName   String?  @map("station_name")
+  certificateNo String?  @map("certificate_no")
+  notes         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  vehicle       Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([ownerUserId], name: "vehicle_inspection_owner_idx")
+  @@map("vehicle_technical_inspections")
+}
+
+model VehicleInsurancePolicy {
+  id              String              @id @default(uuid())
+  vehicleId       String              @map("vehicle_id")
+  ownerUserId     String              @map("owner_user_id")
+  type            InsurancePolicyType
+  insurerName     String              @map("insurer_name")
+  policyNumber    String?             @map("policy_number")
+  startsAt        DateTime            @map("starts_at")
+  endsAt          DateTime            @map("ends_at")
+  premiumAmount   Decimal?            @map("premium_amount") @db.Decimal(12, 2)
+  premiumCurrency String?             @default("PLN") @map("premium_currency")
+  isActive        Boolean             @default(true) @map("is_active")
+  notes           String?
+  createdAt       DateTime            @default(now()) @map("created_at")
+  updatedAt       DateTime            @updatedAt @map("updated_at")
+
+  vehicle         Vehicle             @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, type, isActive], name: "vehicle_insurance_vehicle_type_active_idx")
+  @@map("vehicle_insurance_policies")
 }
 
 model VehicleSaleContract {

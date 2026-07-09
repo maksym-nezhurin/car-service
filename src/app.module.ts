@@ -11,11 +11,13 @@ import { UploadController } from './modules/upload/upload.controller';
 import { GarageModule } from './modules/garage/garage.module';
 import { CatalogModule } from './modules/catalog/catalog.module';
 import { HealthModule } from './health/health.module';
+import { AdminStatsModule } from './modules/admin/admin-stats.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     HealthModule,
+    AdminStatsModule,
     BrandsModule,
     ModelsModule,
     VariantsModule,

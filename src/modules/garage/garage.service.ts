@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import {
   DistributionPlatform,
+  InsurancePolicyType,
   ListingDistributionStatus,
   Prisma,
   SaleListingStatus,
@@ -13,13 +14,29 @@ import { AddMaintenanceRecordDto } from './dto/add-maintenance-record.dto';
 import { AddRegistrationEventDto } from './dto/add-registration-event.dto';
 import { CreateSaleContractDto } from './dto/create-sale-contract.dto';
 import { AddOdometerLogDto } from './dto/add-odometer-log.dto';
+import { CreateServiceVisitDto } from './dto/create-service-visit.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { CreateSaleListingDto } from './dto/create-sale-listing.dto';
 import { PublishSaleListingDto } from './dto/publish-sale-listing.dto';
+import { UpsertTechnicalInspectionDto } from './dto/upsert-technical-inspection.dto';
+import { UpsertInsurancePolicyDto } from './dto/upsert-insurance-policy.dto';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { VehicleProfileAccessService } from './vehicle-profile-access.service';
 
 type RecommendationLevel = 'ok' | 'due_soon' | 'overdue';
+
+type GarageRecommendation = {
+  category: 'maintenance' | 'compliance';
+  type: string;
+  title: string;
+  currentMileageKm: number;
+  lastServiceMileageKm: number | null;
+  kmSinceLastService: number;
+  recommendedIntervalKm: number;
+  level: RecommendationLevel;
+  daysUntilExpiry: number | null;
+  expiresAt: string | null;
+};
 
 const MARKET_PLATFORMS: Record<string, DistributionPlatform[]> = {
   PL: [
@@ -745,7 +762,7 @@ export class GarageService {
       { type: 'AIR_FILTER', everyKm: 20_000, title: 'Air filter replacement' },
     ];
 
-    return rules.map((rule) => {
+    const maintenanceRecommendations: GarageRecommendation[] = rules.map((rule) => {
       const last = vehicle.maintenance.find((item) => item.type === rule.type);
       const mileageAtLast = last?.mileageKm ?? 0;
       const delta = currentMileage - mileageAtLast;
@@ -753,6 +770,7 @@ export class GarageService {
         delta >= rule.everyKm ? 'overdue' : delta >= rule.everyKm * 0.85 ? 'due_soon' : 'ok';
 
       return {
+        category: 'maintenance',
         type: rule.type,
         title: rule.title,
         currentMileageKm: currentMileage,
@@ -760,8 +778,296 @@ export class GarageService {
         kmSinceLastService: delta,
         recommendedIntervalKm: rule.everyKm,
         level,
+        daysUntilExpiry: null,
+        expiresAt: null,
       };
     });
+
+    const complianceRecommendations = await this.getComplianceRecommendations(
+      ownerUserId,
+      vehicleId,
+    );
+    return [...maintenanceRecommendations, ...complianceRecommendations];
+  }
+
+  async getVehicleCompliance(ownerUserId: string, vehicleId: string) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+
+    const vehicle = await this.prisma.vehicle.findUnique({
+      where: { id: vehicleId },
+      select: { countryCode: true },
+    });
+    if (!vehicle) throw new NotFoundException('Vehicle not found.');
+
+    const [inspection, policies] = await Promise.all([
+      this.prisma.vehicleTechnicalInspection.findUnique({ where: { vehicleId } }),
+      this.prisma.vehicleInsurancePolicy.findMany({
+        where: { vehicleId, ownerUserId, isActive: true },
+        orderBy: { endsAt: 'desc' },
+      }),
+    ]);
+
+    const oc = policies.find((p) => p.type === InsurancePolicyType.OC) ?? null;
+    const ac = policies.find((p) => p.type === InsurancePolicyType.AC) ?? null;
+    const alerts = this.buildComplianceAlerts(vehicle.countryCode, inspection, oc, ac);
+
+    return {
+      countryCode: vehicle.countryCode,
+      inspection,
+      oc,
+      ac,
+      alerts,
+    };
+  }
+
+  async upsertTechnicalInspection(
+    ownerUserId: string,
+    vehicleId: string,
+    dto: UpsertTechnicalInspectionDto,
+  ) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+
+    const performedAt = new Date(dto.performedAt);
+    const validUntil = new Date(dto.validUntil);
+    if (validUntil < performedAt) {
+      throw new BadRequestException('validUntil must be on or after performedAt.');
+    }
+
+    return this.prisma.vehicleTechnicalInspection.upsert({
+      where: { vehicleId },
+      create: {
+        vehicleId,
+        ownerUserId,
+        performedAt,
+        validUntil,
+        stationName: dto.stationName?.trim() || null,
+        certificateNo: dto.certificateNo?.trim() || null,
+        notes: dto.notes?.trim() || null,
+      },
+      update: {
+        performedAt,
+        validUntil,
+        stationName: dto.stationName?.trim() || null,
+        certificateNo: dto.certificateNo?.trim() || null,
+        notes: dto.notes?.trim() || null,
+      },
+    });
+  }
+
+  async upsertInsurancePolicy(
+    ownerUserId: string,
+    vehicleId: string,
+    dto: UpsertInsurancePolicyDto,
+  ) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+
+    if (dto.isActive === false) {
+      await this.prisma.vehicleInsurancePolicy.updateMany({
+        where: { vehicleId, ownerUserId, type: dto.type, isActive: true },
+        data: { isActive: false },
+      });
+      return null;
+    }
+
+    if (!dto.insurerName?.trim()) {
+      throw new BadRequestException('insurerName is required.');
+    }
+    if (!dto.startsAt || !dto.endsAt) {
+      throw new BadRequestException('startsAt and endsAt are required.');
+    }
+
+    const startsAt = new Date(dto.startsAt);
+    const endsAt = new Date(dto.endsAt);
+    if (endsAt < startsAt) {
+      throw new BadRequestException('endsAt must be on or after startsAt.');
+    }
+
+    const existing = await this.prisma.vehicleInsurancePolicy.findFirst({
+      where: { vehicleId, ownerUserId, type: dto.type, isActive: true },
+    });
+
+    const payload = {
+      insurerName: dto.insurerName.trim(),
+      policyNumber: dto.policyNumber?.trim() || null,
+      startsAt,
+      endsAt,
+      premiumAmount: dto.premiumAmount ?? null,
+      premiumCurrency: dto.premiumCurrency?.trim() || 'PLN',
+      notes: dto.notes?.trim() || null,
+      isActive: true,
+    };
+
+    if (existing) {
+      return this.prisma.vehicleInsurancePolicy.update({
+        where: { id: existing.id },
+        data: payload,
+      });
+    }
+
+    return this.prisma.vehicleInsurancePolicy.create({
+      data: {
+        vehicleId,
+        ownerUserId,
+        type: dto.type,
+        ...payload,
+      },
+    });
+  }
+
+  private async getComplianceRecommendations(
+    ownerUserId: string,
+    vehicleId: string,
+  ): Promise<GarageRecommendation[]> {
+    const compliance = await this.getVehicleCompliance(ownerUserId, vehicleId);
+    const isPl = this.isPlVehicle(compliance.countryCode);
+    const items: GarageRecommendation[] = [];
+
+    const pushItem = (
+      type: string,
+      title: string,
+      expiresAt: Date | null,
+      missing: boolean,
+    ) => {
+      if (missing || !expiresAt) {
+        items.push({
+          category: 'compliance',
+          type,
+          title,
+          currentMileageKm: 0,
+          lastServiceMileageKm: null,
+          kmSinceLastService: 0,
+          recommendedIntervalKm: 0,
+          level: 'overdue',
+          daysUntilExpiry: null,
+          expiresAt: null,
+        });
+        return;
+      }
+      const daysUntil = this.daysUntilDate(expiresAt);
+      items.push({
+        category: 'compliance',
+        type,
+        title,
+        currentMileageKm: 0,
+        lastServiceMileageKm: null,
+        kmSinceLastService: 0,
+        recommendedIntervalKm: 0,
+        level: this.complianceLevel(daysUntil),
+        daysUntilExpiry: daysUntil,
+        expiresAt: expiresAt.toISOString(),
+      });
+    };
+
+    if (isPl || compliance.inspection) {
+      pushItem(
+        'TECHNICAL_INSPECTION',
+        'Technical inspection (przegląd)',
+        compliance.inspection?.validUntil ?? null,
+        isPl && !compliance.inspection,
+      );
+    }
+    if (isPl || compliance.oc) {
+      pushItem(
+        'INSURANCE_OC',
+        'OC insurance',
+        compliance.oc?.endsAt ?? null,
+        isPl && !compliance.oc,
+      );
+    }
+    if (compliance.ac) {
+      pushItem('INSURANCE_AC', 'AC insurance', compliance.ac.endsAt, false);
+    }
+
+    return items;
+  }
+
+  private daysUntilDate(date: Date): number {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const target = new Date(date);
+    target.setHours(0, 0, 0, 0);
+    return Math.ceil((target.getTime() - today.getTime()) / 86_400_000);
+  }
+
+  private complianceLevel(daysUntil: number): RecommendationLevel {
+    if (daysUntil < 0) return 'overdue';
+    if (daysUntil <= 30) return 'due_soon';
+    return 'ok';
+  }
+
+  private isPlVehicle(countryCode?: string | null): boolean {
+    return countryCode?.trim().toUpperCase() === 'PL';
+  }
+
+  private buildComplianceAlerts(
+    countryCode: string | null | undefined,
+    inspection: { validUntil: Date } | null,
+    oc: { endsAt: Date } | null,
+    ac: { endsAt: Date } | null,
+  ) {
+    const isPl = this.isPlVehicle(countryCode);
+    const alerts: Array<{
+      type: string;
+      severity: 'high' | 'medium' | 'low';
+      title: string;
+      message: string;
+      daysUntil: number | null;
+      expiresAt: string | null;
+    }> = [];
+
+    const push = (
+      type: string,
+      title: string,
+      expiresAt: Date | null,
+      missing: boolean,
+    ) => {
+      if (missing) {
+        alerts.push({
+          type,
+          severity: 'high',
+          title,
+          message: 'No data on file.',
+          daysUntil: null,
+          expiresAt: null,
+        });
+        return;
+      }
+      if (!expiresAt) return;
+      const daysUntil = this.daysUntilDate(expiresAt);
+      const severity =
+        daysUntil < 0 ? 'high' : daysUntil <= 7 ? 'high' : daysUntil <= 30 ? 'medium' : 'low';
+      const message =
+        daysUntil < 0
+          ? `Expired ${Math.abs(daysUntil)} day(s) ago.`
+          : daysUntil === 0
+            ? 'Expires today.'
+            : `Expires in ${daysUntil} day(s).`;
+      alerts.push({
+        type,
+        severity,
+        title,
+        message,
+        daysUntil,
+        expiresAt: expiresAt.toISOString(),
+      });
+    };
+
+    if (isPl || inspection) {
+      push(
+        'TECHNICAL_INSPECTION',
+        'Technical inspection',
+        inspection?.validUntil ?? null,
+        isPl && !inspection,
+      );
+    }
+    if (isPl || oc) {
+      push('INSURANCE_OC', 'OC insurance', oc?.endsAt ?? null, isPl && !oc);
+    }
+    if (ac) {
+      push('INSURANCE_AC', 'AC insurance', ac.endsAt, false);
+    }
+
+    return alerts;
   }
 
   async getInsights(ownerUserId: string, vehicleId: string) {
@@ -785,14 +1091,32 @@ export class GarageService {
     const recommendations = await this.getRecommendations(ownerUserId, vehicleId);
     const alerts = recommendations
       .filter((item) => item.level !== 'ok')
-      .map((item) => ({
-        severity: item.level === 'overdue' ? 'high' : 'medium',
-        title: item.title,
-        message:
-          item.level === 'overdue'
-            ? `Service overdue by ${item.kmSinceLastService - item.recommendedIntervalKm} km.`
-            : 'Service is approaching due mileage.',
-      }));
+      .map((item) => {
+        if (item.category === 'compliance') {
+          const daysUntil = item.daysUntilExpiry;
+          const message =
+            daysUntil == null
+              ? 'No compliance data on file.'
+              : daysUntil < 0
+                ? `Expired ${Math.abs(daysUntil)} day(s) ago.`
+                : daysUntil === 0
+                  ? 'Expires today.'
+                  : `Expires in ${daysUntil} day(s).`;
+          return {
+            severity: item.level === 'overdue' || (daysUntil != null && daysUntil <= 7) ? 'high' : 'medium',
+            title: item.title,
+            message,
+          };
+        }
+        return {
+          severity: item.level === 'overdue' ? 'high' : 'medium',
+          title: item.title,
+          message:
+            item.level === 'overdue'
+              ? `Service overdue by ${item.kmSinceLastService - item.recommendedIntervalKm} km.`
+              : 'Service is approaching due mileage.',
+        };
+      });
 
     const [latest, previous] = vehicle.odometerLogs;
     const usageHint =
@@ -1163,5 +1487,163 @@ export class GarageService {
       contact: listing.contactJson ?? undefined,
       isRentable: false,
     };
+  }
+
+  async createServiceVisit(
+    ownerUserId: string,
+    vehicleId: string,
+    dto: CreateServiceVisitDto,
+  ) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+
+    if (dto.organizationId && dto.draftCompanyId) {
+      throw new BadRequestException('Link either organizationId or draftCompanyId, not both.');
+    }
+
+    const visit = await this.prisma.garageServiceVisit.create({
+      data: {
+        vehicleId,
+        ownerUserId,
+        performedAt: new Date(dto.performedAt),
+        odometerKm: dto.odometerKm,
+        totalCost: dto.totalCost,
+        costCurrency: dto.costCurrency ?? 'PLN',
+        notes: dto.notes?.trim() || null,
+        organizationId: dto.organizationId ?? null,
+        draftCompanyId: dto.draftCompanyId ?? null,
+        providerSnapshot: dto.providerSnapshot as unknown as Prisma.InputJsonValue,
+        verifiedBy: 'OWNER',
+        lineItems: {
+          create: dto.lineItems.map((item, index) => ({
+            sortOrder: index,
+            name: item.name.trim(),
+            description: item.description?.trim() || null,
+            laborCost: item.laborCost,
+            partsCost: item.partsCost,
+            lineTotal: item.lineTotal,
+            parts: item.parts?.length
+              ? {
+                  create: item.parts.map((part) => ({
+                    name: part.name.trim(),
+                    purchasedBy: part.purchasedBy,
+                    brand: part.brand?.trim() || null,
+                    productUrl: part.productUrl?.trim() || null,
+                    partNumber: part.partNumber?.trim() || null,
+                    cost: part.cost,
+                  })),
+                }
+              : undefined,
+          })),
+        },
+      },
+      include: {
+        lineItems: { include: { parts: true }, orderBy: { sortOrder: 'asc' } },
+        attachments: true,
+      },
+    });
+
+    if (dto.odometerKm != null) {
+      await this.recomputeVehicleMileageKm(vehicleId);
+    }
+
+    return visit;
+  }
+
+  async listServiceLineSuggestions(
+    ownerUserId: string,
+    vehicleId: string,
+    query?: string,
+  ): Promise<Array<{ name: string; count: number; source: 'history' }>> {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+
+    const q = query?.trim();
+    const textFilter = q
+      ? { contains: q, mode: 'insensitive' as const }
+      : undefined;
+
+    const [lineItems, maintenance] = await Promise.all([
+      this.prisma.garageServiceLineItem.findMany({
+        where: {
+          visit: { vehicleId, ownerUserId },
+          ...(textFilter ? { name: textFilter } : {}),
+        },
+        select: {
+          name: true,
+          visit: { select: { performedAt: true } },
+        },
+        orderBy: { visit: { performedAt: 'desc' } },
+        take: 120,
+      }),
+      this.prisma.maintenanceRecord.findMany({
+        where: {
+          vehicleId,
+          ownerUserId,
+          ...(textFilter ? { title: textFilter } : {}),
+        },
+        select: {
+          title: true,
+          performedAt: true,
+        },
+        orderBy: { performedAt: 'desc' },
+        take: 60,
+      }),
+    ]);
+
+    const byKey = new Map<string, { name: string; count: number; lastAt: number }>();
+
+    const upsert = (rawName: string, performedAt: Date) => {
+      const name = rawName.trim();
+      if (!name) return;
+      const key = name.toLowerCase();
+      const at = performedAt.getTime();
+      const existing = byKey.get(key);
+      if (!existing) {
+        byKey.set(key, { name, count: 1, lastAt: at });
+        return;
+      }
+      existing.count += 1;
+      if (at >= existing.lastAt) {
+        existing.lastAt = at;
+      }
+    };
+
+    for (const item of lineItems) {
+      upsert(item.name, item.visit.performedAt);
+    }
+    for (const row of maintenance) {
+      upsert(row.title, row.performedAt);
+    }
+
+    return Array.from(byKey.values())
+      .sort((a, b) => b.count - a.count || b.lastAt - a.lastAt)
+      .slice(0, 10)
+      .map(({ name, count }) => ({ name, count, source: 'history' as const }));
+  }
+
+  async listServiceVisits(ownerUserId: string, vehicleId: string) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+    return this.prisma.garageServiceVisit.findMany({
+      where: { vehicleId, ownerUserId },
+      include: {
+        lineItems: { include: { parts: true }, orderBy: { sortOrder: 'asc' } },
+        attachments: true,
+      },
+      orderBy: { performedAt: 'desc' },
+    });
+  }
+
+  async getServiceVisit(ownerUserId: string, vehicleId: string, visitId: string) {
+    await this.assertCurrentOwner(ownerUserId, vehicleId);
+    const visit = await this.prisma.garageServiceVisit.findFirst({
+      where: { id: visitId, vehicleId, ownerUserId },
+      include: {
+        lineItems: { include: { parts: true }, orderBy: { sortOrder: 'asc' } },
+        attachments: true,
+      },
+    });
+    if (!visit) {
+      throw new NotFoundException('Service visit not found.');
+    }
+    return visit;
   }
 }

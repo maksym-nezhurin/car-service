@@ -6,6 +6,7 @@ import {
   Headers,
   Param,
   Patch,
+  Put,
   Post,
   BadRequestException,
   UploadedFiles,
@@ -16,12 +17,15 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { GarageService } from './garage.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { AddMaintenanceRecordDto } from './dto/add-maintenance-record.dto';
+import { CreateServiceVisitDto } from './dto/create-service-visit.dto';
 import { AddRegistrationEventDto } from './dto/add-registration-event.dto';
 import { CreateSaleContractDto } from './dto/create-sale-contract.dto';
 import { AddOdometerLogDto } from './dto/add-odometer-log.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { CreateSaleListingDto } from './dto/create-sale-listing.dto';
 import { PublishSaleListingDto } from './dto/publish-sale-listing.dto';
+import { UpsertTechnicalInspectionDto } from './dto/upsert-technical-inspection.dto';
+import { UpsertInsurancePolicyDto } from './dto/upsert-insurance-policy.dto';
 import { VehicleProfileTier } from '../../prisma/generated-client';
 import { IncomingHttpHeaders } from 'http';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
@@ -105,6 +109,53 @@ export class GarageController {
     @Body() dto: AddMaintenanceRecordDto,
   ) {
     return this.garageService.addMaintenance(this.requireUserId(headers), vehicleId, dto);
+  }
+
+  @Post('vehicles/:vehicleId/service-visits')
+  createServiceVisit(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+    @Body() dto: CreateServiceVisitDto,
+  ) {
+    return this.garageService.createServiceVisit(
+      this.requireUserId(headers),
+      vehicleId,
+      dto,
+    );
+  }
+
+  @Get('vehicles/:vehicleId/service-line-suggestions')
+  listServiceLineSuggestions(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+    @Query('q') q?: string,
+  ) {
+    return this.garageService.listServiceLineSuggestions(
+      this.requireUserId(headers),
+      vehicleId,
+      q,
+    );
+  }
+
+  @Get('vehicles/:vehicleId/service-visits')
+  listServiceVisits(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+  ) {
+    return this.garageService.listServiceVisits(this.requireUserId(headers), vehicleId);
+  }
+
+  @Get('vehicles/:vehicleId/service-visits/:visitId')
+  getServiceVisit(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+    @Param('visitId') visitId: string,
+  ) {
+    return this.garageService.getServiceVisit(
+      this.requireUserId(headers),
+      vehicleId,
+      visitId,
+    );
   }
 
   @Post('vehicles/:vehicleId/maintenance/:maintenanceId/attachments')
@@ -208,6 +259,40 @@ export class GarageController {
     @Param('vehicleId') vehicleId: string,
   ) {
     return this.garageService.getRecommendations(this.requireUserId(headers), vehicleId);
+  }
+
+  @Get('vehicles/:vehicleId/compliance')
+  getVehicleCompliance(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+  ) {
+    return this.garageService.getVehicleCompliance(this.requireUserId(headers), vehicleId);
+  }
+
+  @Put('vehicles/:vehicleId/compliance/inspection')
+  upsertTechnicalInspection(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+    @Body() dto: UpsertTechnicalInspectionDto,
+  ) {
+    return this.garageService.upsertTechnicalInspection(
+      this.requireUserId(headers),
+      vehicleId,
+      dto,
+    );
+  }
+
+  @Put('vehicles/:vehicleId/compliance/insurance')
+  upsertInsurancePolicy(
+    @Headers() headers: IncomingHttpHeaders,
+    @Param('vehicleId') vehicleId: string,
+    @Body() dto: UpsertInsurancePolicyDto,
+  ) {
+    return this.garageService.upsertInsurancePolicy(
+      this.requireUserId(headers),
+      vehicleId,
+      dto,
+    );
   }
 
   @Get('vehicles/:vehicleId/insights')

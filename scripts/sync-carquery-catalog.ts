@@ -10,6 +10,11 @@
  */
 import { PrismaClient } from '../generated/client';
 import {
+  buildContentKey,
+  isGenerationSupported,
+  resolveSupportTier,
+} from '../src/modules/catalog/catalog-public.utils';
+import {
   buildEngineVariantKey,
   formatEngineDisplaySubtitle,
   isTrimPackageName,
@@ -53,15 +58,17 @@ async function main() {
     const makeName = String(make.make_display ?? make.name ?? makeId);
     if (!makeId) continue;
 
-    await prisma.catalogMake.upsert({
-      where: { id: makeId },
-      create: {
-        id: makeId,
-        slug: slugify(makeName) || makeId,
-        name: makeName,
-      },
-      update: { name: makeName, syncedAt: new Date() },
-    });
+      const makeSlug = slugify(makeName) || makeId;
+
+      await prisma.catalogMake.upsert({
+        where: { id: makeId },
+        create: {
+          id: makeId,
+          slug: makeSlug,
+          name: makeName,
+        },
+        update: { name: makeName, slug: makeSlug, syncedAt: new Date() },
+      });
 
     await sleep(delayMs);
     const modelsRaw = await fetchJson(
@@ -111,6 +118,14 @@ async function main() {
           ? `${modelName} ${yearFrom}–${yearTo}`
           : modelName;
 
+      if (!isGenerationSupported(yearFrom, yearTo)) {
+        continue;
+      }
+
+      const contentKey = buildContentKey(makeSlug, modelSlug, genSlug);
+      const isSupported = isGenerationSupported(yearFrom, yearTo);
+      const supportTier = resolveSupportTier(yearTo);
+
       const generation = await prisma.catalogGeneration.upsert({
         where: {
           modelId_slug: { modelId, slug: genSlug },
@@ -122,12 +137,18 @@ async function main() {
           displayName,
           yearFrom,
           yearTo,
+          contentKey,
+          isSupported,
+          supportTier,
         },
         update: {
           externalModelId: modelId,
           displayName,
           yearFrom,
           yearTo,
+          contentKey,
+          isSupported,
+          supportTier,
           syncedAt: new Date(),
         },
       });

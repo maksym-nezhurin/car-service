@@ -7,6 +7,11 @@
  */
 import { PrismaClient } from '../generated/client';
 import {
+  buildContentKey,
+  isGenerationSupported,
+  resolveSupportTier,
+} from '../src/modules/catalog/catalog-public.utils';
+import {
   buildEngineVariantKey,
   formatEngineDisplaySubtitle,
 } from '../src/modules/catalog/engine-trim.utils';
@@ -105,6 +110,10 @@ async function seedGeneration(params: {
     update: { name: params.modelName },
   });
 
+  const contentKey = buildContentKey(params.makeId, params.modelId, params.generationSlug);
+  const isSupported = isGenerationSupported(params.yearFrom, params.yearTo);
+  const supportTier = resolveSupportTier(params.yearTo);
+
   const generation = await prisma.catalogGeneration.upsert({
     where: {
       modelId_slug: { modelId: params.modelId, slug: params.generationSlug },
@@ -118,12 +127,18 @@ async function seedGeneration(params: {
       yearTo: params.yearTo,
       shortDescription: params.shortDescription,
       coverImageUrl: null,
+      contentKey,
+      isSupported,
+      supportTier,
     },
     update: {
       displayName: params.displayName,
       yearFrom: params.yearFrom,
       yearTo: params.yearTo,
       shortDescription: params.shortDescription,
+      contentKey,
+      isSupported,
+      supportTier,
     },
   });
 

@@ -562,18 +562,21 @@ model CatalogModel {
 
 /// Model line / generation (community GENERATION room), e.g. Tucson 2015–2018.
 model CatalogGeneration {
-  id              String       @id @default(uuid())
-  modelId         String       @map("model_id")
-  externalModelId String?      @map("external_model_id")
-  slug            String
-  displayName     String       @map("display_name")
-  yearFrom        Int?         @map("year_from")
-  yearTo          Int?         @map("year_to")
-  coverImageUrl   String?      @map("cover_image_url")
-  shortDescription String?     @map("short_description")
-  syncedAt        DateTime     @default(now()) @map("synced_at")
-  model           CatalogModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
-  trims           CatalogTrim[]
+  id               String       @id @default(uuid())
+  modelId          String       @map("model_id")
+  externalModelId  String?      @map("external_model_id")
+  slug             String
+  displayName      String       @map("display_name")
+  yearFrom         Int?         @map("year_from")
+  yearTo           Int?         @map("year_to")
+  coverImageUrl    String?      @map("cover_image_url")
+  shortDescription String?      @map("short_description")
+  isSupported      Boolean      @default(true) @map("is_supported")
+  supportTier      String       @default("active") @map("support_tier")
+  contentKey       String?      @unique @map("content_key")
+  syncedAt         DateTime     @default(now()) @map("synced_at")
+  model            CatalogModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  trims            CatalogTrim[]
 
   @@unique([modelId, slug])
   @@index([externalModelId])
@@ -582,18 +585,70 @@ model CatalogGeneration {
 
 /// Engine subgroup (community VARIANT), e.g. 2.0 CRDi 185 KM — not trim package (Premium).
 model CatalogTrim {
-  id           String            @id
-  generationId String            @map("generation_id")
-  slug         String
-  displayName  String            @map("display_name")
-  modelYear    Int?              @map("model_year")
-  engine       String?
-  fuelType     String?           @map("fuel_type")
-  aspiration   String?
-  powerHp      Int?              @map("power_hp")
-  syncedAt     DateTime          @default(now()) @map("synced_at")
-  generation   CatalogGeneration @relation(fields: [generationId], references: [id], onDelete: Cascade)
+  id                   String                     @id
+  generationId         String                     @map("generation_id")
+  slug                 String
+  displayName          String                     @map("display_name")
+  modelYear            Int?                       @map("model_year")
+  engine               String?
+  fuelType             String?                    @map("fuel_type")
+  aspiration           String?
+  powerHp              Int?                       @map("power_hp")
+  transmission         String?
+  engineCode           String?                    @map("engine_code")
+  displacementCc       Int?                       @map("displacement_cc")
+  contentKey           String?                    @unique @map("content_key")
+  engineFamilyId       String?                    @map("engine_family_id")
+  transmissionFamilyId String?                    @map("transmission_family_id")
+  syncedAt             DateTime                   @default(now()) @map("synced_at")
+  generation           CatalogGeneration          @relation(fields: [generationId], references: [id], onDelete: Cascade)
+  engineFamily         CatalogEngineFamily?       @relation(fields: [engineFamilyId], references: [id], onDelete: SetNull)
+  transmissionFamily   CatalogTransmissionFamily? @relation(fields: [transmissionFamilyId], references: [id], onDelete: SetNull)
 
   @@unique([generationId, slug])
+  @@index([engineFamilyId])
+  @@index([transmissionFamilyId])
   @@map("catalog_trims")
+}
+
+/// Curated engine family KB (Phase C) — linked from trims, shared across models.
+model CatalogEngineFamily {
+  id               String        @id @default(uuid())
+  slug             String        @unique
+  displayName      String        @map("display_name")
+  manufacturer     String?
+  displacementCc   Int?          @map("displacement_cc")
+  fuelType         String?       @map("fuel_type")
+  aspiration       String?
+  engineCodes      String[]      @default([]) @map("engine_codes")
+  specsJson        Json?         @map("specs_json")
+  shortDescription String?       @map("short_description")
+  reviewStatus     String        @default("approved") @map("review_status")
+  reviewedAt       DateTime?     @map("reviewed_at")
+  source           String?
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+  trims            CatalogTrim[]
+
+  @@map("catalog_engine_families")
+}
+
+/// Curated transmission family KB (Phase C).
+model CatalogTransmissionFamily {
+  id               String        @id @default(uuid())
+  slug             String        @unique
+  displayName      String        @map("display_name")
+  type             String?
+  gears            Int?
+  manufacturer     String?
+  specsJson        Json?         @map("specs_json")
+  shortDescription String?       @map("short_description")
+  reviewStatus     String        @default("approved") @map("review_status")
+  reviewedAt       DateTime?     @map("reviewed_at")
+  source           String?
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+  trims            CatalogTrim[]
+
+  @@map("catalog_transmission_families")
 }

@@ -20,7 +20,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "catalog:sync": "ts-node scripts/sync-carquery-catalog.ts"
+    "catalog:sync": "ts-node scripts/sync-carquery-catalog.ts",
+    "catalog:seed:engines": "ts-node scripts/seed-catalog-engine-families.ts"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.0",

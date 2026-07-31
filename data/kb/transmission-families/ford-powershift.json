@@ -1,0 +1,10 @@
+{
+  "slug": "ford-powershift",
+  "displayName": "Ford PowerShift (dwusprzęgłowa)",
+  "type": "dct",
+  "gears": 6,
+  "manufacturer": "Ford",
+  "shortDescription": "Dwusprzęgłowa skrzynia Forda. Szybka, ale w dieslach z mokrym sprzęgłem wymaga regularnej wymiany oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

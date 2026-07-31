@@ -1,0 +1,9 @@
+{
+  "slug": "ford-mt",
+  "displayName": "Ford skrzynia manualna",
+  "type": "mt",
+  "manufacturer": "Ford",
+  "shortDescription": "Manualne przekładnie Forda, pięcio- lub sześciobiegowe.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

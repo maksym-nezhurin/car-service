@@ -1,0 +1,15 @@
+{
+  "slug": "ford-tdci-20",
+  "displayName": "Ford 2.0 TDCi",
+  "manufacturer": "Ford",
+  "displacementCc": 1997,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "DW10",
+    "Panther"
+  ],
+  "shortDescription": "Diesel 2.0 z Focusa, Mondeo i Kugi. Od 110 do 180 KM w zależności od mapy; Powershift bywa droższy w naprawie niż sama jednostka.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

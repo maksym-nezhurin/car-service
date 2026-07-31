@@ -1,0 +1,16 @@
+{
+  "slug": "toyota-ad-diesel",
+  "displayName": "Toyota AD 2.0/2.2 D-4D",
+  "manufacturer": "Toyota",
+  "displacementCc": 2231,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "1AD-FTV",
+    "2AD-FTV",
+    "2AD-FHV"
+  ],
+  "shortDescription": "Diesle D-4D z Corolli i RAV4 lat 2005–2015. Oszczędne, ale 2AD ma złą sławę przez uszczelkę głowicy i nagar na EGR.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

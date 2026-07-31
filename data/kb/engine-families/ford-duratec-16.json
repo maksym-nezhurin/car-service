@@ -1,0 +1,15 @@
+{
+  "slug": "ford-duratec-16",
+  "displayName": "Ford Duratec 1.6",
+  "manufacturer": "Ford",
+  "displacementCc": 1596,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "Duratec 16V",
+    "Ti-VCT"
+  ],
+  "shortDescription": "Wolnossąca jednostka Fiesty i Focusa lat 2000. Prosta konstrukcja, przyjazna LPG, bez turbiny i bezpośredniego wtrysku.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

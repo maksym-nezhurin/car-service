@@ -1,0 +1,15 @@
+{
+  "slug": "toyota-dynamic-force-25",
+  "displayName": "Toyota Dynamic Force 2.5",
+  "manufacturer": "Toyota",
+  "displacementCc": 2487,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "A25A-FKS",
+    "A25A-FXS"
+  ],
+  "shortDescription": "Większa Dynamic Force z Camry XV70 i RAV5. Najczęściej spotykana jako hybryda, rzadziej jako czysta benzyna.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

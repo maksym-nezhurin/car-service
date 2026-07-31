@@ -1,0 +1,20 @@
+{
+  "slug": "ford-ecoboost-10-125",
+  "familySlug": "ford-ecoboost-10",
+  "code": "Fox",
+  "displayName": "1.0 EcoBoost 125 KM",
+  "displacementCc": 999,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 125,
+  "powerKw": 92,
+  "torqueNm": 170,
+  "cylinders": 3,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2012,
+  "shortDescription": "Najczęściej wybierana odmiana 1.0 EcoBoost w Fieście i Focusie.",
+  "reliabilityNotes": "Wczesne egzemplarze (do ok. 2015) warto sprawdzić pod kątem paska w kąpieli olejowej i chłodzenia.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

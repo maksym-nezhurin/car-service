@@ -1,0 +1,15 @@
+{
+  "slug": "toyota-nz-15",
+  "displayName": "Toyota NZ 1.5",
+  "manufacturer": "Toyota",
+  "displacementCc": 1497,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "1NZ-FE",
+    "2NZ-FE"
+  ],
+  "shortDescription": "Podstawowa jednostka Yaris i starszych Corolli. Lekka, oszczędna, bez bezpośredniego wtrysku.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

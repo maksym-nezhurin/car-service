@@ -1,0 +1,14 @@
+{
+  "slug": "ford-duratec-20",
+  "displayName": "Ford Duratec 2.0",
+  "manufacturer": "Ford",
+  "displacementCc": 1999,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "Duratec HE"
+  ],
+  "shortDescription": "Benzyna 2.0 z Focusa Mk2/Mk3 i Mondeo. Solidna baza, często z instalacją gazową.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

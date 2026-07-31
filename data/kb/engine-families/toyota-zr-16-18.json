@@ -1,0 +1,16 @@
+{
+  "slug": "toyota-zr-16-18",
+  "displayName": "Toyota ZR 1.6/1.8",
+  "manufacturer": "Toyota",
+  "displacementCc": 1798,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "1ZR-FE",
+    "2ZR-FE",
+    "2ZR-FAE"
+  ],
+  "shortDescription": "Rodzina wolnossących benzyn Dual VVT-i z Corolli E150/E180 i Auris. Proste w utrzymaniu, chętnie wybierane z LPG.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

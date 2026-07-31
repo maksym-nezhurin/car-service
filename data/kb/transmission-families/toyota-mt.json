@@ -1,0 +1,9 @@
+{
+  "slug": "toyota-mt",
+  "displayName": "Toyota skrzynia manualna",
+  "type": "mt",
+  "manufacturer": "Toyota",
+  "shortDescription": "Manualne przekładnie Toyoty, zwykle pięcio- lub sześciobiegowe. Najtańsze w utrzymaniu rozwiązanie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,15 @@
+{
+  "slug": "ford-tdci-16",
+  "displayName": "Ford 1.6 TDCi",
+  "manufacturer": "Ford",
+  "displacementCc": 1560,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "DV6",
+    "PSA DW"
+  ],
+  "shortDescription": "Wspólny z PSA diesel 1.6, montowany w Fieście, Focusie i Mondeo. Oszczędny, ale wrażliwy na jakość paliwa i zapchany filtr FAP.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

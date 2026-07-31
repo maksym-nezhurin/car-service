@@ -1,0 +1,21 @@
+{
+  "slug": "toyota-2zr-fe-18-132",
+  "familySlug": "toyota-zr-16-18",
+  "code": "2ZR-FE",
+  "displayName": "1.8 Dual VVT-i 132 KM (2ZR-FE)",
+  "displacementCc": 1798,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "powerHp": 132,
+  "powerKw": 97,
+  "torqueNm": 174,
+  "cylinders": 4,
+  "injection": "wtrysk pośredni",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2008,
+  "yearTo": 2019,
+  "shortDescription": "Najpopularniejsza odmiana ZR w Corolli E150/E180.",
+  "reliabilityNotes": "Przy LPG pilnuj luzu zaworowego i stanu cewek.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

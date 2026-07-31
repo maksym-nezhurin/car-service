@@ -1911,5 +1911,541 @@
       "MT": "bmw-mt",
       "AT": "bmw-zf-6hp"
     }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "yearFrom": 2001,
+    "yearTo": 2019,
+    "enginePattern": "2[.,]0\\s*d\\b|2[.,]0d",
+    "notEnginePattern": "hybrid",
+    "engineFamilySlug": "toyota-ad-diesel",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "yearFrom": 2001,
+    "yearTo": 2019,
+    "enginePattern": "2[.,]2\\s*d\\b|2[.,]2d",
+    "notEnginePattern": "hybrid",
+    "engineFamilySlug": "toyota-ad-diesel",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "yaris",
+      "corolla"
+    ],
+    "yearFrom": 2001,
+    "yearTo": 2017,
+    "enginePattern": "1[.,]4\\s*d|1[.,]4d",
+    "engineFamilySlug": "toyota-nd-14-diesel",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "corolla",
+      "c-hr",
+      "rav4"
+    ],
+    "yearFrom": 2018,
+    "yearsStrict": true,
+    "enginePattern": "^2[.,]0i?$",
+    "notEnginePattern": "hybrid|hev",
+    "powerHp": [
+      168,
+      169,
+      170,
+      171,
+      172,
+      173
+    ],
+    "engineSlug": "toyota-m20a-20-168",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "corolla",
+      "c-hr",
+      "rav4"
+    ],
+    "yearFrom": 2018,
+    "yearsStrict": true,
+    "enginePattern": "^2[.,]0i?$",
+    "notEnginePattern": "hybrid|hev",
+    "engineFamilySlug": "toyota-dynamic-force-20",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "camry",
+      "rav4"
+    ],
+    "yearFrom": 2017,
+    "yearsStrict": true,
+    "enginePattern": "^2[.,]5$",
+    "notEnginePattern": "hybrid|hev",
+    "engineFamilySlug": "toyota-dynamic-force-25",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "camry",
+      "rav4"
+    ],
+    "yearFrom": 2008,
+    "yearTo": 2018,
+    "yearsStrict": true,
+    "enginePattern": "^2[.,]5$",
+    "notEnginePattern": "hybrid|hev",
+    "engineFamilySlug": "toyota-ar-25",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "camry",
+      "rav4"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2012,
+    "yearsStrict": true,
+    "enginePattern": "^2[.,]4i?$",
+    "engineFamilySlug": "toyota-az-24",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "corolla"
+    ],
+    "yearFrom": 2006,
+    "yearTo": 2019,
+    "yearsStrict": true,
+    "enginePattern": "^1[.,]8i?$",
+    "powerHp": [
+      132,
+      136,
+      137,
+      139,
+      140
+    ],
+    "engineSlug": "toyota-2zr-fe-18-132",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "corolla"
+    ],
+    "yearFrom": 2006,
+    "yearTo": 2019,
+    "yearsStrict": true,
+    "enginePattern": "^1[.,]8i?$",
+    "engineFamilySlug": "toyota-zr-16-18",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "corolla"
+    ],
+    "yearFrom": 2006,
+    "yearTo": 2019,
+    "yearsStrict": true,
+    "enginePattern": "^1[.,]6i?$",
+    "engineFamilySlug": "toyota-zr-16-18",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "yaris",
+      "corolla"
+    ],
+    "yearFrom": 1999,
+    "yearTo": 2019,
+    "yearsStrict": true,
+    "enginePattern": "^1[.,]5i?$",
+    "notEnginePattern": "hybrid|hev",
+    "engineFamilySlug": "toyota-nz-15",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "camry",
+      "rav4",
+      "c-hr",
+      "corolla"
+    ],
+    "yearFrom": 2017,
+    "enginePattern": "2[.,]5.*hybrid|hybrid.*2[.,]5",
+    "engineFamilySlug": "toyota-dynamic-force-25",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "corolla",
+      "c-hr",
+      "rav4"
+    ],
+    "yearFrom": 2018,
+    "enginePattern": "2[.,]0.*hybrid|hybrid.*2[.,]0",
+    "engineFamilySlug": "toyota-dynamic-force-20",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "toyota"
+    ],
+    "models": [
+      "camry",
+      "rav4"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2018,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]5.*hybrid|hybrid.*2[.,]5",
+    "engineFamilySlug": "toyota-ar-25",
+    "transmissions": {
+      "MT": "toyota-mt",
+      "AT": "toyota-at",
+      "CVT": "toyota-at"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2011,
+    "enginePattern": "1[.,]0\\s*ecoboost",
+    "notEnginePattern": "mhev|hybrid",
+    "powerHp": [
+      123,
+      125
+    ],
+    "engineSlug": "ford-ecoboost-10-125",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2011,
+    "enginePattern": "1[.,]0\\s*ecoboost",
+    "notEnginePattern": "mhev|hybrid",
+    "engineFamilySlug": "ford-ecoboost-10",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2014,
+    "enginePattern": "1[.,]5\\s*ecoboost",
+    "notEnginePattern": "mhev|hybrid",
+    "engineFamilySlug": "ford-ecoboost-15",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2018,
+    "enginePattern": "1[.,]6\\s*ecoboost|1[.,]6.*ecoboost",
+    "engineFamilySlug": "ford-ecoboost-16",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2018,
+    "yearsStrict": true,
+    "enginePattern": "^1[.,]6$",
+    "powerHp": [
+      180,
+      182
+    ],
+    "engineFamilySlug": "ford-ecoboost-16",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2018,
+    "enginePattern": "1[.,]6\\s*tdci",
+    "engineFamilySlug": "ford-tdci-16",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-powershift",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2018,
+    "enginePattern": "1[.,]5\\s*tdci",
+    "engineFamilySlug": "ford-tdci-16",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-powershift",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2018,
+    "enginePattern": "2[.,]0\\s*tdci|2[.,]0tdci",
+    "powerHp": [
+      150
+    ],
+    "engineSlug": "ford-tdci-20-150",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-powershift",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2018,
+    "enginePattern": "2[.,]0\\s*tdci|2[.,]0tdci",
+    "engineFamilySlug": "ford-tdci-20",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-powershift",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "models": [
+      "focus",
+      "mondeo",
+      "kuga"
+    ],
+    "yearFrom": 2008,
+    "yearTo": 2019,
+    "enginePattern": "^2[.,]0d$|new\\s*2[.,]0d",
+    "engineFamilySlug": "ford-tdci-20",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-powershift",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2018,
+    "enginePattern": "1[.,]5\\s*ecoblue",
+    "engineFamilySlug": "ford-ecoblue-15",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2001,
+    "yearTo": 2019,
+    "enginePattern": "1[.,]6\\s*(duratec|ti-?vct)",
+    "engineFamilySlug": "ford-duratec-16",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2001,
+    "yearTo": 2014,
+    "yearsStrict": true,
+    "enginePattern": "^1[.,]6$",
+    "powerHp": [
+      100,
+      105,
+      115,
+      125
+    ],
+    "engineFamilySlug": "ford-duratec-16",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2014,
+    "enginePattern": "2[.,]0\\s*duratec",
+    "engineFamilySlug": "ford-duratec-20",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
+  },
+  {
+    "makes": [
+      "ford"
+    ],
+    "models": [
+      "focus",
+      "mondeo"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2014,
+    "yearsStrict": true,
+    "enginePattern": "^2[.,]0$",
+    "powerHp": [
+      130,
+      131,
+      132,
+      140,
+      145
+    ],
+    "engineFamilySlug": "ford-duratec-20",
+    "transmissions": {
+      "MT": "ford-mt",
+      "AT": "ford-at",
+      "DCT": "ford-powershift"
+    }
   }
 ]

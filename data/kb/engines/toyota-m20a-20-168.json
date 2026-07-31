@@ -1,0 +1,20 @@
+{
+  "slug": "toyota-m20a-20-168",
+  "familySlug": "toyota-dynamic-force-20",
+  "code": "M20A-FKS",
+  "displayName": "2.0 Dynamic Force 168 KM (M20A-FKS)",
+  "displacementCc": 1987,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "powerHp": 168,
+  "powerKw": 124,
+  "torqueNm": 207,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni + pośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2018,
+  "shortDescription": "Benzynowa Dynamic Force w Corolli i C-HR.",
+  "reliabilityNotes": "Wymaga oleju 0W-16/0W-20 według instrukcji. Unikaj przedłużonych interwałów.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

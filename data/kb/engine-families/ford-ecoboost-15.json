@@ -1,0 +1,14 @@
+{
+  "slug": "ford-ecoboost-15",
+  "displayName": "Ford EcoBoost 1.5",
+  "manufacturer": "Ford",
+  "displacementCc": 1498,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "Dragon"
+  ],
+  "shortDescription": "Turbobenzyna 1.5 z Focusa i Kugi. Spokojniejsza od 1.6 EcoBoost, w części wersji z wyłączaniem cylindra.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

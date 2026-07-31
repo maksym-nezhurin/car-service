@@ -132,16 +132,16 @@ const TRANSMISSION_TOKEN_RE =
 
 /** Named automatics that AUTO.RIA writes instead of "AT": 7G-Tronic, Steptronic, Tiptronic. */
 const NAMED_AUTOMATIC_RE =
-  /\b(?:([579])\s*)?g-?tronic\b|\bsteptronic\b|\btiptronic\b|\bs-?tronic\b/i;
+  /\b(?:([579])\s*)?g-?tronic\b|\bsteptronic\b|\btiptronic\b|\bs-?tronic\b|\bpowershift\b|\bmultidrive\b|\be-?cvt\b|\bhybrid\s*e-?cvt\b/i;
 
 const ELECTRIC_RE = /\bkwh\b|elektr|\bev\b|\be-[a-z]/i;
 const HYBRID_RE = /\b[pm]?hev\b|hybrid|hybryd/i;
 // AUTO.RIA writes both "1.9 TDI" and "1.9TDI", so the left edge only rejects letters —
 // \b would fail between a digit and the acronym. TDI also carries suffixes ("TDIe").
 const DIESEL_RE =
-  /crdi|\bcrd\b|(?<![a-z])tdi|cdti|\bdci\b|\bhdi\b|\bjtd\b|bluetec|(?<![a-z])cdi\b|diesel|\bd4d\b|\d[.,]\d\s*d\b/i;
+  /crdi|\bcrd\b|(?<![a-z])tdi|cdti|tdci|ecoblue|duratorq|\bdci\b|\bhdi\b|\bjtd\b|bluetec|(?<![a-z])cdi\b|diesel|\bd4d\b|\d[.,]\d\s*td\b|\d[.,]\d\s*d\b/i;
 const TURBO_RE =
-  /t-gdi|tgdi|(?<![a-z])tsi\b|(?<![a-z])tfsi\b|turbo|\d[.,]\d\s*t\b|\bt-jet\b/i;
+  /t-gdi|tgdi|(?<![a-z])tsi\b|(?<![a-z])tfsi\b|ecoboost|turbo|\d[.,]\d\s*t\b|\bt-jet\b/i;
 const ATMO_RE = /(?<![a-z])gdi\b|(?<![a-z])mpi\b|\bvvt\b|atmo|\bdohc\b/i;
 const SUPERCHARGED_RE = /kompressor|kompresor|\bsupercharg/i;
 // German factory designations carry the fuel in the suffix: 320d and 250TD are diesels,

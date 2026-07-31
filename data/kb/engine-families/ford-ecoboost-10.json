@@ -1,0 +1,14 @@
+{
+  "slug": "ford-ecoboost-10",
+  "displayName": "Ford EcoBoost 1.0",
+  "manufacturer": "Ford",
+  "displacementCc": 999,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "Fox"
+  ],
+  "shortDescription": "Trzycylindrowa turbobenzyna od 2012 roku. Podstawa gamy Fiesty, Focusa i Pumy; nowsze odmiany mają miękką hybrydę MHEV.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

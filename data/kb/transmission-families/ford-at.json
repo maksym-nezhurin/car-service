@@ -1,0 +1,9 @@
+{
+  "slug": "ford-at",
+  "displayName": "Ford automat hydrokinetyczny",
+  "type": "at",
+  "manufacturer": "Ford",
+  "shortDescription": "Klasyczny automat Forda, montowany głównie w Mondeo i Kudze z mocniejszymi silnikami.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

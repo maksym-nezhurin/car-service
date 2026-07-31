@@ -1,0 +1,14 @@
+{
+  "slug": "toyota-nd-14-diesel",
+  "displayName": "Toyota 1.4 D-4D",
+  "manufacturer": "Toyota",
+  "displacementCc": 1364,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "1ND-TV"
+  ],
+  "shortDescription": "Mały diesel z Yaris i Corolli. Bardzo oszczędny w mieście, bez AdBlue, ale z filtrem cząstek stałych w nowszych odmianach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "toyota-az-24",
+  "displayName": "Toyota AZ 2.4",
+  "manufacturer": "Toyota",
+  "displacementCc": 2362,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "2AZ-FE"
+  ],
+  "shortDescription": "Benzyna z Camry XV30/XV40 i RAV4 XA30. Trwała, ale w tej rodzinie wraca temat zużycia oleju przy wysokich przebiegach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

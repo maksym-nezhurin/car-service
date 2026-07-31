@@ -1,0 +1,15 @@
+{
+  "slug": "toyota-dynamic-force-20",
+  "displayName": "Toyota Dynamic Force 2.0",
+  "manufacturer": "Toyota",
+  "displacementCc": 1987,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "M20A-FKS",
+    "M20A-FXS"
+  ],
+  "shortDescription": "Nowoczesna jednostka TNGA od 2018 roku w Corolli E210, C-HR i RAV4. Wysoki stosunek mocy do spalania, wariant FXS w hybrydach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

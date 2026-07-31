@@ -1,0 +1,21 @@
+{
+  "slug": "ford-tdci-20-150",
+  "familySlug": "ford-tdci-20",
+  "code": "DW10",
+  "displayName": "2.0 TDCi 150 KM",
+  "displacementCc": 1997,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 150,
+  "powerKw": 110,
+  "torqueNm": 370,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2010,
+  "yearTo": 2018,
+  "shortDescription": "Uniwersalna odmiana 2.0 TDCi w Focusie i Mondeo.",
+  "reliabilityNotes": "Przy Powershift kluczowa jest wymiana oleju w skrzyni. Sam diesel jest raczej bezproblemowy.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

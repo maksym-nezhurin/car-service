@@ -1,0 +1,14 @@
+{
+  "slug": "ford-ecoblue-15",
+  "displayName": "Ford EcoBlue 1.5",
+  "manufacturer": "Ford",
+  "displacementCc": 1499,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "EcoBlue 1.5"
+  ],
+  "shortDescription": "Nowszy diesel od 2018 roku z AdBlue. Cichszy i czystszy od TDCi, montowany w Focusie Mk4 i Kudze.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

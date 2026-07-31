@@ -1,0 +1,15 @@
+{
+  "slug": "toyota-ar-25",
+  "displayName": "Toyota AR 2.5",
+  "manufacturer": "Toyota",
+  "displacementCc": 2494,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "2AR-FE",
+    "2AR-FXE"
+  ],
+  "shortDescription": "Następca 2AZ w Camry XV50 i RAV4 XA40. Wersja FXE napędza hybrydy; FE to klasyczna benzyna.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

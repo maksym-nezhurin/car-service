@@ -1,0 +1,14 @@
+{
+  "slug": "ford-ecoboost-16",
+  "displayName": "Ford EcoBoost 1.6",
+  "manufacturer": "Ford",
+  "displacementCc": 1596,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "Sigma EcoBoost"
+  ],
+  "shortDescription": "Wczesny EcoBoost z Focusa Mk3. Mocne odmiany (182 KM) są żwawe, ale wymagają dobrego oleju i krótkich interwałów.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

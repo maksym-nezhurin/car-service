@@ -1,0 +1,9 @@
+{
+  "slug": "toyota-at",
+  "displayName": "Toyota automat / e-CVT",
+  "type": "at",
+  "manufacturer": "Toyota",
+  "shortDescription": "Klasyczne automaty i e-CVT hybryd. Hybrydowe e-CVT uchodzi za wyjątkowo trwałe przy regularnej wymianie oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "vag-25-tdi-v6",
+  "displayName": "VAG 2.5 TDI V6",
+  "manufacturer": "Audi",
+  "displacementCc": 2496,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["AFB", "AKN", "AKE", "BAU", "BDG", "BDH", "BFC"],
+  "shortDescription": "Sześciocylindrowy diesel z przełomu wieków, montowany w Audi A4, A6 i Superbie pierwszej generacji. Kulturalny i mocny jak na swoje czasy, ale dziś kluczowe są stan wałków pompy wtryskowej i napęd rozrządu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

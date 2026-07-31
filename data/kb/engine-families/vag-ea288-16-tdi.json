@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea288-16-tdi",
+  "displayName": "VAG EA288 1.6 TDI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1598,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["CRKB", "CXXB", "CLHB", "DGTE", "DTRA"],
+  "shortDescription": "Wersja 1.6 TDI z rodziny EA288, produkowana od 2013 roku. Spokojna jednostka do miasta i tras, w nowszych odmianach z SCR i AdBlue.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

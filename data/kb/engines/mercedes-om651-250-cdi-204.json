@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-om651-250-cdi-204",
+  "familySlug": "mercedes-om651",
+  "code": "OM651",
+  "displayName": "250 CDI 204 KM (OM651)",
+  "displacementCc": 2143,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 204,
+  "powerKw": 150,
+  "torqueNm": 500,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2009,
+  "yearTo": 2014,
+  "shortDescription": "Najmocniejsza czterocylindrowa odmiana OM651 z podwójnym doładowaniem. Spotykana w C- i E-Klasie.",
+  "reliabilityNotes": "Wyższy moment obrotowy mocniej obciąża skrzynię 7G-Tronic — pilnuj wymian oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

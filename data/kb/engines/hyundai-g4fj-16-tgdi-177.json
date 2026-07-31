@@ -1,0 +1,21 @@
+{
+  "slug": "hyundai-g4fj-16-tgdi-177",
+  "familySlug": "hyundai-gamma-16-tgdi",
+  "code": "G4FJ",
+  "displayName": "1.6 T-GDI 177 KM (G4FJ)",
+  "displacementCc": 1591,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 177,
+  "powerKw": 130,
+  "torqueNm": 265,
+  "cylinders": 4,
+  "injection": "T-GDI",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2015,
+  "yearTo": 2021,
+  "shortDescription": "Mocniejsza benzyna z turbodoładowaniem, w Tucsonie TL i Sportage QL zwykle łączona z dwusprzęgłową skrzynią 7DCT.",
+  "reliabilityNotes": "Wymaga oleju zgodnego ze specyfikacją producenta i regularnych wymian — turbosprężarka i łańcuch rozrządu są wrażliwe na zaniedbania. Unikaj gaszenia silnika zaraz po dynamicznej jeździe.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

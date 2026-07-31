@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea188-19-tdi",
+  "displayName": "VAG 1.9 TDI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1896,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["AHU", "ALH", "AGR", "ATD", "AXR", "ASZ", "ARL", "BXE", "BKC", "BLS"],
+  "shortDescription": "Najpopularniejszy diesel Grupy VW lat 90. i 2000. Starsze wersje mają pompę rozdzielaczową, późniejsze pompowtryskiwacze (PD). Ceniony za trwałość i niskie spalanie, ale konstrukcyjnie należy już do poprzedniej epoki.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

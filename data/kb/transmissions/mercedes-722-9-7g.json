@@ -1,0 +1,16 @@
+{
+  "slug": "mercedes-722-9-7g",
+  "familySlug": "mercedes-7g-tronic",
+  "code": "722.9",
+  "displayName": "7G-Tronic 722.9",
+  "type": "at",
+  "gears": 7,
+  "drive": "rwd/awd",
+  "maxTorqueNm": 700,
+  "yearFrom": 2003,
+  "yearTo": 2017,
+  "shortDescription": "Siedmiobiegowy automat Mercedesa, łączony z OM651, M271 i OM642.",
+  "reliabilityNotes": "Wymiana oleju co ok. 60–80 tys. km. Objawy zużycia to szarpanie przy ruszaniu i opóźnione przełożenia.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "bmw-zf-6hp19",
+  "familySlug": "bmw-zf-6hp",
+  "code": "6HP19",
+  "displayName": "ZF 6HP19 Steptronic",
+  "type": "at",
+  "gears": 6,
+  "drive": "rwd/awd",
+  "maxTorqueNm": 400,
+  "yearFrom": 2000,
+  "yearTo": 2012,
+  "shortDescription": "Sześciobiegowy automat E90/E60 z M57 i N52.",
+  "reliabilityNotes": "Przy zaniedbanej wymianie oleju pada mechatronika. Szarpnięcia przy zmianie z 2. na 3. bieg to typowy objaw.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

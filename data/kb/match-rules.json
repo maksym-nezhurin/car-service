@@ -1,0 +1,1915 @@
+[
+  {
+    "makes": [
+      "hyundai",
+      "kia"
+    ],
+    "models": [
+      "tucson",
+      "i30",
+      "kona",
+      "ceed",
+      "sportage"
+    ],
+    "yearFrom": 2010,
+    "enginePattern": "1[.,]6\\s*gdi",
+    "notEnginePattern": "hev|hybrid",
+    "powerHp": [
+      132,
+      135
+    ],
+    "engineSlug": "hyundai-g4fd-16-gdi-132",
+    "transmissions": {
+      "MT": "hyundai-m6cf1-6mt",
+      "AT": "hyundai-a6mf2-6at"
+    }
+  },
+  {
+    "makes": [
+      "hyundai",
+      "kia"
+    ],
+    "models": [
+      "tucson",
+      "i30",
+      "kona",
+      "ceed",
+      "sportage"
+    ],
+    "yearFrom": 2015,
+    "enginePattern": "1[.,]6\\s*t-?gdi",
+    "notEnginePattern": "hev|hybrid",
+    "powerHp": [
+      175,
+      177
+    ],
+    "engineSlug": "hyundai-g4fj-16-tgdi-177",
+    "transmissions": {
+      "MT": "hyundai-m6cf1-6mt",
+      "AT": "hyundai-d7uf1-7dct",
+      "DCT": "hyundai-d7uf1-7dct"
+    }
+  },
+  {
+    "makes": [
+      "hyundai",
+      "kia"
+    ],
+    "models": [
+      "tucson",
+      "i30",
+      "sportage",
+      "ceed"
+    ],
+    "yearFrom": 2010,
+    "enginePattern": "1[.,]7\\s*crdi",
+    "powerHp": [
+      115,
+      116
+    ],
+    "engineSlug": "hyundai-d4fd-17-crdi-116",
+    "transmissions": {
+      "MT": "hyundai-m6cf1-6mt",
+      "AT": "hyundai-d7uf1-7dct",
+      "DCT": "hyundai-d7uf1-7dct"
+    }
+  },
+  {
+    "makes": [
+      "hyundai",
+      "kia"
+    ],
+    "models": [
+      "tucson",
+      "i30",
+      "sportage",
+      "ceed"
+    ],
+    "yearFrom": 2010,
+    "enginePattern": "1[.,]7\\s*crdi",
+    "powerHp": [
+      136,
+      141
+    ],
+    "engineSlug": "hyundai-d4fd-17-crdi-141",
+    "transmissions": {
+      "MT": "hyundai-m6cf1-6mt",
+      "AT": "hyundai-d7uf1-7dct",
+      "DCT": "hyundai-d7uf1-7dct"
+    }
+  },
+  {
+    "makes": [
+      "hyundai",
+      "kia"
+    ],
+    "models": [
+      "tucson",
+      "santa-fe",
+      "sportage",
+      "sorento"
+    ],
+    "yearFrom": 2009,
+    "enginePattern": "2[.,]0\\s*crdi",
+    "powerHp": [
+      136,
+      150
+    ],
+    "engineSlug": "hyundai-d4ha-20-crdi-136",
+    "transmissions": {
+      "MT": "hyundai-m6cf1-6mt",
+      "AT": "hyundai-a6mf2-6at"
+    }
+  },
+  {
+    "makes": [
+      "hyundai",
+      "kia"
+    ],
+    "models": [
+      "tucson",
+      "santa-fe",
+      "sportage",
+      "sorento"
+    ],
+    "yearFrom": 2009,
+    "enginePattern": "2[.,]0\\s*crdi",
+    "powerHp": [
+      184,
+      185,
+      186
+    ],
+    "engineSlug": "hyundai-d4hb-20-crdi-185",
+    "transmissions": {
+      "MT": "hyundai-m6cf1-6mt",
+      "AT": "hyundai-a6mf2-6at"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearTo": 2010,
+    "enginePattern": "1[.,]9\\s*tdi",
+    "powerHp": [
+      90
+    ],
+    "engineSlug": "vag-alh-19-tdi-90",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearTo": 2010,
+    "enginePattern": "1[.,]9\\s*tdi",
+    "powerHp": [
+      105
+    ],
+    "engineSlug": "vag-bxe-19-tdi-105",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearTo": 2010,
+    "enginePattern": "1[.,]9\\s*tdi",
+    "powerHp": [
+      130
+    ],
+    "engineSlug": "vag-asz-19-tdi-130",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "enginePattern": "1[.,]9\\s*tdi",
+    "engineFamilySlug": "vag-ea188-19-tdi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2003,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*tdi",
+    "powerHp": [
+      140
+    ],
+    "engineSlug": "vag-bkd-20-tdi-140",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2003,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*tdi",
+    "powerHp": [
+      170
+    ],
+    "engineSlug": "vag-bmn-20-tdi-170",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2003,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*tdi",
+    "engineFamilySlug": "vag-ea188-20-tdi-pd",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2008,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*tdi",
+    "powerHp": [
+      140
+    ],
+    "engineSlug": "vag-cbab-20-tdi-140",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2008,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*tdi",
+    "engineFamilySlug": "vag-ea189-20-tdi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2013,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*tdi",
+    "powerHp": [
+      150
+    ],
+    "engineSlug": "vag-crbc-20-tdi-150",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dsg-wet",
+      "DCT": "vag-dsg-wet"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2013,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*tdi",
+    "engineFamilySlug": "vag-ea288-20-tdi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dsg-wet",
+      "DCT": "vag-dsg-wet"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]6\\s*tdi",
+    "powerHp": [
+      105
+    ],
+    "engineSlug": "vag-cayc-16-tdi-105",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]6\\s*tdi",
+    "engineFamilySlug": "vag-ea189-16-tdi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2013,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]6\\s*tdi",
+    "engineFamilySlug": "vag-ea288-16-tdi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearTo": 2010,
+    "enginePattern": "1[.,]8\\s*t(?![sf])",
+    "powerHp": [
+      180
+    ],
+    "engineSlug": "vag-auq-18t-180",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "enginePattern": "1[.,]8\\s*t(?![sf])",
+    "engineFamilySlug": "vag-ea113-18t",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2007,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]8\\s*t[fs]si",
+    "engineFamilySlug": "vag-ea888-18-tsi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dsg-wet",
+      "DCT": "vag-dsg-wet"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2003,
+    "yearTo": 2009,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*t[fs]si",
+    "powerHp": [
+      200
+    ],
+    "engineSlug": "vag-bwa-20-tfsi-200",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2003,
+    "yearTo": 2009,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*t[fs]si",
+    "engineFamilySlug": "vag-ea113-20-tfsi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq250-6dsg",
+      "DCT": "vag-dq250-6dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2010,
+    "yearsStrict": true,
+    "enginePattern": "2[.,]0\\s*t[fs]si",
+    "engineFamilySlug": "vag-ea888-20-tsi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dsg-wet",
+      "DCT": "vag-dsg-wet"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2005,
+    "yearTo": 2011,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]4\\s*t[fs]si",
+    "engineFamilySlug": "vag-ea111-14-tsi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2012,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]4\\s*t[fs]si",
+    "powerHp": [
+      150
+    ],
+    "engineSlug": "vag-czda-14-tsi-150",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2012,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]4\\s*t[fs]si",
+    "engineFamilySlug": "vag-ea211-14-tsi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2016,
+    "enginePattern": "1[.,]5\\s*t[fs]si",
+    "engineFamilySlug": "vag-ea211-15-tsi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2014,
+    "enginePattern": "1[.,]0\\s*t[fs]si",
+    "engineFamilySlug": "vag-ea211-10-tsi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2013,
+    "yearsStrict": true,
+    "enginePattern": "1[.,]6\\s*mpi",
+    "engineFamilySlug": "vag-ea211-16-mpi",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearTo": 2008,
+    "enginePattern": "2[.,]5\\s*tdi",
+    "engineFamilySlug": "vag-25-tdi-v6",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at"
+    }
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2004,
+    "enginePattern": "3[.,]0\\s*tdi",
+    "engineFamilySlug": "vag-30-tdi-v6",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dsg-wet",
+      "DCT": "vag-dsg-wet"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2016,
+    "yearsStrict": true,
+    "enginePattern": "200\\s*cdi",
+    "powerHp": [
+      136
+    ],
+    "engineSlug": "mercedes-om651-200-cdi-136",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2016,
+    "yearsStrict": true,
+    "enginePattern": "220\\s*cdi",
+    "powerHp": [
+      170
+    ],
+    "engineSlug": "mercedes-om651-220-cdi-170",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2014,
+    "yearsStrict": true,
+    "enginePattern": "250\\s*cdi",
+    "powerHp": [
+      201,
+      204
+    ],
+    "engineSlug": "mercedes-om651-250-cdi-204",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2016,
+    "yearsStrict": true,
+    "enginePattern": "200\\s*cdi",
+    "engineFamilySlug": "mercedes-om651",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2016,
+    "yearsStrict": true,
+    "enginePattern": "220\\s*cdi",
+    "engineFamilySlug": "mercedes-om651",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2014,
+    "yearsStrict": true,
+    "enginePattern": "250\\s*cdi",
+    "engineFamilySlug": "mercedes-om651",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2009,
+    "yearsStrict": true,
+    "enginePattern": "200\\s*cdi",
+    "engineFamilySlug": "mercedes-om646",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2009,
+    "yearsStrict": true,
+    "enginePattern": "220\\s*cdi",
+    "engineFamilySlug": "mercedes-om646",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 1997,
+    "yearTo": 2003,
+    "yearsStrict": true,
+    "enginePattern": "(200|220)\\s*cdi",
+    "engineFamilySlug": "mercedes-om611",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2014,
+    "yearsStrict": true,
+    "enginePattern": "220d",
+    "powerHp": [
+      190,
+      194,
+      195,
+      197
+    ],
+    "engineSlug": "mercedes-om654-220d-194",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2014,
+    "yearsStrict": true,
+    "enginePattern": "220d",
+    "engineFamilySlug": "mercedes-om654",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2014,
+    "yearsStrict": true,
+    "enginePattern": "200d",
+    "engineFamilySlug": "mercedes-om654",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2014,
+    "yearsStrict": true,
+    "enginePattern": "180d",
+    "engineFamilySlug": "mercedes-om654",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    },
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2005,
+    "yearTo": 2014,
+    "yearsStrict": true,
+    "enginePattern": "320\\s*cdi",
+    "engineFamilySlug": "mercedes-om642",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2005,
+    "yearTo": 2011,
+    "yearsStrict": true,
+    "enginePattern": "280\\s*cdi",
+    "engineFamilySlug": "mercedes-om642",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2011,
+    "yearsStrict": true,
+    "enginePattern": "200\\s*kompressor",
+    "powerHp": [
+      184
+    ],
+    "engineSlug": "mercedes-m271-200k-184",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2011,
+    "yearsStrict": true,
+    "enginePattern": "200\\s*kompressor",
+    "engineFamilySlug": "mercedes-m271",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2011,
+    "yearsStrict": true,
+    "enginePattern": "180\\s*kompressor",
+    "engineFamilySlug": "mercedes-m271",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2008,
+    "yearsStrict": true,
+    "enginePattern": "230\\s*kompressor",
+    "engineFamilySlug": "mercedes-m271",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ],
+    "yearFrom": 2012,
+    "yearTo": 2020,
+    "yearsStrict": true,
+    "enginePattern": "^200$",
+    "powerHp": [
+      184,
+      197
+    ],
+    "engineFamilySlug": "mercedes-m274",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ],
+    "yearFrom": 2012,
+    "yearTo": 2020,
+    "yearsStrict": true,
+    "enginePattern": "^180$",
+    "powerHp": [
+      156
+    ],
+    "engineFamilySlug": "mercedes-m274",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ],
+    "yearFrom": 2012,
+    "yearTo": 2020,
+    "yearsStrict": true,
+    "enginePattern": "^250$",
+    "powerHp": [
+      211
+    ],
+    "engineFamilySlug": "mercedes-m274",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class",
+      "gla",
+      "glc"
+    ],
+    "yearFrom": 2012,
+    "yearsStrict": true,
+    "enginePattern": "200\\s*g-?tronic",
+    "engineFamilySlug": "mercedes-m274",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "e-class",
+      "glc"
+    ],
+    "yearFrom": 2012,
+    "yearsStrict": true,
+    "enginePattern": "300\\s*g-?tronic",
+    "engineFamilySlug": "mercedes-m274",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "a-class",
+      "gla"
+    ],
+    "yearFrom": 2012,
+    "yearTo": 2018,
+    "yearsStrict": true,
+    "enginePattern": "^180$",
+    "engineFamilySlug": "mercedes-m270",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "a-class",
+      "gla"
+    ],
+    "yearFrom": 2012,
+    "yearTo": 2018,
+    "yearsStrict": true,
+    "enginePattern": "^200$",
+    "engineFamilySlug": "mercedes-m270",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "a-class"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2012,
+    "yearsStrict": true,
+    "enginePattern": "^(160|180|200)$",
+    "engineFamilySlug": "mercedes-m266",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 1998,
+    "yearTo": 2007,
+    "yearsStrict": true,
+    "enginePattern": "^320d",
+    "engineFamilySlug": "bmw-m47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^320d",
+    "powerHp": [
+      184
+    ],
+    "engineSlug": "bmw-n47-320d-184",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^320d",
+    "engineFamilySlug": "bmw-n47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^320d",
+    "powerHp": [
+      190
+    ],
+    "engineSlug": "bmw-b47-320d-190",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^320d",
+    "engineFamilySlug": "bmw-b47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2007,
+    "yearsStrict": true,
+    "enginePattern": "^318d",
+    "engineFamilySlug": "bmw-m47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^318d",
+    "engineFamilySlug": "bmw-n47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^318d",
+    "engineFamilySlug": "bmw-b47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^325d",
+    "engineFamilySlug": "bmw-m57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2019,
+    "yearsStrict": true,
+    "enginePattern": "^325d",
+    "engineFamilySlug": "bmw-n57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 1998,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^330d|^330xd",
+    "powerHp": [
+      231
+    ],
+    "engineSlug": "bmw-m57-330d-231",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 1998,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^330d|^330xd",
+    "engineFamilySlug": "bmw-m57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^330d",
+    "engineFamilySlug": "bmw-n57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^335i",
+    "powerHp": [
+      306
+    ],
+    "engineSlug": "bmw-n54-335i-306",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^335i",
+    "engineFamilySlug": "bmw-n54",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^335i",
+    "powerHp": [
+      306
+    ],
+    "engineSlug": "bmw-n55-335i-306",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^335i",
+    "engineFamilySlug": "bmw-n55",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2001,
+    "yearTo": 2012,
+    "yearsStrict": true,
+    "enginePattern": "^318i",
+    "engineFamilySlug": "bmw-n46",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2012,
+    "yearTo": 2019,
+    "yearsStrict": true,
+    "enginePattern": "^318i|^316i",
+    "engineFamilySlug": "bmw-n13",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2001,
+    "yearTo": 2012,
+    "yearsStrict": true,
+    "enginePattern": "^320i",
+    "engineFamilySlug": "bmw-n46",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2011,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^320i|^328i",
+    "engineFamilySlug": "bmw-n20",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^320i|^330i",
+    "engineFamilySlug": "bmw-b48",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "3-series"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2012,
+    "yearsStrict": true,
+    "enginePattern": "^325i|^330i",
+    "engineFamilySlug": "bmw-n52",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2007,
+    "yearsStrict": true,
+    "enginePattern": "^520d",
+    "engineFamilySlug": "bmw-m47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^520d",
+    "engineFamilySlug": "bmw-n47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^520d",
+    "engineFamilySlug": "bmw-b47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 1995,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^530d",
+    "engineFamilySlug": "bmw-m57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2017,
+    "yearsStrict": true,
+    "enginePattern": "^530d",
+    "engineFamilySlug": "bmw-n57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2003,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^535d",
+    "engineFamilySlug": "bmw-m57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2017,
+    "yearsStrict": true,
+    "enginePattern": "^535d",
+    "engineFamilySlug": "bmw-n57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^525d",
+    "engineFamilySlug": "bmw-m57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2017,
+    "yearsStrict": true,
+    "enginePattern": "^525d",
+    "engineFamilySlug": "bmw-n57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2011,
+    "yearTo": 2017,
+    "yearsStrict": true,
+    "enginePattern": "^520i|^528i",
+    "engineFamilySlug": "bmw-n20",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2013,
+    "yearsStrict": true,
+    "enginePattern": "^525i|^530i",
+    "engineFamilySlug": "bmw-n52",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2017,
+    "yearsStrict": true,
+    "enginePattern": "^535i",
+    "engineFamilySlug": "bmw-n55",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "x1",
+      "x3"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^18d|^20d",
+    "engineFamilySlug": "bmw-n47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "x1",
+      "x3"
+    ],
+    "yearFrom": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^18d|^20d",
+    "engineFamilySlug": "bmw-b47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "x1",
+      "x3"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2017,
+    "yearsStrict": true,
+    "enginePattern": "^20i|^28i",
+    "engineFamilySlug": "bmw-n20",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "x1"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2015,
+    "yearsStrict": true,
+    "enginePattern": "^18i",
+    "engineFamilySlug": "bmw-n20",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "x3",
+      "x5"
+    ],
+    "yearFrom": 2000,
+    "yearTo": 2010,
+    "yearsStrict": true,
+    "enginePattern": "^3[.,]0d",
+    "engineFamilySlug": "bmw-m57",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-6hp"
+    }
+  }
+]

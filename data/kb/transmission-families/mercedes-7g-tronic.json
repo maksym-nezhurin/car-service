@@ -1,0 +1,10 @@
+{
+  "slug": "mercedes-7g-tronic",
+  "displayName": "Mercedes-Benz 7G-Tronic",
+  "type": "at",
+  "gears": 7,
+  "manufacturer": "Mercedes-Benz",
+  "shortDescription": "Siedmiobiegowy automat hydrokinetyczny od 2003 roku. Płynna praca w mieście, standard w C- i E-Klasie z dieslem OM651.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

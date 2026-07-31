@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-n57",
+  "displayName": "BMW N57 3.0 diesel",
+  "manufacturer": "BMW",
+  "displacementCc": 2993,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "N57"
+  ],
+  "shortDescription": "Sześciocylindrowy diesel od 2008 roku. Mocniejsze odmiany 330d/530d i biturbo 535d. Kultura pracy i moment na wysokim poziomie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "hyundai-gamma-16-tgdi",
+  "displayName": "Hyundai/Kia Gamma 1.6 T-GDI",
+  "manufacturer": "Hyundai",
+  "displacementCc": 1591,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["G4FJ"],
+  "shortDescription": "Doładowana rodzina 1.6 T-GDI. Daje wyraźnie lepszą dynamikę niż wolnossące 1.6, kosztem wyższego spalania w mieście i wrażliwości na jakość oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

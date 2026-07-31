@@ -1,0 +1,10 @@
+{
+  "slug": "hyundai-6mt",
+  "displayName": "Hyundai/Kia 6-biegowa manualna",
+  "type": "manual",
+  "gears": 6,
+  "manufacturer": "Hyundai",
+  "shortDescription": "Klasyczna skrzynia manualna z sześcioma przełożeniami. Najtańsza w utrzymaniu opcja — koszty ograniczają się głównie do sprzęgła i oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "mercedes-om651",
+  "displayName": "Mercedes-Benz OM651 1.8/2.1 CDI",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 2143,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "OM651"
+  ],
+  "shortDescription": "Najpopularniejszy diesel Mercedesa lat 2009–2018. Od 136 do 204 KM w odmianach 200/220/250 CDI. Wczesne egzemplarze miały problemy z łańcuchem rozrządu i wtryskiwaczami piezoelektrycznymi.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

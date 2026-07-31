@@ -1,0 +1,15 @@
+{
+  "slug": "hyundai-a6mf2-6at",
+  "familySlug": "hyundai-6at",
+  "code": "A6MF2",
+  "displayName": "6-biegowy automat A6MF2",
+  "type": "automatic",
+  "gears": 6,
+  "drive": "fwd/awd",
+  "maxTorqueNm": 400,
+  "yearFrom": 2009,
+  "shortDescription": "Hydrokinetyczny automat własnej konstrukcji Hyundai/Kia, stosowany w dieslach 2.0 CRDi oraz mocniejszych benzynach w SUV-ach segmentu C i D.",
+  "reliabilityNotes": "Trwały przy wymianie oleju co ok. 60-80 tys. km. Zaniedbany olej objawia się szarpaniem przy przełożeniach 2-3 i przegrzewaniem w korkach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

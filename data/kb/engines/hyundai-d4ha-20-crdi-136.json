@@ -1,0 +1,21 @@
+{
+  "slug": "hyundai-d4ha-20-crdi-136",
+  "familySlug": "hyundai-r-20-crdi",
+  "code": "D4HA",
+  "displayName": "2.0 CRDi 136 KM (D4HA)",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 136,
+  "powerKw": 100,
+  "torqueNm": 320,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5/6",
+  "yearFrom": 2009,
+  "yearTo": 2020,
+  "shortDescription": "Podstawowa odmiana 2.0 CRDi w Santa Fe, Tucsonie i Sportage. Spokojna charakterystyka, często z napędem na przód.",
+  "reliabilityNotes": "Zwróć uwagę na koło dwumasowe i stan wtryskiwaczy przy przebiegach powyżej 200 tys. km.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

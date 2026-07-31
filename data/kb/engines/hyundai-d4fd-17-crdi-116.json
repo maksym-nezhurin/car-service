@@ -1,0 +1,21 @@
+{
+  "slug": "hyundai-d4fd-17-crdi-116",
+  "familySlug": "hyundai-u2-17-crdi",
+  "code": "D4FD",
+  "displayName": "1.7 CRDi 116 KM (D4FD)",
+  "displacementCc": 1685,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 116,
+  "powerKw": 85,
+  "torqueNm": 260,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5/6",
+  "yearFrom": 2011,
+  "yearTo": 2020,
+  "shortDescription": "Słabsza odmiana 1.7 CRDi, najczęściej z manualną skrzynią. Ekonomiczna w trasie, wystarczająca do spokojnej jazdy.",
+  "reliabilityNotes": "Krótkie miejskie trasy szkodzą filtrowi DPF. Sprawdzaj stan zaworu EGR i szczelność układu doładowania.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

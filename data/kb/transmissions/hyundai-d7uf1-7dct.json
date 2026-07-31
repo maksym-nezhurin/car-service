@@ -1,0 +1,15 @@
+{
+  "slug": "hyundai-d7uf1-7dct",
+  "familySlug": "hyundai-7dct",
+  "code": "D7UF1",
+  "displayName": "7-biegowa dwusprzęgłowa D7UF1 (mokre sprzęgła)",
+  "type": "dct",
+  "gears": 7,
+  "drive": "fwd/awd",
+  "maxTorqueNm": 340,
+  "yearFrom": 2015,
+  "shortDescription": "Dwusprzęgłowa skrzynia z mokrymi sprzęgłami, przeznaczona do mocniejszych diesli i silników turbo. W Tucsonie TL łączona z 1.7 CRDi 141 KM oraz 1.6 T-GDI.",
+  "reliabilityNotes": "Kluczowa jest wymiana oleju w skrzyni według harmonogramu producenta. Objawy zużycia to szarpanie przy ruszaniu i opóźnienia przy niskich prędkościach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

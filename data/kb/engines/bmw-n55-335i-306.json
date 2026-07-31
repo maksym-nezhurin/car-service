@@ -1,0 +1,21 @@
+{
+  "slug": "bmw-n55-335i-306",
+  "familySlug": "bmw-n55",
+  "code": "N55",
+  "displayName": "335i 306 KM (N55)",
+  "displacementCc": 2979,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 306,
+  "powerKw": 225,
+  "torqueNm": 400,
+  "cylinders": 6,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 5/6",
+  "yearFrom": 2009,
+  "yearTo": 2015,
+  "shortDescription": "Sztandarowa sportowa odmiana Serii 3 F30 i E90 LCI. Jedna turbosprężarka twin-scroll zamiast dwóch z N54.",
+  "reliabilityNotes": "Sprawdź stan pompy wody, termostatu i wtryskiwaczy. Wersje z modyfikacją oprogramowania obciążają sprzęgło i skrzynię.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "mercedes-m271",
+  "displayName": "Mercedes-Benz M271 Kompressor",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1796,
+  "fuelType": "petrol",
+  "aspiration": "supercharged",
+  "engineCodes": [
+    "M271"
+  ],
+  "shortDescription": "Benzyna z mechaniczną sprężarką, podstawowa jednostka C-Klasy W203/W204 i E-Klasy W211 w latach 2002–2011. Oznaczenia 180/200/230 Kompressor.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

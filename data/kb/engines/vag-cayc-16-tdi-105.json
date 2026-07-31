@@ -1,0 +1,21 @@
+{
+  "slug": "vag-cayc-16-tdi-105",
+  "familySlug": "vag-ea189-16-tdi",
+  "code": "CAYC",
+  "displayName": "1.6 TDI 105 KM (CAYC)",
+  "displacementCc": 1598,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 105,
+  "powerKw": 77,
+  "torqueNm": 250,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2009,
+  "yearTo": 2015,
+  "shortDescription": "Podstawowy diesel Golfa VI, Octavii II i Audi A3 8P. W wersjach BlueMotion potrafi zejść poniżej czterech i pół litra na sto kilometrów.",
+  "reliabilityNotes": "Sprawdź stan filtra cząstek stałych i pompy podciśnienia. Przy dłuższych postojach zdarzają się problemy z rozruchem przy zużytych świecach żarowych.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea211-10-tsi",
+  "displayName": "VAG EA211 1.0 TSI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 999,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["CHZB", "CHZC", "CHZD", "DKRF", "DLAA", "DLAC"],
+  "shortDescription": "Trzycylindrowa turbobenzyna od 2015 roku, podstawa gamy w Polo, Fabii i Golfie. Zaskakująco żwawa w mieście i tania w utrzymaniu, choć przy pełnym obciążeniu słychać, że to mała jednostka.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

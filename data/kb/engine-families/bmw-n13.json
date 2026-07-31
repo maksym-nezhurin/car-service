@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-n13",
+  "displayName": "BMW N13 1.6 turbo",
+  "manufacturer": "BMW",
+  "displacementCc": 1598,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "N13"
+  ],
+  "shortDescription": "Wspólna z PSA turbobenzyna 1.6, podstawowa jednostka Serii 3 F30 jako 316i/318i. Oszczędna, ale bez charakteru klasycznych szóstek.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

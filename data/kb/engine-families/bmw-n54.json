@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-n54",
+  "displayName": "BMW N54 3.0 twin-turbo",
+  "manufacturer": "BMW",
+  "displacementCc": 2979,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "N54"
+  ],
+  "shortDescription": "Pierwsza seryjna biturbo R6 BMW, znana z 335i E90. Ogromny potencjał mocy, ale wtryskiwacze wysokociśnieniowe i pompa HPFP bywają drogie w naprawie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

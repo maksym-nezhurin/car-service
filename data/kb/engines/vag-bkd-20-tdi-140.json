@@ -1,0 +1,21 @@
+{
+  "slug": "vag-bkd-20-tdi-140",
+  "familySlug": "vag-ea188-20-tdi-pd",
+  "code": "BKD",
+  "displayName": "2.0 TDI 140 KM (BKD/AZV)",
+  "displacementCc": 1968,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 140,
+  "powerKw": 103,
+  "torqueNm": 320,
+  "cylinders": 4,
+  "injection": "pompowtryskiwacze",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2003,
+  "yearTo": 2010,
+  "shortDescription": "Najpopularniejsze 2.0 TDI epoki pompowtryskiwaczy, obecne w Golfie V, Passacie B6, Octavii II i Audi A3 8P. Mocne w środkowym zakresie obrotów i wciąż chętnie kupowane na rynku wtórnym.",
+  "reliabilityNotes": "Słabym punktem jest głowica z ośmioma zaworami przy odmianach z filtrem cząstek stałych oraz napęd pompy oleju. Warto sprawdzić, czy wymieniono wałek napędowy pompy.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

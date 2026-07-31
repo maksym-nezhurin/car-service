@@ -1,0 +1,21 @@
+{
+  "slug": "vag-bmn-20-tdi-170",
+  "familySlug": "vag-ea188-20-tdi-pd",
+  "code": "BMN",
+  "displayName": "2.0 TDI 170 KM (BMN/BMR)",
+  "displacementCc": 1968,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 170,
+  "powerKw": 125,
+  "torqueNm": 350,
+  "cylinders": 4,
+  "injection": "pompowtryskiwacze",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2005,
+  "yearTo": 2010,
+  "shortDescription": "Najmocniejsza odmiana 2.0 TDI PD, z turbosprężarką o zmiennej geometrii i szesnastozaworową głowicą. Spotykana w Golfie V GT, Passacie B6 i Audi A3.",
+  "reliabilityNotes": "Uchodzi za najbardziej awaryjną wersję rodziny: newralgiczne są pompowtryskiwacze, głowica i filtr cząstek stałych. Przed zakupem warto zrobić pomiar zwrotów na wtryskiwaczach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

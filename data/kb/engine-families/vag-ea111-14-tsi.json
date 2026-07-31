@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea111-14-tsi",
+  "displayName": "VAG EA111 1.4 TSI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1390,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["CAXA", "CAVD", "CTHD", "CDGA", "CAVA", "BMY"],
+  "shortDescription": "Downsizing w wydaniu z lat 2005–2015, w mocniejszych wersjach z turbosprężarką i kompresorem jednocześnie. Osiągi jak z większej jednostki, ale rodzina ma złą sławę przez pękające tłoki i rozciągnięty łańcuch rozrządu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

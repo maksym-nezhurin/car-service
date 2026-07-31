@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea288-20-tdi",
+  "displayName": "VAG EA288 2.0 TDI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1968,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["CRBC", "CRLB", "CUAA", "CUNA", "DFHA", "DFGA", "DTUA", "DTTA"],
+  "shortDescription": "Rodzina TDI od 2012 roku, z układem oczyszczania spalin przeniesionym bliżej silnika. Nowsze odmiany z podwójnym wtryskiem AdBlue (evo) należą do najoszczędniejszych diesli w klasie kompaktowej.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

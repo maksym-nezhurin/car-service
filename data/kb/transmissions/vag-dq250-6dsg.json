@@ -1,0 +1,16 @@
+{
+  "slug": "vag-dq250-6dsg",
+  "familySlug": "vag-dsg-wet",
+  "code": "DQ250",
+  "displayName": "6-biegowa DSG DQ250 (mokre sprzęgła)",
+  "type": "dct",
+  "gears": 6,
+  "drive": "fwd/awd",
+  "maxTorqueNm": 350,
+  "yearFrom": 2003,
+  "yearTo": 2020,
+  "shortDescription": "Pierwsza seryjna dwusprzęgłowa skrzynia koncernu, łączona z 2.0 TDI i mocniejszymi benzynami. Sprzęgła pracują w kąpieli olejowej, dzięki czemu znosi wyższy moment obrotowy.",
+  "reliabilityNotes": "Wymaga wymiany oleju mniej więcej co 60 tys. km. Przy zaniedbanej obsłudze najpierw daje o sobie znać mechatronika i akumulator ciśnienia.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

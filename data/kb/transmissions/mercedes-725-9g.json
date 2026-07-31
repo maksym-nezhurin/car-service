@@ -1,0 +1,15 @@
+{
+  "slug": "mercedes-725-9g",
+  "familySlug": "mercedes-9g-tronic",
+  "code": "725.0",
+  "displayName": "9G-Tronic 725.0",
+  "type": "at",
+  "gears": 9,
+  "drive": "rwd/awd",
+  "maxTorqueNm": 1000,
+  "yearFrom": 2013,
+  "shortDescription": "Dziewięciobiegowy automat w nowszych C-, E- i GLC-Klasie z OM654 i M274.",
+  "reliabilityNotes": "Konstrukcja uchodzi za trwałą przy terminowej wymianie oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

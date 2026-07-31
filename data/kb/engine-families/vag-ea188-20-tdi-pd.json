@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea188-20-tdi-pd",
+  "displayName": "VAG 2.0 TDI PD (pompowtryskiwacze)",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1968,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["BKD", "AZV", "BKP", "BMM", "BMN", "BMR"],
+  "shortDescription": "Pierwsze 2.0 TDI z pompowtryskiwaczami, montowane od 2003 roku w Golfie V, Passacie B6 i Octavii II. Mocny i elastyczny, ale w tej rodzinie najczęściej wraca temat głowicy, pompy oleju i wałka napędowego.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m271-200k-184",
+  "familySlug": "mercedes-m271",
+  "code": "M271",
+  "displayName": "200 Kompressor 184 KM (M271)",
+  "displacementCc": 1796,
+  "fuelType": "petrol",
+  "aspiration": "supercharged",
+  "powerHp": 184,
+  "powerKw": 135,
+  "torqueNm": 250,
+  "cylinders": 4,
+  "injection": "wtrysk pośredni",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2002,
+  "yearTo": 2011,
+  "shortDescription": "Najpopularniejsza odmiana M271 w C-Klasie. Charakterystyczny dźwięk sprężarki, dobra elastyczność od niskich obrotów.",
+  "reliabilityNotes": "Typowe punkty kontroli: sprzęgło kompresora, cewki zapłonowe i nagar na zaworach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

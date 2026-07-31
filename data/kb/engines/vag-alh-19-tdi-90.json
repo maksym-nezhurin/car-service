@@ -1,0 +1,21 @@
+{
+  "slug": "vag-alh-19-tdi-90",
+  "familySlug": "vag-ea188-19-tdi",
+  "code": "ALH",
+  "displayName": "1.9 TDI 90 KM (ALH)",
+  "displacementCc": 1896,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 90,
+  "powerKw": 66,
+  "torqueNm": 210,
+  "cylinders": 4,
+  "injection": "pompa rozdzielaczowa",
+  "euroStandard": "Euro 3",
+  "yearFrom": 1997,
+  "yearTo": 2006,
+  "shortDescription": "Podstawowa wersja 1.9 TDI z pompą rozdzielaczową, znana z Golfa IV, Octavii I i Polo. Bez filtra cząstek stałych i bez masy dwukierunkowej w większości odmian, przez co bardzo tania w utrzymaniu.",
+  "reliabilityNotes": "Przy przebiegach powyżej 300 tys. km normą jest zużycie turbosprężarki i przepustnicy. Kluczowa jest terminowa wymiana paska rozrządu razem z pompą wtryskową.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

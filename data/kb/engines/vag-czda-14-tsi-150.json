@@ -1,0 +1,21 @@
+{
+  "slug": "vag-czda-14-tsi-150",
+  "familySlug": "vag-ea211-14-tsi",
+  "code": "CZDA",
+  "displayName": "1.4 TSI 150 KM (CZDA)",
+  "displacementCc": 1395,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 150,
+  "powerKw": 110,
+  "torqueNm": 250,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2013,
+  "yearTo": 2019,
+  "shortDescription": "Mocniejsza odmiana EA211 z Golfa VII, Octavii III i Superba III. Dobrze łączy osiągi z rozsądnym spalaniem, w części wersji z wyłączaniem dwóch cylindrów.",
+  "reliabilityNotes": "Rozrząd na pasku wymaga wymiany zgodnie z harmonogramem. Zwróć uwagę na szczelność układu chłodzenia i pracę pompy wody ze sterowaniem termostatem.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

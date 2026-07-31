@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea211-14-tsi",
+  "displayName": "VAG EA211 1.4 TSI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1395,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["CZCA", "CZDA", "CZEA", "CHPA", "CXSA", "CUKB"],
+  "shortDescription": "Zaprojektowana od nowa następczyni EA111, z paskiem rozrządu zamiast łańcucha i aluminiowym blokiem. Uchodzi za znacznie trwalszą od poprzedniczki; część odmian ma wyłączanie cylindrów ACT.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

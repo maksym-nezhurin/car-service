@@ -1,0 +1,15 @@
+{
+  "slug": "vag-dq200-7dsg",
+  "familySlug": "vag-dsg-dry",
+  "code": "DQ200",
+  "displayName": "7-biegowa DSG DQ200 (suche sprzęgła)",
+  "type": "dct",
+  "gears": 7,
+  "drive": "fwd",
+  "maxTorqueNm": 250,
+  "yearFrom": 2008,
+  "shortDescription": "Skrzynia do słabszych silników benzynowych i 1.6 TDI, łączona z jednostkami do 250 Nm. Lekka i oszczędna, ale konstrukcyjnie najbardziej wrażliwa z całej rodziny DSG.",
+  "reliabilityNotes": "Najczęstsza usterka to moduł mechatroniki oraz zużycie suchych sprzęgieł przy jeździe miejskiej. Objawy to szarpanie przy ruszaniu i opóźniona reakcja po wrzuceniu biegu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

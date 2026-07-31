@@ -1,6 +1,6 @@
 /** Public encyclopedia filters — shared by API and ETL scripts. */
 
-export const CATALOG_YEAR_CUTOFF = 2005;
+export const CATALOG_YEAR_CUTOFF = 2004;
 
 export function buildContentKey(
   makeSlug: string,

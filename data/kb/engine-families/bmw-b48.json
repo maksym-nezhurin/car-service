@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-b48",
+  "displayName": "BMW B48 2.0 turbo",
+  "manufacturer": "BMW",
+  "displacementCc": 1998,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "B48"
+  ],
+  "shortDescription": "Modularna turbobenzyna od 2014 roku. Napędza nowsze 320i/330i, 520i i X3 20i. Uchodzi za wyraźnie trwalszą od N20.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

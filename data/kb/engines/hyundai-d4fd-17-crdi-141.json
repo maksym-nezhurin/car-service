@@ -1,0 +1,21 @@
+{
+  "slug": "hyundai-d4fd-17-crdi-141",
+  "familySlug": "hyundai-u2-17-crdi",
+  "code": "D4FD",
+  "displayName": "1.7 CRDi 141 KM (D4FD)",
+  "displacementCc": 1685,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 141,
+  "powerKw": 104,
+  "torqueNm": 340,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2015,
+  "yearTo": 2020,
+  "shortDescription": "Mocniejsza wersja 1.7 CRDi, w Tucsonie TL oferowana także z dwusprzęgłową skrzynią 7DCT. Wyraźnie żywsza w niskich obrotach niż odmiana 116 KM.",
+  "reliabilityNotes": "Ten sam blok co wersja 116 KM, ale wyższe obciążenie turbosprężarki. Trzymaj się skróconych interwałów oleju przy jeździe miejskiej.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

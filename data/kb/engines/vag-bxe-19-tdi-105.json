@@ -1,0 +1,21 @@
+{
+  "slug": "vag-bxe-19-tdi-105",
+  "familySlug": "vag-ea188-19-tdi",
+  "code": "BXE",
+  "displayName": "1.9 TDI 105 KM (BXE/BKC)",
+  "displacementCc": 1896,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 105,
+  "powerKw": 77,
+  "torqueNm": 250,
+  "cylinders": 4,
+  "injection": "pompowtryskiwacze",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2003,
+  "yearTo": 2010,
+  "shortDescription": "Najczęściej spotykana odmiana 1.9 TDI z pompowtryskiwaczami, w Golfie V, Octavii II, Passacie B6 i Fabii. Rozsądny kompromis między osiągami a spalaniem rzędu pięciu litrów w trasie.",
+  "reliabilityNotes": "Typowe punkty kontroli to pompowtryskiwacze, przepływomierz i koło dwumasowe. Odmiany BLS mają filtr cząstek stałych, który przy jeździe wyłącznie po mieście szybko się zapycha.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,15 @@
+{
+  "slug": "hyundai-m6cf1-6mt",
+  "familySlug": "hyundai-6mt",
+  "code": "M6CF1",
+  "displayName": "6-biegowa manualna M6CF1",
+  "type": "manual",
+  "gears": 6,
+  "drive": "fwd",
+  "maxTorqueNm": 300,
+  "yearFrom": 2009,
+  "shortDescription": "Manualna skrzynia do jednostek benzynowych i diesli o momencie do ok. 300 Nm, montowana w Tucsonie, Sportage, i30 i Ceedzie.",
+  "reliabilityNotes": "Konstrukcja bezawaryjna przy regularnej wymianie oleju. Najczęstszy koszt to sprzęgło z kołem dwumasowym w dieslach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

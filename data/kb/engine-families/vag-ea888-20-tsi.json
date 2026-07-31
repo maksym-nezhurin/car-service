@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea888-20-tsi",
+  "displayName": "VAG EA888 2.0 TSI/TFSI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1984,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["CCZA", "CCZB", "CAWB", "CHHB", "CZPB", "CJXC", "DKZA", "DNPA"],
+  "shortDescription": "Podstawowa turbobenzyna koncernu od 2008 roku, w kolejnych generacjach od 170 do ponad 300 KM. Wczesne wersje miały apetyt na olej i problem z napinaczem łańcucha; od trzeciej generacji jednostka uchodzi za solidną.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

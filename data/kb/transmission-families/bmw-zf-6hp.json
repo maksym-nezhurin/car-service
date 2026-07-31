@@ -1,0 +1,10 @@
+{
+  "slug": "bmw-zf-6hp",
+  "displayName": "BMW / ZF 6HP",
+  "type": "at",
+  "gears": 6,
+  "manufacturer": "ZF",
+  "shortDescription": "Sześciobiegowy automat ZF z lat 2000–2012. Solidny przy regularnej wymianie oleju, wolniejszy od następcy 8HP.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

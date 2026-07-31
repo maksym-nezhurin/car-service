@@ -1,0 +1,10 @@
+{
+  "slug": "hyundai-7dct",
+  "displayName": "Hyundai/Kia 7DCT (dwusprzęgłowa)",
+  "type": "dct",
+  "gears": 7,
+  "manufacturer": "Hyundai",
+  "shortDescription": "Dwusprzęgłowa skrzynia siedmiobiegowa. Szybkie zmiany biegów i niższe spalanie niż w klasycznym automacie, ale w korkach potrafi szarpać.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

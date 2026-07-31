@@ -1,0 +1,14 @@
+{
+  "slug": "mercedes-om646",
+  "displayName": "Mercedes-Benz OM646 2.2 CDI",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 2148,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "OM646"
+  ],
+  "shortDescription": "Ewolucja OM611 z lat 2003–2009. Cichszy i czystszy od poprzednika, montowany w C-Klasie W203/W204 i E-Klasie W211 jako 200/220 CDI.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

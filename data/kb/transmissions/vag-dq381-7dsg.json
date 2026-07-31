@@ -1,0 +1,15 @@
+{
+  "slug": "vag-dq381-7dsg",
+  "familySlug": "vag-dsg-wet",
+  "code": "DQ381",
+  "displayName": "7-biegowa DSG DQ381 (mokre sprzęgła)",
+  "type": "dct",
+  "gears": 7,
+  "drive": "fwd/awd",
+  "maxTorqueNm": 420,
+  "yearFrom": 2017,
+  "shortDescription": "Następca DQ250 wprowadzony w 2017 roku, z siedmioma biegami i wyższą dopuszczalną wartością momentu. Montowana w Passacie B8, Tiguanie, Superbie III i Kodiaqu.",
+  "reliabilityNotes": "Jak w każdej mokrej DSG kluczowa jest terminowa wymiana oleju. Konstrukcja uchodzi za trwalszą od poprzedniczki.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-n47",
+  "displayName": "BMW N47 2.0 diesel",
+  "manufacturer": "BMW",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "N47"
+  ],
+  "shortDescription": "Diesel z lat 2007–2014, obecny w Serii 3 E90/F30, Serii 5 i X1/X3. Oszczędny, ale rodzina ma złą sławę przez łańcuch rozrządu montowany od strony skrzyni.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "vag-tiptronic-at",
+  "displayName": "VAG automat hydrokinetyczny (tiptronic)",
+  "type": "at",
+  "manufacturer": "Volkswagen Group",
+  "shortDescription": "Klasyczny automat z przekładnią hydrokinetyczną, w zależności od modelu sześcio- lub ośmiobiegowy. Mniej dynamiczny od dwusprzęgłowej skrzyni, ale płynniejszy w mieście i mniej wrażliwy na korki.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

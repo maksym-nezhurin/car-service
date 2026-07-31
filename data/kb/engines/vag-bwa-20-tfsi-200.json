@@ -1,0 +1,21 @@
+{
+  "slug": "vag-bwa-20-tfsi-200",
+  "familySlug": "vag-ea113-20-tfsi",
+  "code": "BWA",
+  "displayName": "2.0 TFSI 200 KM (BWA/BPY)",
+  "displacementCc": 1984,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 200,
+  "powerKw": 147,
+  "torqueNm": 280,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2004,
+  "yearTo": 2009,
+  "shortDescription": "Jednostka z Golfa V GTI, Audi A3 8P i Passata B6. Żeliwny blok daje spory zapas na modyfikacje, a charakterystyka jest wyraźnie żywsza niż w wolnossących odpowiednikach.",
+  "reliabilityNotes": "Klasyka usterek to rozciągnięty łańcuch rozrządu, mechaniczna pompa paliwa i zakoksowane zawory dolotowe. Wymaga oleju o wysokiej jakości i krótkich interwałów.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

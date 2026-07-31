@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-m47",
+  "displayName": "BMW M47 2.0 diesel",
+  "manufacturer": "BMW",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "M47"
+  ],
+  "shortDescription": "Pierwszy nowoczesny diesel BMW z common rail, montowany w Serii 3 E46/E90 i X3 jako 318d/320d. Trwały, choć głośniejszy od następców.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

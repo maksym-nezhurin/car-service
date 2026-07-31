@@ -1,0 +1,12 @@
+{
+  "slug": "hyundai-kappa-16-gdi",
+  "displayName": "Hyundai/Kia Kappa 1.6 GDI",
+  "manufacturer": "Hyundai",
+  "displacementCc": 1591,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": ["G4FD"],
+  "shortDescription": "Wolnossąca rodzina 1.6 GDI z bezpośrednim wtryskiem benzyny. Prostsza i tańsza w utrzymaniu niż odmiany turbo, ale wymaga dobrej jakości paliwa i regularnej kontroli zaworu EGR.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

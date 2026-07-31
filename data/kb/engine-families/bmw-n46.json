@@ -1,0 +1,15 @@
+{
+  "slug": "bmw-n46",
+  "displayName": "BMW N46 1.8/2.0",
+  "manufacturer": "BMW",
+  "displacementCc": 1995,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "N46",
+    "N42"
+  ],
+  "shortDescription": "Wolnossąca R4 z Valvetronic, popularna w 318i/320i E46 i E90. Wymaga dbałości o Vanos i łańcuch rozrządu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

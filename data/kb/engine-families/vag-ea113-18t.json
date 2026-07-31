@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea113-18t",
+  "displayName": "VAG 1.8T 20V",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1781,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["AGU", "APP", "AUM", "AUQ", "AWT", "BFB", "BEX", "AMB", "BVR"],
+  "shortDescription": "Pięciozaworowa turbobenzyna, która w latach 90. i 2000. napędzała pół gamy koncernu — od Golfa IV GTI po Audi A4 i Passata B5. Wdzięczna do modyfikacji, wymaga pilnowania jakości oleju ze względu na skłonność do zakoksowania.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

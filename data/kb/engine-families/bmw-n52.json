@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-n52",
+  "displayName": "BMW N52 2.5/3.0",
+  "manufacturer": "BMW",
+  "displacementCc": 2996,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "N52"
+  ],
+  "shortDescription": "Wolnossąca R6 z magnezowo-aluminiowym blokiem, montowana w 325i/330i i 525i. Jedna z ostatnich klasycznych szóstek BMW przed erą downsizingu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

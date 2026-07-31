@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea113-20-tfsi",
+  "displayName": "VAG EA113 2.0 TFSI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1984,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["AXX", "BWA", "BPY", "BHZ", "CDLA", "CDLB"],
+  "shortDescription": "Pierwsze 2.0 z bezpośrednim wtryskiem i turbo, znane z Golfa V GTI, Audi A3 8P i Passata B6. Ma żeliwny blok i duży zapas na modyfikacje, ale w tej rodzinie klasykiem usterek jest łańcuch rozrządu i pompa paliwa.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

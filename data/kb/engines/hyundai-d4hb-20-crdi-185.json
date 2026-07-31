@@ -1,0 +1,21 @@
+{
+  "slug": "hyundai-d4hb-20-crdi-185",
+  "familySlug": "hyundai-r-20-crdi",
+  "code": "D4HB",
+  "displayName": "2.0 CRDi 185 KM (D4HB)",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 185,
+  "powerKw": 136,
+  "torqueNm": 400,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5/6",
+  "yearFrom": 2009,
+  "yearTo": 2020,
+  "shortDescription": "Mocniejsza odmiana 2.0 CRDi z większą turbosprężarką, zwykle z automatem i napędem 4x4 w Santa Fe i Sorento.",
+  "reliabilityNotes": "Wyższe obciążenie układu doładowania i DPF. Przy zakupie sprawdź historię serwisową turbosprężarki i chłodnicy EGR.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "vag-30-tdi-v6",
+  "displayName": "VAG 3.0 TDI V6",
+  "manufacturer": "Audi",
+  "displacementCc": 2967,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["ASB", "CAPA", "CCWA", "CDUC", "CLAB", "CRTC", "CVUA"],
+  "shortDescription": "Sztandarowy diesel Audi, od 2004 roku w A4, A6 i Q5, w zależności od odmiany od 204 do 272 KM. Kultura pracy i moment obrotowy są mocną stroną; kosztami bywają wtryskiwacze piezoelektryczne i osprzęt układu oczyszczania spalin.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

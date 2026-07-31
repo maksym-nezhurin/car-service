@@ -20,8 +20,15 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "catalog:sync": "ts-node scripts/sync-carquery-catalog.ts",
-    "catalog:seed:engines": "ts-node scripts/seed-catalog-engine-families.ts"
+    "catalog:sync:autoria": "ts-node scripts/sync-autoria-catalog.ts",
+    "catalog:estimate:autoria": "ts-node scripts/estimate-autoria-sync.ts",
+    "catalog:probe:autoria": "ts-node scripts/probe-autoria-catalog.ts",
+    "catalog:cleanup": "ts-node scripts/cleanup-catalog-non-autoria.ts",
+    "catalog:normalize": "ts-node scripts/normalize-catalog-trims.ts",
+    "catalog:import:kb": "ts-node scripts/import-catalog-kb.ts",
+    "catalog:link:engines": "ts-node scripts/link-catalog-engines.ts",
+    "catalog:seed:generations": "ts-node scripts/apply-catalog-generation-spine.ts",
+    "catalog:export-browse-index": "ts-node scripts/export-catalog-browse-index.ts"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.0",

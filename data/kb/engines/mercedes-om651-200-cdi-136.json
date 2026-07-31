@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-om651-200-cdi-136",
+  "familySlug": "mercedes-om651",
+  "code": "OM651",
+  "displayName": "200 CDI 136 KM (OM651)",
+  "displacementCc": 2143,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 136,
+  "powerKw": 100,
+  "torqueNm": 300,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2009,
+  "yearTo": 2016,
+  "shortDescription": "Podstawowa odmiana OM651 w C- i E-Klasie. Spokojna charakterystyka, często z 6-biegową manualną lub 7G-Tronic.",
+  "reliabilityNotes": "Wczesne egzemplarze (do ok. 2011) warto sprawdzić pod kątem łańcucha rozrządu i wtryskiwaczy.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

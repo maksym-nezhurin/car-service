@@ -1,0 +1,12 @@
+{
+  "slug": "hyundai-u2-17-crdi",
+  "displayName": "Hyundai/Kia U2 1.7 CRDi",
+  "manufacturer": "Hyundai",
+  "displacementCc": 1685,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["D4FD"],
+  "shortDescription": "Diesel rodziny U2 o pojemności 1.7 l. Oszczędny w trasie, ale przy krótkich miejskich dystansach wymaga uwagi na filtr DPF i układ EGR.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

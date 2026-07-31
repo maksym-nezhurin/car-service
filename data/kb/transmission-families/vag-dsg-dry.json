@@ -1,0 +1,10 @@
+{
+  "slug": "vag-dsg-dry",
+  "displayName": "VAG DSG z suchym sprzęgłem",
+  "type": "dct",
+  "gears": 7,
+  "manufacturer": "Volkswagen Group",
+  "shortDescription": "Siedmiobiegowa dwusprzęgłowa skrzynia do jednostek o mniejszym momencie obrotowym. Bardzo szybko zmienia biegi i pomaga obniżyć spalanie, ale w korkach bywa nerwowa.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-om651-220-cdi-170",
+  "familySlug": "mercedes-om651",
+  "code": "OM651",
+  "displayName": "220 CDI 170 KM (OM651)",
+  "displacementCc": 2143,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 170,
+  "powerKw": 125,
+  "torqueNm": 400,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2009,
+  "yearTo": 2016,
+  "shortDescription": "Najczęściej wybierana odmiana OM651. Dobry kompromis między dynamiką a spalaniem w trasie.",
+  "reliabilityNotes": "Przy przebiegach powyżej 200 tys. km kontroluj koło dwumasowe i filtr cząstek stałych.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

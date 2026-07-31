@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-n55",
+  "displayName": "BMW N55 3.0 turbo",
+  "manufacturer": "BMW",
+  "displacementCc": 2979,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "N55"
+  ],
+  "shortDescription": "Jednoturbinowy następca N54 z lat 2009–2017. Spokojniejszy w eksploatacji, montowany w 335i F30 i 535i F10.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "hyundai-g4fd-16-gdi-132",
+  "familySlug": "hyundai-kappa-16-gdi",
+  "code": "G4FD",
+  "displayName": "1.6 GDI 132 KM (G4FD)",
+  "displacementCc": 1591,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "powerHp": 132,
+  "powerKw": 97,
+  "torqueNm": 161,
+  "cylinders": 4,
+  "injection": "GDI",
+  "euroStandard": "Euro 5/6",
+  "yearFrom": 2010,
+  "yearTo": 2020,
+  "shortDescription": "Podstawowa benzyna w Tucsonie TL, Sportage QL, i30 i Ceedzie. Kultura pracy i koszty serwisu lepsze niż w turbo, ale moment obrotowy dostępny dopiero przy wyższych obrotach.",
+  "reliabilityNotes": "Bezpośredni wtrysk sprzyja nagarowi na zaworach dolotowych — przy wyższych przebiegach warto rozważyć czyszczenie. Kontroluj poziom oleju między wymianami.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

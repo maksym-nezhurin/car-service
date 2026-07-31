@@ -1,0 +1,15 @@
+{
+  "slug": "mercedes-m274",
+  "displayName": "Mercedes-Benz M274 1.6/2.0 turbo",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1991,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "M274",
+    "M264"
+  ],
+  "shortDescription": "Nowoczesna turbobenzyna R4 od 2013 roku. Napędza C- i E-Klasę jako 180/200/250 oraz nowsze odmiany z oznaczeniem G-tronic.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea189-16-tdi",
+  "displayName": "VAG EA189 1.6 TDI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1598,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["CAYB", "CAYC", "CAYD", "CLNA", "CLHA"],
+  "shortDescription": "Mniejszy brat 2.0 TDI z tej samej rodziny, od 2009 roku podstawowy diesel w Golfie VI, Polo i Octavii II. Bardzo oszczędny, ale ma wyraźnie mniej zapasu mocy przy pełnym obciążeniu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

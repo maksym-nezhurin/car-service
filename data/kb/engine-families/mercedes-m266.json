@@ -1,0 +1,14 @@
+{
+  "slug": "mercedes-m266",
+  "displayName": "Mercedes-Benz M266 1.5/1.7/2.0",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1699,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": [
+    "M266"
+  ],
+  "shortDescription": "Wolnossąca jednostka A-Klasy W169. Prosta konstrukcja, przyjazna instalacjom LPG, bez turbiny i bezpośredniego wtrysku.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

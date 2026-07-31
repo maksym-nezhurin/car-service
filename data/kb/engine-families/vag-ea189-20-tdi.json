@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea189-20-tdi",
+  "displayName": "VAG EA189 2.0 TDI Common Rail",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1968,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["CBAB", "CBAA", "CBDB", "CFFB", "CFGB", "CFHC", "CLJA", "CLCA"],
+  "shortDescription": "Common railowy następca konstrukcji PD, produkowany od 2008 roku. Kulturalniejszy i cichszy od poprzednika, ale to właśnie ta rodzina objęta była aferą spalinową i akcją serwisową dotyczącą oprogramowania.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

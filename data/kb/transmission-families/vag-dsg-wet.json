@@ -1,0 +1,9 @@
+{
+  "slug": "vag-dsg-wet",
+  "displayName": "VAG DSG z mokrym sprzęgłem",
+  "type": "dct",
+  "manufacturer": "Volkswagen Group",
+  "shortDescription": "Dwusprzęgłowa skrzynia chłodzona olejem, przeznaczona do mocniejszych silników. Uchodzi za trwalszą od odmiany z suchym sprzęgłem, pod warunkiem regularnej wymiany oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

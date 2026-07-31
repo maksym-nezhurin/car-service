@@ -1,0 +1,10 @@
+{
+  "slug": "hyundai-6at",
+  "displayName": "Hyundai/Kia 6-biegowy automat",
+  "type": "automatic",
+  "gears": 6,
+  "manufacturer": "Hyundai",
+  "shortDescription": "Klasyczny automat hydrokinetyczny z sześcioma biegami, stosowany w dieslach 2.0 CRDi i mocniejszych benzynach. Płynny w mieście, mniej oszczędny niż dwusprzęgłowa 7DCT.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

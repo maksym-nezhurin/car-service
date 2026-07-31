@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-n20",
+  "displayName": "BMW N20 2.0 turbo",
+  "manufacturer": "BMW",
+  "displacementCc": 1997,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "N20"
+  ],
+  "shortDescription": "Turbobenzyna R4 z lat 2011–2017, zastępująca wolnossące szóstki w 320i/328i i X3. Wczesne egzemplarze miały problemy z łańcuchem rozrządu i panewkami.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

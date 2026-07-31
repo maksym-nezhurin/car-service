@@ -1,0 +1,9 @@
+{
+  "slug": "mercedes-mt",
+  "displayName": "Mercedes-Benz skrzynia manualna",
+  "type": "mt",
+  "manufacturer": "Mercedes-Benz",
+  "shortDescription": "Manualne przekładnie Mercedesa, zwykle sześciobiegowe. Najtańsze w utrzymaniu rozwiązanie w starszych dieslach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

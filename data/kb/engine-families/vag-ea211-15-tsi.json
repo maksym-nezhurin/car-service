@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea211-15-tsi",
+  "displayName": "VAG EA211 evo 1.5 TSI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1498,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["DADA", "DACA", "DPCA", "DFYA"],
+  "shortDescription": "Następca 1.4 TSI wprowadzony w 2017 roku, z turbosprężarką o zmiennej geometrii i wyłączaniem cylindrów. Bardzo oszczędny w trasie; wczesne egzemplarze miały reklamacje na szarpanie przy niskich obrotach, usuwane aktualizacją oprogramowania.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

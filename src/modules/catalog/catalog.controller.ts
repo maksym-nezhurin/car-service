@@ -8,6 +8,10 @@ function parseIncludeLegacy(value?: string): boolean {
   return value === 'true' || value === '1';
 }
 
+function parseFull(value?: string): boolean {
+  return value === 'true' || value === '1';
+}
+
 /** Proxied via gateway as `/v1/cars/catalog/*` → `/api/cars/catalog/*` */
 @Controller('cars/catalog')
 export class CatalogController {
@@ -21,9 +25,13 @@ export class CatalogController {
 
   @Get('makes')
   @Header('Cache-Control', LIST_CACHE)
-  listMakes(@Query('includeLegacy') includeLegacy?: string) {
+  listMakes(
+    @Query('includeLegacy') includeLegacy?: string,
+    @Query('full') full?: string,
+  ) {
     return this.catalogService.listMakes({
       includeLegacy: parseIncludeLegacy(includeLegacy),
+      full: parseFull(full),
     });
   }
 
@@ -32,9 +40,11 @@ export class CatalogController {
   listModelsByMake(
     @Param('makeSlug') makeSlug: string,
     @Query('includeLegacy') includeLegacy?: string,
+    @Query('full') full?: string,
   ) {
     return this.catalogService.listModelsByMakeSlug(makeSlug, {
       includeLegacy: parseIncludeLegacy(includeLegacy),
+      full: parseFull(full),
     });
   }
 
@@ -88,6 +98,30 @@ export class CatalogController {
   @Header('Cache-Control', DETAIL_CACHE)
   getTrimById(@Param('trimId') trimId: string) {
     return this.catalogService.getTrimById(trimId);
+  }
+
+  @Get('engines')
+  @Header('Cache-Control', LIST_CACHE)
+  listEngines() {
+    return this.catalogService.listEngines();
+  }
+
+  @Get('engines/:slug')
+  @Header('Cache-Control', DETAIL_CACHE)
+  getEngine(@Param('slug') slug: string) {
+    return this.catalogService.getEngineBySlug(slug);
+  }
+
+  @Get('transmissions')
+  @Header('Cache-Control', LIST_CACHE)
+  listTransmissions() {
+    return this.catalogService.listTransmissions();
+  }
+
+  @Get('transmissions/:slug')
+  @Header('Cache-Control', DETAIL_CACHE)
+  getTransmission(@Param('slug') slug: string) {
+    return this.catalogService.getTransmissionBySlug(slug);
   }
 
   @Get('generations')

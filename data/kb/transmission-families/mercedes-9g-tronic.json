@@ -1,0 +1,10 @@
+{
+  "slug": "mercedes-9g-tronic",
+  "displayName": "Mercedes-Benz 9G-Tronic",
+  "type": "at",
+  "gears": 9,
+  "manufacturer": "Mercedes-Benz",
+  "shortDescription": "Dziewięciobiegowy automat od 2013 roku. Niższe obroty w trasie i niższe spalanie niż w 7G-Tronic.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

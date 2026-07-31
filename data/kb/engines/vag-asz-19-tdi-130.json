@@ -1,0 +1,21 @@
+{
+  "slug": "vag-asz-19-tdi-130",
+  "familySlug": "vag-ea188-19-tdi",
+  "code": "ASZ",
+  "displayName": "1.9 TDI 130 KM (ASZ/AVF)",
+  "displacementCc": 1896,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 130,
+  "powerKw": 96,
+  "torqueNm": 310,
+  "cylinders": 4,
+  "injection": "pompowtryskiwacze",
+  "euroStandard": "Euro 3/4",
+  "yearFrom": 2000,
+  "yearTo": 2008,
+  "shortDescription": "Mocniejsza odmiana PD z Golfa IV, Passata B5 FL i Audi A4 B6. Uchodzi za jedną z najlepszych proporcji osiągów do spalania w całej rodzinie 1.9 TDI.",
+  "reliabilityNotes": "Wrażliwa na jakość oleju ze względu na napęd pompowtryskiwaczy. Przy zakupie sprawdź stan wałka rozrządu i szczelność chłodnicy spalin.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

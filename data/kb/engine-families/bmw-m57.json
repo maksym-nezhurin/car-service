@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-m57",
+  "displayName": "BMW M57 3.0 diesel",
+  "manufacturer": "BMW",
+  "displacementCc": 2993,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "M57"
+  ],
+  "shortDescription": "Legendarny R6 diesel z lat 1998–2010. 330d i 530d z tą jednostką uchodzą za jedne z najbardziej udanych diesli w historii marki.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

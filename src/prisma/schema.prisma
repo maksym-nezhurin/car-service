@@ -532,7 +532,7 @@ model VehicleSaleContract {
 }
 
 // ---------------------------------------------------------------------------
-// Local vehicle catalog mirror (CarQuery → DB). Source of truth for community
+// Local vehicle catalog mirror (CarAPI / CarQuery → DB). Source of truth for community
 // generations + variant subgroups. Do not call CarQuery on every user request.
 // ---------------------------------------------------------------------------
 
@@ -598,14 +598,20 @@ model CatalogTrim {
   engineCode           String?                    @map("engine_code")
   displacementCc       Int?                       @map("displacement_cc")
   contentKey           String?                    @unique @map("content_key")
+  engineId             String?                    @map("engine_id")
+  transmissionId       String?                    @map("transmission_id")
   engineFamilyId       String?                    @map("engine_family_id")
   transmissionFamilyId String?                    @map("transmission_family_id")
   syncedAt             DateTime                   @default(now()) @map("synced_at")
   generation           CatalogGeneration          @relation(fields: [generationId], references: [id], onDelete: Cascade)
+  engineUnit           CatalogEngine?             @relation(fields: [engineId], references: [id], onDelete: SetNull)
+  transmissionUnit     CatalogTransmission?       @relation(fields: [transmissionId], references: [id], onDelete: SetNull)
   engineFamily         CatalogEngineFamily?       @relation(fields: [engineFamilyId], references: [id], onDelete: SetNull)
   transmissionFamily   CatalogTransmissionFamily? @relation(fields: [transmissionFamilyId], references: [id], onDelete: SetNull)
 
   @@unique([generationId, slug])
+  @@index([engineId])
+  @@index([transmissionId])
   @@index([engineFamilyId])
   @@index([transmissionFamilyId])
   @@map("catalog_trims")
@@ -626,11 +632,47 @@ model CatalogEngineFamily {
   reviewStatus     String        @default("approved") @map("review_status")
   reviewedAt       DateTime?     @map("reviewed_at")
   source           String?
-  createdAt        DateTime      @default(now()) @map("created_at")
-  updatedAt        DateTime      @updatedAt @map("updated_at")
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
   trims            CatalogTrim[]
+  engines          CatalogEngine[]
 
   @@map("catalog_engine_families")
+}
+
+/// Concrete engine unit inside a family — one row per code + power variant (D4FD 116 KM).
+model CatalogEngine {
+  id               String               @id @default(uuid())
+  familyId         String               @map("family_id")
+  slug             String               @unique
+  code             String?
+  displayName      String               @map("display_name")
+  displacementCc   Int?                 @map("displacement_cc")
+  fuelType         String?              @map("fuel_type")
+  aspiration       String?
+  powerHp          Int?                 @map("power_hp")
+  powerKw          Int?                 @map("power_kw")
+  torqueNm         Int?                 @map("torque_nm")
+  cylinders        Int?
+  injection        String?
+  euroStandard     String?              @map("euro_standard")
+  yearFrom         Int?                 @map("year_from")
+  yearTo           Int?                 @map("year_to")
+  specsJson        Json?                @map("specs_json")
+  shortDescription String?              @map("short_description")
+  reliabilityNotes String?              @map("reliability_notes")
+  reviewStatus     String               @default("approved") @map("review_status")
+  reviewedAt       DateTime?            @map("reviewed_at")
+  source           String?
+  externalRef      String?              @map("external_ref")
+  createdAt        DateTime             @default(now()) @map("created_at")
+  updatedAt        DateTime             @updatedAt @map("updated_at")
+  family           CatalogEngineFamily  @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  trims            CatalogTrim[]
+
+  @@index([familyId])
+  @@index([code])
+  @@map("catalog_engines")
 }
 
 /// Curated transmission family KB (Phase C).
@@ -646,9 +688,40 @@ model CatalogTransmissionFamily {
   reviewStatus     String        @default("approved") @map("review_status")
   reviewedAt       DateTime?     @map("reviewed_at")
   source           String?
-  createdAt        DateTime      @default(now()) @map("created_at")
-  updatedAt        DateTime      @updatedAt @map("updated_at")
+  createdAt        DateTime              @default(now()) @map("created_at")
+  updatedAt        DateTime              @updatedAt @map("updated_at")
   trims            CatalogTrim[]
+  transmissions    CatalogTransmission[]
 
   @@map("catalog_transmission_families")
+}
+
+/// Concrete gearbox unit inside a family — one row per code (D7UF1, M6CF1, A6MF1).
+model CatalogTransmission {
+  id               String                    @id @default(uuid())
+  familyId         String                    @map("family_id")
+  slug             String                    @unique
+  code             String?
+  displayName      String                    @map("display_name")
+  type             String?
+  gears            Int?
+  drive            String?
+  maxTorqueNm      Int?                      @map("max_torque_nm")
+  yearFrom         Int?                      @map("year_from")
+  yearTo           Int?                      @map("year_to")
+  specsJson        Json?                     @map("specs_json")
+  shortDescription String?                   @map("short_description")
+  reliabilityNotes String?                   @map("reliability_notes")
+  reviewStatus     String                    @default("approved") @map("review_status")
+  reviewedAt       DateTime?                 @map("reviewed_at")
+  source           String?
+  externalRef      String?                   @map("external_ref")
+  createdAt        DateTime                  @default(now()) @map("created_at")
+  updatedAt        DateTime                  @updatedAt @map("updated_at")
+  family           CatalogTransmissionFamily @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  trims            CatalogTrim[]
+
+  @@index([familyId])
+  @@index([code])
+  @@map("catalog_transmissions")
 }

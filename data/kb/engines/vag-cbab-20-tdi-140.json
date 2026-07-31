@@ -1,0 +1,21 @@
+{
+  "slug": "vag-cbab-20-tdi-140",
+  "familySlug": "vag-ea189-20-tdi",
+  "code": "CBAB",
+  "displayName": "2.0 TDI CR 140 KM (CBAB/CFFB)",
+  "displacementCc": 1968,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 140,
+  "powerKw": 103,
+  "torqueNm": 320,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2008,
+  "yearTo": 2015,
+  "shortDescription": "Common railowy odpowiednik BKD, montowany w Golfie VI, Passacie B7, Octavii II i Tiguanie. Cichszy i kulturalniejszy od konstrukcji z pompowtryskiwaczami.",
+  "reliabilityNotes": "Typowe koszty to filtr cząstek stałych, zawór EGR i koło dwumasowe. To odmiana objęta akcją serwisową związaną z oprogramowaniem sterownika.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

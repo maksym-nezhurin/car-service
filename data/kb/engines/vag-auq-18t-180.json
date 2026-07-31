@@ -1,0 +1,21 @@
+{
+  "slug": "vag-auq-18t-180",
+  "familySlug": "vag-ea113-18t",
+  "code": "AUQ",
+  "displayName": "1.8T 180 KM (AUQ/BAM)",
+  "displacementCc": 1781,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 180,
+  "powerKw": 132,
+  "torqueNm": 235,
+  "cylinders": 4,
+  "injection": "wtrysk pośredni",
+  "euroStandard": "Euro 3/4",
+  "yearFrom": 1999,
+  "yearTo": 2006,
+  "shortDescription": "Mocniejsza odmiana 1.8T z Golfa IV GTI, Leona Cupry i Audi TT. Kultowa wśród miłośników modyfikacji, bo bez ingerencji w mechanikę osiąga znacznie więcej mocy.",
+  "reliabilityNotes": "Uważaj na egzemplarze po nieprofesjonalnym zwiększaniu mocy. Standardowe zużycie dotyczy cewek zapłonowych, przewodów podciśnienia i zaworu N75.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

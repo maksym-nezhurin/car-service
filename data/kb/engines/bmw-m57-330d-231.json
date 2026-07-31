@@ -1,0 +1,21 @@
+{
+  "slug": "bmw-m57-330d-231",
+  "familySlug": "bmw-m57",
+  "code": "M57",
+  "displayName": "330d 231 KM (M57)",
+  "displacementCc": 2993,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 231,
+  "powerKw": 170,
+  "torqueNm": 500,
+  "cylinders": 6,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2005,
+  "yearTo": 2010,
+  "shortDescription": "Jedna z najlepszych odmian M57 w Serii 3 E90. Elastyczność R6 i niskie spalanie w trasie.",
+  "reliabilityNotes": "Przy wysokich przebiegach kontroluj zawór EGR, kolektor ssący i koło dwumasowe.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

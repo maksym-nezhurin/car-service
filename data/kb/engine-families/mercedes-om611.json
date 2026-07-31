@@ -1,0 +1,14 @@
+{
+  "slug": "mercedes-om611",
+  "displayName": "Mercedes-Benz OM611 2.2 CDI",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 2148,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "OM611"
+  ],
+  "shortDescription": "Pierwszy common-railowy diesel Mercedesa z przełomu wieków. Napędzał C- i E-Klasę jako 200 CDI i 220 CDI. Trwały, ale już wyraźnie głośniejszy od późniejszych OM646 i OM651.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

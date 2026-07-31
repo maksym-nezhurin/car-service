@@ -1,0 +1,21 @@
+{
+  "slug": "bmw-n47-320d-184",
+  "familySlug": "bmw-n47",
+  "code": "N47",
+  "displayName": "320d 184 KM (N47)",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 184,
+  "powerKw": 135,
+  "torqueNm": 380,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2007,
+  "yearTo": 2015,
+  "shortDescription": "Najczęściej spotykana odmiana N47 w Serii 3. Oszczędna w trasie, ale wymaga sprawdzenia łańcucha rozrządu.",
+  "reliabilityNotes": "Przed zakupem zrób diagnostykę hałasu łańcucha na zimnym silniku. Wymiana jest kosztowna ze względu na dostęp od strony skrzyni.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

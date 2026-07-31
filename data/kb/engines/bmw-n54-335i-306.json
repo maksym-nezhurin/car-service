@@ -1,0 +1,21 @@
+{
+  "slug": "bmw-n54-335i-306",
+  "familySlug": "bmw-n54",
+  "code": "N54",
+  "displayName": "335i 306 KM (N54)",
+  "displacementCc": 2979,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 306,
+  "powerKw": 225,
+  "torqueNm": 400,
+  "cylinders": 6,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 4/5",
+  "yearFrom": 2006,
+  "yearTo": 2010,
+  "shortDescription": "Pierwsza biturbo 335i z E90/E92. Kultowa wśród tunerów, z dużym zapasem na dalsze zwiększanie mocy.",
+  "reliabilityNotes": "Klasyka usterek: pompa HPFP, wtryskiwacze piezo i wastegate. Budżet na serwis powinien być wyższy niż przy N55.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

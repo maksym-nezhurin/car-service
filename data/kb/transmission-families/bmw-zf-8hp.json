@@ -1,0 +1,10 @@
+{
+  "slug": "bmw-zf-8hp",
+  "displayName": "BMW / ZF 8HP",
+  "type": "at",
+  "gears": 8,
+  "manufacturer": "ZF",
+  "shortDescription": "Ośmiobiegowy automat ZF, montowany w BMW od ok. 2009 roku jako Steptronic. Szybkie zmiany biegów i niska strata mocy.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea211-16-mpi",
+  "displayName": "VAG EA211 1.6 MPI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1598,
+  "fuelType": "petrol",
+  "aspiration": "atmo",
+  "engineCodes": ["CWVA", "CWVB", "CLSA"],
+  "shortDescription": "Wolnossąca jednostka z wtryskiem pośrednim, utrzymana w gamie głównie na rynki Europy Środkowo-Wschodniej. Bez turbiny i bez filtra cząstek stałych, przez co prosta w utrzymaniu i przyjazna instalacjom LPG.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

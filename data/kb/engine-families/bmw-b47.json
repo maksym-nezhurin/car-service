@@ -1,0 +1,14 @@
+{
+  "slug": "bmw-b47",
+  "displayName": "BMW B47 2.0 diesel",
+  "manufacturer": "BMW",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "B47"
+  ],
+  "shortDescription": "Następca N47 od 2014 roku z łańcuchem po stronie rozrządu. Znacznie trwalszy; napędza 318d/320d/520d oraz X1/X3 18d/20d.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

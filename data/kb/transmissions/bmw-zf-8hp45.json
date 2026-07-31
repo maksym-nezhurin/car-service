@@ -1,0 +1,15 @@
+{
+  "slug": "bmw-zf-8hp45",
+  "familySlug": "bmw-zf-8hp",
+  "code": "8HP45",
+  "displayName": "ZF 8HP45 Steptronic",
+  "type": "at",
+  "gears": 8,
+  "drive": "rwd/awd",
+  "maxTorqueNm": 450,
+  "yearFrom": 2009,
+  "shortDescription": "Najpopularniejszy automat w Serii 3/5 z dieslami B47/N47 i benzynami N20/B48.",
+  "reliabilityNotes": "Oleju nie wymienia się „dożywotnio” — praktyka serwisowa to 60–80 tys. km.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

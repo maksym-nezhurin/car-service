@@ -1,0 +1,20 @@
+{
+  "slug": "mercedes-om654-220d-194",
+  "familySlug": "mercedes-om654",
+  "code": "OM654",
+  "displayName": "220d 194 KM (OM654)",
+  "displacementCc": 1950,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 194,
+  "powerKw": 143,
+  "torqueNm": 400,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2016,
+  "shortDescription": "Podstawowy diesel nowszej C- i E-Klasy. Cichy, elastyczny, z AdBlue.",
+  "reliabilityNotes": "Układ SCR wymaga regularnego uzupełniania AdBlue. Sprawdź historię serwisową pompy wody.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

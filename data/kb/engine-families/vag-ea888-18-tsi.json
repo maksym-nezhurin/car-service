@@ -1,0 +1,12 @@
+{
+  "slug": "vag-ea888-18-tsi",
+  "displayName": "VAG EA888 1.8 TSI/TFSI",
+  "manufacturer": "Volkswagen Group",
+  "displacementCc": 1798,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["CDAA", "CDAB", "CDHA", "CJEB", "CJSA", "CJSB", "DAJB"],
+  "shortDescription": "Mniejsza pojemnościowo odmiana EA888, popularna w Octavii, Passacie i Audi A4. Kompromis między osiągami a podatkiem od pojemności, chętnie wybierana z instalacją LPG mimo bezpośredniego wtrysku.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

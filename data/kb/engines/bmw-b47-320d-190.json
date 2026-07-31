@@ -1,0 +1,20 @@
+{
+  "slug": "bmw-b47-320d-190",
+  "familySlug": "bmw-b47",
+  "code": "B47",
+  "displayName": "320d 190 KM (B47)",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 190,
+  "powerKw": 140,
+  "torqueNm": 400,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2015,
+  "shortDescription": "Aktualna odmiana 320d z rodziny B47. Znacznie spokojniejsza w eksploatacji niż N47.",
+  "reliabilityNotes": "Przy jeździe wyłącznie miejskiej pilnuj regeneracji DPF. Olej wymieniaj co najwyżej co 15 tys. km.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

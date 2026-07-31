@@ -1,0 +1,15 @@
+{
+  "slug": "mercedes-om654",
+  "displayName": "Mercedes-Benz OM654 1.6/2.0 diesel",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1950,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "OM654",
+    "OM622"
+  ],
+  "shortDescription": "Nowa generacja diesli od 2016 roku z aluminiowym blokiem i filtrem cząstek stałych przy silniku. Oznaczenia 180d, 200d i 220d w C-, E- i A-Klasie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

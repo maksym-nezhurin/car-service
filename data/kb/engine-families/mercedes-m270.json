@@ -1,0 +1,14 @@
+{
+  "slug": "mercedes-m270",
+  "displayName": "Mercedes-Benz M270 1.6 turbo",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1595,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "M270"
+  ],
+  "shortDescription": "Poprzecznie montowana turbobenzyna z A-Klasy W176, CLA i GLA. Odmiany 180 i 200 o mocy 122–156 KM.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

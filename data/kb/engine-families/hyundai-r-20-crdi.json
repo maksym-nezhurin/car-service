@@ -1,0 +1,12 @@
+{
+  "slug": "hyundai-r-20-crdi",
+  "displayName": "Hyundai/Kia R 2.0 CRDi",
+  "manufacturer": "Hyundai",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["D4HA", "D4HB"],
+  "shortDescription": "Rodzina R 2.0 CRDi z SUV-ów segmentu C. Wersje 136 i 185 KM różnią się turbosprężarką i mapą sterownika. Przy zakupie używanego warto sprawdzić historię DPF, EGR i koła dwumasowego.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

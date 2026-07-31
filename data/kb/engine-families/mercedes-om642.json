@@ -1,0 +1,14 @@
+{
+  "slug": "mercedes-om642",
+  "displayName": "Mercedes-Benz OM642 3.0 V6 CDI",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 2987,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": [
+    "OM642"
+  ],
+  "shortDescription": "Sześciocylindrowy diesel z lat 2005–2014, znany z E-Klasy 320 CDI i ML. Kulturalny i mocny, ale wymaga dbałości o chłodnicę spalin i łańcuch rozrządu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "vag-crbc-20-tdi-150",
+  "familySlug": "vag-ea288-20-tdi",
+  "code": "CRBC",
+  "displayName": "2.0 TDI 150 KM (CRBC/DFHA)",
+  "displacementCc": 1968,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 150,
+  "powerKw": 110,
+  "torqueNm": 340,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5/6",
+  "yearFrom": 2012,
+  "yearTo": 2020,
+  "shortDescription": "Najczęściej wybierana odmiana EA288, obecna w Golfie VII, Passacie B8, Octavii III i Superbie III. Oszczędna w trasie i wystarczająco dynamiczna do rodzinnego kombi.",
+  "reliabilityNotes": "Nowsze wersje wymagają uzupełniania AdBlue. Przy eksploatacji wyłącznie miejskiej rośnie ryzyko zapchania filtra cząstek stałych.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

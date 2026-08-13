@@ -1,0 +1,9 @@
+{
+  "slug": "opel-at",
+  "displayName": "Opel automat / Easytronic",
+  "type": "at",
+  "manufacturer": "Opel / GM",
+  "shortDescription": "Automaty hydromechaniczne oraz zrobotyzowane Easytronic. Easytronic bywa szarpany — warto sprawdzić historię sprzęgła.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

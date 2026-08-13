@@ -1,0 +1,12 @@
+{
+  "slug": "mercedes-m276",
+  "displayName": "Mercedes-Benz M276 3.0/3.5 V6",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 2996,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["M276"],
+  "shortDescription": "V6 z bezpośrednim wtryskiem — naturalnie aspirowany 3.5 i biturbo 3.0. Napędza C/E 400 oraz modele AMG-line z lat 2011–2018.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

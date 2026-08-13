@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m276-400-333",
+  "familySlug": "mercedes-m276",
+  "code": "M276",
+  "displayName": "400 333 KM (M276)",
+  "displacementCc": 2996,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 333,
+  "powerKw": 245,
+  "torqueNm": 480,
+  "cylinders": 6,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2011,
+  "yearTo": 2018,
+  "shortDescription": "Biturbo V6 3.0 — C 400 / E 400. Płynna moc i charakterystyczny dźwięk rzędówki… a właściwie widlastej szóstki.",
+  "reliabilityNotes": "Sprawdź turbiny i chłodnice powietrza doładowującego; silnik lubi świeży olej niskopopiołowy.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

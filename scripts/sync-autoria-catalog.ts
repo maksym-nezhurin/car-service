@@ -48,6 +48,7 @@ import {
   plPlanModelNeedles,
 } from './catalog-autoria-pl-plan';
 import { linkCatalogEngines } from './link-catalog-engines';
+import { deriveCatalogAggregates } from './derive-catalog-aggregates';
 import {
   autoriaId,
   autoriaListGenerationsByModel,
@@ -619,6 +620,7 @@ async function main() {
     trims: await prisma.catalogTrim.count(),
   };
   const linked = await linkCatalogEngines({ prisma, quiet: true });
+  const derived = await deriveCatalogAggregates({ prisma });
   const quota = getQuotaStats();
   console.log('Done.', {
     ...counts,
@@ -626,6 +628,8 @@ async function main() {
     syncedTrims: totalTrims,
     linkedEngines: linked.linkedEngines,
     linkedEngineFamilies: linked.linkedEngineFamilies,
+    derivedEngines: derived.enginesUpserted,
+    derivedTransmissions: derived.transmissionsUpserted,
     quota,
   });
 }
@@ -635,6 +639,7 @@ main()
     if (e instanceof AutoriaBudgetExhaustedError || e instanceof AutoriaHourlyLimitError) {
       // Link what was already written — the next run may be an hour away.
       await linkCatalogEngines({ prisma, quiet: true }).catch(() => undefined);
+      await deriveCatalogAggregates({ prisma }).catch(() => undefined);
       console.error('\n', e.message);
       console.error('Progress saved. Re-run the same command after the next hour.');
       process.exit(2);

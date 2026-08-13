@@ -1,0 +1,21 @@
+{
+  "slug": "renault-k9k-15-dci-110",
+  "familySlug": "renault-k9k-15-dci",
+  "code": "K9K",
+  "displayName": "1.5 dCi 110 KM (K9K)",
+  "displacementCc": 1461,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 110,
+  "powerKw": 81,
+  "torqueNm": 260,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2010,
+  "yearTo": 2018,
+  "shortDescription": "Najczęściej spotykana odmiana K9K 110 KM w Mégane III/IV i Captur I. Oszczędna w trasie.",
+  "reliabilityNotes": "Wtryskiwacze i koło dwumasowe to typowe koszty po 180–220 tys. km. Unikaj aut tylko miejskich z zatkanym DPF.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

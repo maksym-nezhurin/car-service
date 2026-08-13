@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m274-300-245",
+  "familySlug": "mercedes-m274",
+  "code": "M274",
+  "displayName": "300 245 KM (M274)",
+  "displacementCc": 1991,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 245,
+  "powerKw": 180,
+  "torqueNm": 370,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2014,
+  "yearTo": 2018,
+  "shortDescription": "Mocniejsza odmiana M274 2.0 — C 300 / E 300 przed erą mild-hybrid. Sporo dynamiki bez schodzenia do V6.",
+  "reliabilityNotes": "Jak w słabszym M274: nagar na zaworach i historia oleju są kluczowe.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

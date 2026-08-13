@@ -269,14 +269,16 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
       if (!engineFamilyId) {
         const key = `${makeSlug} | ${trim.engine ?? '—'} | ${trim.powerHp ?? '—'} KM | ${txKey ?? '—'}`;
         unmatched.set(key, (unmatched.get(key) ?? 0) + 1);
+        // No KB rule match — leave FKs alone (may already be filled by catalog:derive:aggregates).
+        continue;
       }
 
-      const family = engineFamilyId ? familyById.get(engineFamilyId) : undefined;
+      const family = familyById.get(engineFamilyId);
       const next = {
         engineId: engine?.id ?? null,
         transmissionId: transmission?.id ?? null,
         engineFamilyId,
-        transmissionFamilyId,
+        transmissionFamilyId: transmissionFamilyId ?? null,
         engineCode: engine?.code ?? null,
         displacementCc: engine?.displacementCc ?? family?.displacementCc ?? null,
       };
@@ -290,7 +292,7 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
         next.displacementCc !== trim.displacementCc;
 
       if (engine) linkedEngines += 1;
-      else if (engineFamilyId) linkedEngineFamilies += 1;
+      else linkedEngineFamilies += 1;
       if (transmission) linkedTransmissions += 1;
       else if (transmissionFamilyId) linkedTransmissionFamilies += 1;
       if (!engine && trim.engineId) cleared += 1;

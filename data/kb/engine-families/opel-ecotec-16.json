@@ -1,0 +1,12 @@
+{
+  "slug": "opel-ecotec-16",
+  "displayName": "Opel 1.6 EcoTec",
+  "manufacturer": "Opel / GM",
+  "displacementCc": 1598,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "engineCodes": ["A16XER", "B16XER", "A16LET", "B16SHL"],
+  "shortDescription": "Popularny 1.6 w Astrze i Insignii — wolnossący lub turbo (A16LET). Prosty w serwisie, części tanie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

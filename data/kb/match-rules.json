@@ -464,7 +464,7 @@
     ],
     "yearFrom": 2007,
     "yearsStrict": true,
-    "enginePattern": "1[.,]8\\s*t[fs]si",
+    "enginePattern": "1[.,]8\\s*t(?:f)?si",
     "engineFamilySlug": "vag-ea888-18-tsi",
     "transmissions": {
       "MT": "vag-mt",
@@ -484,7 +484,7 @@
     "yearFrom": 2003,
     "yearTo": 2009,
     "yearsStrict": true,
-    "enginePattern": "2[.,]0\\s*t[fs]si",
+    "enginePattern": "2[.,]0\\s*t(?:f)?si",
     "powerHp": [
       200
     ],
@@ -507,7 +507,7 @@
     "yearFrom": 2003,
     "yearTo": 2009,
     "yearsStrict": true,
-    "enginePattern": "2[.,]0\\s*t[fs]si",
+    "enginePattern": "2[.,]0\\s*t(?:f)?si",
     "engineFamilySlug": "vag-ea113-20-tfsi",
     "transmissions": {
       "MT": "vag-mt",
@@ -526,7 +526,7 @@
     ],
     "yearFrom": 2010,
     "yearsStrict": true,
-    "enginePattern": "2[.,]0\\s*t[fs]si",
+    "enginePattern": "2[.,]0\\s*t(?:f)?si",
     "engineFamilySlug": "vag-ea888-20-tsi",
     "transmissions": {
       "MT": "vag-mt",
@@ -546,7 +546,7 @@
     "yearFrom": 2005,
     "yearTo": 2011,
     "yearsStrict": true,
-    "enginePattern": "1[.,]4\\s*t[fs]si",
+    "enginePattern": "1[.,]4\\s*t(?:f)?si",
     "engineFamilySlug": "vag-ea111-14-tsi",
     "transmissions": {
       "MT": "vag-mt",
@@ -564,8 +564,8 @@
       "seat"
     ],
     "yearFrom": 2012,
-    "yearsStrict": true,
-    "enginePattern": "1[.,]4\\s*t[fs]si",
+    "yearTo": 2020,
+    "enginePattern": "1[.,]4\\s*t(?:f)?si",
     "powerHp": [
       150
     ],
@@ -586,8 +586,31 @@
       "seat"
     ],
     "yearFrom": 2012,
+    "yearTo": 2020,
+    "enginePattern": "1[.,]4\\s*t(?:f)?si",
+    "powerHp": [
+      122,
+      125
+    ],
+    "engineSlug": "vag-czca-14-tsi-125",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
+    "yearFrom": 2012,
     "yearsStrict": true,
-    "enginePattern": "1[.,]4\\s*t[fs]si",
+    "enginePattern": "1[.,]4\\s*t(?:f)?si",
     "engineFamilySlug": "vag-ea211-14-tsi",
     "transmissions": {
       "MT": "vag-mt",
@@ -604,8 +627,29 @@
       "skoda",
       "seat"
     ],
+    "yearFrom": 2017,
+    "enginePattern": "1[.,]5\\s*t(?:f)?si",
+    "powerHp": [
+      150
+    ],
+    "engineSlug": "vag-dada-15-tsi-150",
+    "transmissions": {
+      "MT": "vag-mt",
+      "AT": "vag-tiptronic-at",
+      "DSG": "vag-dq200-7dsg",
+      "DCT": "vag-dq200-7dsg"
+    },
+    "notEnginePattern": "hev|hybrid|e-tron|plug|g-?tec|phev|ehybrid|m-?hev|mild"
+  },
+  {
+    "makes": [
+      "volkswagen",
+      "audi",
+      "skoda",
+      "seat"
+    ],
     "yearFrom": 2016,
-    "enginePattern": "1[.,]5\\s*t[fs]si",
+    "enginePattern": "1[.,]5\\s*t(?:f)?si",
     "engineFamilySlug": "vag-ea211-15-tsi",
     "transmissions": {
       "MT": "vag-mt",
@@ -623,7 +667,7 @@
       "seat"
     ],
     "yearFrom": 2014,
-    "enginePattern": "1[.,]0\\s*t[fs]si",
+    "enginePattern": "1[.,]0\\s*t(?:f)?si",
     "engineFamilySlug": "vag-ea211-10-tsi",
     "transmissions": {
       "MT": "vag-mt",
@@ -687,9 +731,8 @@
       "mercedes-benz"
     ],
     "yearFrom": 2007,
-    "yearTo": 2016,
-    "yearsStrict": true,
-    "enginePattern": "200\\s*cdi",
+    "yearTo": 2018,
+    "enginePattern": "200\\s*(cdi|d)\\b",
     "powerHp": [
       136
     ],
@@ -698,22 +741,32 @@
       "MT": "mercedes-mt",
       "AT": "mercedes-7g-tronic",
       "DCT": "mercedes-7g-tronic"
-    },
-    "models": [
-      "c-class",
-      "e-class",
-      "gla",
-      "glc"
-    ]
+    }
   },
   {
     "makes": [
       "mercedes-benz"
     ],
     "yearFrom": 2007,
-    "yearTo": 2016,
-    "yearsStrict": true,
-    "enginePattern": "220\\s*cdi",
+    "yearTo": 2018,
+    "enginePattern": "^200$",
+    "powerHp": [
+      136
+    ],
+    "engineSlug": "mercedes-om651-200-cdi-136",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2018,
+    "enginePattern": "220\\s*(cdi|d)\\b",
     "powerHp": [
       170
     ],
@@ -722,22 +775,15 @@
       "MT": "mercedes-mt",
       "AT": "mercedes-7g-tronic",
       "DCT": "mercedes-7g-tronic"
-    },
-    "models": [
-      "c-class",
-      "e-class",
-      "gla",
-      "glc"
-    ]
+    }
   },
   {
     "makes": [
       "mercedes-benz"
     ],
     "yearFrom": 2007,
-    "yearTo": 2014,
-    "yearsStrict": true,
-    "enginePattern": "250\\s*cdi",
+    "yearTo": 2018,
+    "enginePattern": "250\\s*(cdi|d)\\b",
     "powerHp": [
       201,
       204
@@ -747,13 +793,7 @@
       "MT": "mercedes-mt",
       "AT": "mercedes-7g-tronic",
       "DCT": "mercedes-7g-tronic"
-    },
-    "models": [
-      "c-class",
-      "e-class",
-      "gla",
-      "glc"
-    ]
+    }
   },
   {
     "makes": [
@@ -762,7 +802,7 @@
     "yearFrom": 2007,
     "yearTo": 2016,
     "yearsStrict": true,
-    "enginePattern": "200\\s*cdi",
+    "enginePattern": "200\\s*(cdi|d)\\b",
     "engineFamilySlug": "mercedes-om651",
     "transmissions": {
       "MT": "mercedes-mt",
@@ -783,7 +823,7 @@
     "yearFrom": 2007,
     "yearTo": 2016,
     "yearsStrict": true,
-    "enginePattern": "220\\s*cdi",
+    "enginePattern": "220\\s*(cdi|d)\\b",
     "engineFamilySlug": "mercedes-om651",
     "transmissions": {
       "MT": "mercedes-mt",
@@ -802,9 +842,9 @@
       "mercedes-benz"
     ],
     "yearFrom": 2007,
-    "yearTo": 2014,
+    "yearTo": 2016,
     "yearsStrict": true,
-    "enginePattern": "250\\s*cdi",
+    "enginePattern": "250\\s*(cdi|d)\\b",
     "engineFamilySlug": "mercedes-om651",
     "transmissions": {
       "MT": "mercedes-mt",
@@ -903,6 +943,37 @@
       "gla",
       "glc"
     ]
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2016,
+    "yearTo": 2021,
+    "enginePattern": "^300d$",
+    "powerHp": [
+      245
+    ],
+    "engineSlug": "mercedes-om654-300d-245",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2016,
+    "yearTo": 2021,
+    "enginePattern": "^300d$",
+    "engineFamilySlug": "mercedes-om654",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
   },
   {
     "makes": [
@@ -1060,15 +1131,34 @@
     "models": [
       "c-class",
       "e-class",
-      "gla",
       "glc"
     ],
     "yearFrom": 2012,
-    "yearTo": 2020,
-    "yearsStrict": true,
+    "yearTo": 2021,
     "enginePattern": "^200$",
     "powerHp": [
-      184,
+      184
+    ],
+    "engineSlug": "mercedes-m274-200-184",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class",
+      "glc"
+    ],
+    "yearFrom": 2012,
+    "yearTo": 2021,
+    "enginePattern": "^200$",
+    "powerHp": [
       197
     ],
     "engineFamilySlug": "mercedes-m274",
@@ -1085,17 +1175,15 @@
     "models": [
       "c-class",
       "e-class",
-      "gla",
       "glc"
     ],
     "yearFrom": 2012,
-    "yearTo": 2020,
-    "yearsStrict": true,
+    "yearTo": 2021,
     "enginePattern": "^180$",
     "powerHp": [
       156
     ],
-    "engineFamilySlug": "mercedes-m274",
+    "engineSlug": "mercedes-m274-180-156",
     "transmissions": {
       "MT": "mercedes-mt",
       "AT": "mercedes-9g-tronic",
@@ -1109,21 +1197,110 @@
     "models": [
       "c-class",
       "e-class",
-      "gla",
       "glc"
     ],
     "yearFrom": 2012,
-    "yearTo": 2020,
-    "yearsStrict": true,
+    "yearTo": 2021,
     "enginePattern": "^250$",
     "powerHp": [
       211
     ],
-    "engineFamilySlug": "mercedes-m274",
+    "engineSlug": "mercedes-m274-250-211",
     "transmissions": {
       "MT": "mercedes-mt",
       "AT": "mercedes-9g-tronic",
       "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class",
+      "glc"
+    ],
+    "yearFrom": 2014,
+    "yearTo": 2018,
+    "enginePattern": "^300$",
+    "powerHp": [
+      245
+    ],
+    "engineSlug": "mercedes-m274-300-245",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class",
+      "glc"
+    ],
+    "yearFrom": 2018,
+    "enginePattern": "^300$",
+    "powerHp": [
+      258
+    ],
+    "engineSlug": "mercedes-m264-300-258",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2011,
+    "yearTo": 2019,
+    "enginePattern": "^400$",
+    "powerHp": [
+      333
+    ],
+    "engineSlug": "mercedes-m276-400-333",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-9g-tronic",
+      "DCT": "mercedes-9g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2011,
+    "enginePattern": "^350$",
+    "powerHp": [
+      272
+    ],
+    "engineSlug": "mercedes-m272-350-272",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2011,
+    "enginePattern": "^350$",
+    "engineFamilySlug": "mercedes-m272",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-7g-tronic",
+      "DCT": "mercedes-7g-tronic"
     }
   },
   {
@@ -1647,9 +1824,47 @@
     ],
     "yearFrom": 2007,
     "yearTo": 2015,
+    "enginePattern": "^520d",
+    "powerHp": [
+      177,
+      184
+    ],
+    "engineSlug": "bmw-n47-520d-184",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2007,
+    "yearTo": 2015,
     "yearsStrict": true,
     "enginePattern": "^520d",
     "engineFamilySlug": "bmw-n47",
+    "transmissions": {
+      "MT": "bmw-mt",
+      "AT": "bmw-zf-8hp"
+    }
+  },
+  {
+    "makes": [
+      "bmw"
+    ],
+    "models": [
+      "5-series"
+    ],
+    "yearFrom": 2014,
+    "enginePattern": "^520d",
+    "powerHp": [
+      190
+    ],
+    "engineSlug": "bmw-b47-520d-190",
     "transmissions": {
       "MT": "bmw-mt",
       "AT": "bmw-zf-8hp"
@@ -2447,5 +2662,107 @@
       "AT": "ford-at",
       "DCT": "ford-powershift"
     }
+  },
+  {
+    "makes": [
+      "opel"
+    ],
+    "yearFrom": 2009,
+    "yearTo": 2019,
+    "enginePattern": "^1[.,]4$",
+    "powerHp": [
+      140
+    ],
+    "engineSlug": "opel-a14net-14-turbo-140",
+    "transmissions": {
+      "MT": "opel-mt",
+      "AT": "opel-at"
+    }
+  },
+  {
+    "makes": [
+      "opel"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2019,
+    "enginePattern": "^1[.,]4$",
+    "engineFamilySlug": "opel-ecotec-14",
+    "transmissions": {
+      "MT": "opel-mt",
+      "AT": "opel-at"
+    }
+  },
+  {
+    "makes": [
+      "opel"
+    ],
+    "yearFrom": 2004,
+    "enginePattern": "^1[.,]2$",
+    "engineFamilySlug": "opel-ecotec-12",
+    "transmissions": {
+      "MT": "opel-mt",
+      "AT": "opel-at"
+    }
+  },
+  {
+    "makes": [
+      "opel"
+    ],
+    "yearFrom": 2004,
+    "yearTo": 2019,
+    "enginePattern": "^1[.,]6$",
+    "engineFamilySlug": "opel-ecotec-16",
+    "transmissions": {
+      "MT": "opel-mt",
+      "AT": "opel-at"
+    }
+  },
+  {
+    "makes": [
+      "opel"
+    ],
+    "yearFrom": 2014,
+    "enginePattern": "^1[.,]0$",
+    "engineFamilySlug": "opel-ecotec-10",
+    "transmissions": {
+      "MT": "opel-mt",
+      "AT": "opel-at"
+    }
+  },
+  {
+    "makes": [
+      "renault",
+      "dacia",
+      "nissan"
+    ],
+    "yearFrom": 2010,
+    "yearTo": 2018,
+    "enginePattern": "1[.,]5\\s*(d\\b|dci)",
+    "powerHp": [
+      110
+    ],
+    "engineSlug": "renault-k9k-15-dci-110",
+    "transmissions": {
+      "MT": "renault-mt",
+      "AT": "renault-edc",
+      "DCT": "renault-edc"
+    },
+    "notEnginePattern": "blue|phev|hybrid"
+  },
+  {
+    "makes": [
+      "renault",
+      "dacia",
+      "nissan"
+    ],
+    "yearFrom": 2001,
+    "enginePattern": "1[.,]5\\s*(d\\b|dci|blue\\s*dci)",
+    "engineFamilySlug": "renault-k9k-15-dci",
+    "transmissions": {
+      "MT": "renault-mt",
+      "AT": "renault-edc",
+      "DCT": "renault-edc"
+    },
+    "notEnginePattern": "phev|hybrid|e-tech"
   }
 ]

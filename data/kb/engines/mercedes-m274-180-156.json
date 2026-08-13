@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m274-180-156",
+  "familySlug": "mercedes-m274",
+  "code": "M274",
+  "displayName": "180 156 KM (M274)",
+  "displacementCc": 1595,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 156,
+  "powerKw": 115,
+  "torqueNm": 250,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2012,
+  "yearTo": 2018,
+  "shortDescription": "Podstawowa turbobenzyna M274 1.6 w C-Klasie W205 i CLA. Wystarczająca do spokojnej jazdy, oszczędna w trasie.",
+  "reliabilityNotes": "Kontroluj łańcuch rozrządu przy wyższych przebiegach oraz stan cewek zapłonowych.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

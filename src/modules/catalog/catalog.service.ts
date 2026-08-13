@@ -630,10 +630,13 @@ export class CatalogService {
 
     return {
       count: engines.length,
-      engines: engines.map((unit) => ({
-        ...this.mapApprovedEngineUnit(unit),
-        trimCount: unit._count.trims,
-      })),
+      engines: engines
+        .map((unit) => {
+          const mapped = this.mapApprovedEngineUnit(unit);
+          if (!mapped) return null;
+          return { ...mapped, trimCount: unit._count.trims };
+        })
+        .filter((row): row is NonNullable<typeof row> => row != null),
     };
   }
 
@@ -674,10 +677,13 @@ export class CatalogService {
 
     return {
       count: transmissions.length,
-      transmissions: transmissions.map((unit) => ({
-        ...this.mapApprovedTransmissionUnit(unit),
-        trimCount: unit._count.trims,
-      })),
+      transmissions: transmissions
+        .map((unit) => {
+          const mapped = this.mapApprovedTransmissionUnit(unit);
+          if (!mapped) return null;
+          return { ...mapped, trimCount: unit._count.trims };
+        })
+        .filter((row): row is NonNullable<typeof row> => row != null),
     };
   }
 

@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-om654-300d-245",
+  "familySlug": "mercedes-om654",
+  "code": "OM654",
+  "displayName": "300d 245 KM (OM654)",
+  "displacementCc": 1950,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 245,
+  "powerKw": 180,
+  "torqueNm": 500,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2016,
+  "yearTo": 2021,
+  "shortDescription": "Najmocniejsza czterocylindrowa odmiana OM654 w C/E 300d i GLC 300d przed przejściem na rzędową szóstkę OM656.",
+  "reliabilityNotes": "AdBlue i DPF — historia autostradowych przebiegów jest plusem. Kontroluj wycieki oleju przy obudowie filtra.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

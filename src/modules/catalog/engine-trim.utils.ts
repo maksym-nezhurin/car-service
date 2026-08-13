@@ -75,6 +75,9 @@ export function formatEngineDisplaySubtitle(row: CatalogEngineRow): string {
 /**
  * Normalize gearbox tokens from AUTO.RIA (Cyrillic lookalikes → Latin).
  * "АТ" / "МТ" / "7DCT" → AT / MT / 7DCT
+ *
+ * AMG model badges ("63 AT", "45 DCT") must not become 63-/45-speed boxes —
+ * only plausible gear counts are kept.
  */
 export function normalizeTransmissionLabel(
   value: string | null | undefined,
@@ -88,16 +91,29 @@ export function normalizeTransmissionLabel(
     .replace(/\s+/g, '')
     .toUpperCase();
 
-  if (/^\d*DCT$/i.test(raw) || raw === 'DCT') return raw === 'DCT' ? 'DCT' : raw;
-  if (/^\d*DSG$/i.test(raw) || raw === 'DSG') return raw === 'DSG' ? 'DSG' : raw;
-  if (/^\d*MT$/i.test(raw) || raw === 'MT') {
-    return raw === 'MT' ? 'MT' : raw; // 6MT
+  const match = raw.match(/^(\d{0,2})(MT|AT|CVT|DCT|DSG|AMT|IVT)$/);
+  if (!match) {
+    if (raw === 'CVT' || raw === 'IVT' || raw === 'AMT') return raw;
+    return raw;
   }
-  if (/^\d*AT$/i.test(raw) || raw === 'AT') {
-    return raw === 'AT' ? 'AT' : raw;
-  }
-  if (raw === 'CVT' || raw === 'IVT' || raw === 'AMT') return raw;
-  return raw;
+
+  const gears = match[1] ? Number(match[1]) : null;
+  const type = match[2];
+
+  if (gears == null) return type;
+  if (!isPlausibleGearCount(type, gears)) return type;
+  return `${gears}${type}`;
+}
+
+/** Gear counts that real passenger cars use — rejects AMG line numbers (35/43/45/63…). */
+export function isPlausibleGearCount(type: string, gears: number): boolean {
+  const t = type.toUpperCase();
+  if (t === 'MT') return gears >= 4 && gears <= 7;
+  if (t === 'AT') return gears >= 4 && gears <= 10;
+  if (t === 'DCT' || t === 'DSG') return gears >= 6 && gears <= 8;
+  if (t === 'AMT') return gears >= 5 && gears <= 7;
+  // CVT / IVT rarely carry a digit prefix; if they do, ignore it.
+  return false;
 }
 
 /**

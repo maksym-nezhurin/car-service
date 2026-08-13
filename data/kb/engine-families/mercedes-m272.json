@@ -1,0 +1,12 @@
+{
+  "slug": "mercedes-m272",
+  "displayName": "Mercedes-Benz M272 2.5–3.5 V6",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 3498,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "engineCodes": ["M272"],
+  "shortDescription": "Atmosferyczne V6 z lat 2004–2011 (C/E 280/350). Kulturalne, ale znane z zużycia kół zębatych wałków wyrównoważających.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

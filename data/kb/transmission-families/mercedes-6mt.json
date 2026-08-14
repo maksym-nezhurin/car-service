@@ -1,0 +1,10 @@
+{
+  "slug": "mercedes-6mt",
+  "displayName": "Mercedes-Benz 6-biegowa manualna",
+  "type": "mt",
+  "gears": 6,
+  "manufacturer": "Mercedes-Benz",
+  "shortDescription": "Sześciobiegowa manualna skrzynia, standard w nowszych silnikach Mercedesa, zwłaszcza dieslach OM651.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

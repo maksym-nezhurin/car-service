@@ -1,0 +1,10 @@
+{
+  "slug": "toyota-5mt",
+  "displayName": "Toyota 5-biegowa manualna",
+  "type": "mt",
+  "gears": 5,
+  "manufacturer": "Toyota",
+  "shortDescription": "Pięciobiegowa manualna skrzynia w słabszych lub starszych silnikach Toyoty.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

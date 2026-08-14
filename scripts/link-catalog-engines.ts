@@ -26,7 +26,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { PrismaClient } from '../generated/client';
-import { normalizeTransmissionLabel } from '../src/modules/catalog/engine-trim.utils';
+import {
+  normalizeTransmissionLabel,
+  parseGearCount,
+  preferGearSpecificSlug,
+  transmissionKey,
+} from '../src/modules/catalog/engine-trim.utils';
 
 type MatchRule = {
   makes?: string[];
@@ -80,14 +85,6 @@ function loadRules(): MatchRule[] {
     }
     return rule;
   });
-}
-
-/** "7DCT" → "DCT", "6MT" → "MT" — rule keys are family-agnostic. */
-function transmissionKey(raw: string | null): string | null {
-  const tx = normalizeTransmissionLabel(raw);
-  if (!tx) return null;
-  const match = tx.match(/^(\d*)(MT|AT|CVT|DCT|DSG|AMT|IVT)(\d*)$/);
-  return match ? match[2] : tx;
 }
 
 type TrimScope = {
@@ -260,10 +257,19 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
         ? (exact ? [exact] : fallback ? candidates : []).map((r) => r.transmissions?.[txKey])
         : [];
       const txSlug = unanimous(txSlugs);
-      const transmission = txSlug ? transmissionBySlug.get(txSlug) : undefined;
+      // Upgrade a generic manufacturer-wide MT family to a gear-count-specific one when this
+      // trim's own label confirms the gear count and that family is already in the KB.
+      const resolvedTxSlug = txSlug
+        ? preferGearSpecificSlug(
+            txSlug,
+            parseGearCount(normalizeTransmissionLabel(trim.transmission)),
+            transmissionFamilyBySlug,
+          )
+        : txSlug;
+      const transmission = resolvedTxSlug ? transmissionBySlug.get(resolvedTxSlug) : undefined;
       const transmissionFamilyId =
         transmission?.familyId ??
-        (txSlug ? transmissionFamilyBySlug.get(txSlug)?.id : undefined) ??
+        (resolvedTxSlug ? transmissionFamilyBySlug.get(resolvedTxSlug)?.id : undefined) ??
         unanimous(txSlugs.map((slug) => (slug ? transmissionBySlug.get(slug)?.familyId : null)));
 
       if (!engineFamilyId) {

@@ -1,0 +1,10 @@
+{
+  "slug": "bmw-6mt",
+  "displayName": "BMW 6-biegowa manualna",
+  "type": "mt",
+  "gears": 6,
+  "manufacturer": "BMW",
+  "shortDescription": "Sześciobiegowa manualna skrzynia, standard w mocniejszych i nowszych silnikach BMW od połowy lat 2000. Dodatkowy bieg obniża obroty i spalanie na autostradzie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

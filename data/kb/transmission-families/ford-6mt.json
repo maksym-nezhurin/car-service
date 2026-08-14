@@ -1,0 +1,10 @@
+{
+  "slug": "ford-6mt",
+  "displayName": "Ford 6-biegowa manualna",
+  "type": "mt",
+  "gears": 6,
+  "manufacturer": "Ford",
+  "shortDescription": "Sześciobiegowa manualna skrzynia w mocniejszych silnikach Forda, zwłaszcza dieslach. Dodatkowy bieg obniża spalanie w trasie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

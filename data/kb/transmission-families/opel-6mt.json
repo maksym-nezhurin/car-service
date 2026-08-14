@@ -1,0 +1,10 @@
+{
+  "slug": "opel-6mt",
+  "displayName": "Opel 6-biegowa manualna",
+  "type": "mt",
+  "gears": 6,
+  "manufacturer": "Opel / GM",
+  "shortDescription": "Sześciobiegowa manualna skrzynia w mocniejszych i nowszych silnikach Opla, zwłaszcza dieslach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

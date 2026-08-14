@@ -116,6 +116,40 @@ export function isPlausibleGearCount(type: string, gears: number): boolean {
   return false;
 }
 
+/** "7DCT" → "DCT", "6MT" → "MT" — match-rule keys are family-agnostic. */
+export function transmissionKey(raw: string | null | undefined): string | null {
+  const tx = normalizeTransmissionLabel(raw);
+  if (!tx) return null;
+  const match = tx.match(/^(\d*)(MT|AT|CVT|DCT|DSG|AMT|IVT)(\d*)$/);
+  return match ? match[2] : tx;
+}
+
+/** Digit prefix of a normalized label ("6MT" → 6), or null when the label didn't carry one. */
+export function parseGearCount(label: string | null): number | null {
+  if (!label) return null;
+  const match = label.match(/^(\d+)/);
+  return match ? Number(match[1]) : null;
+}
+
+/**
+ * Prefer a gear-count-specific manual-transmission family ("vag-6mt") over the generic
+ * manufacturer-wide one a rule points at ("vag-mt") when the trim's own label confirms the
+ * gear count and that specific family already exists in the KB. Falls back to the base slug
+ * otherwise (gear count unknown on this trim, or nobody has curated that gear count for this
+ * manufacturer yet) — this never invents a family, only picks a more specific one that's
+ * already there. See docs/V1_7_VEHICLE_ENCYCLOPEDIA.md §4.3.2.
+ */
+export function preferGearSpecificSlug(
+  baseSlug: string,
+  gears: number | null,
+  transmissionFamilyBySlug: Map<string, unknown>,
+): string {
+  if (gears == null) return baseSlug;
+  const upgraded = baseSlug.replace(/-mt$/, `-${gears}mt`);
+  if (upgraded === baseSlug) return baseSlug;
+  return transmissionFamilyBySlug.has(upgraded) ? upgraded : baseSlug;
+}
+
 /**
  * Unique trim key — engine + power + gearbox.
  * Manual 1.7 CRDi 116 and AT 1.7 CRDi 141 must stay separate rows.

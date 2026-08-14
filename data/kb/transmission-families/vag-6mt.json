@@ -1,0 +1,10 @@
+{
+  "slug": "vag-6mt",
+  "displayName": "VAG 6-biegowa manualna",
+  "type": "mt",
+  "gears": 6,
+  "manufacturer": "Volkswagen Group",
+  "shortDescription": "Sześciobiegowa manualna skrzynia w mocniejszych silnikach koncernu, zwłaszcza dieslach TDI. Dodatkowy bieg obniża obroty na autostradzie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

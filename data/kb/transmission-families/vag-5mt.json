@@ -1,0 +1,10 @@
+{
+  "slug": "vag-5mt",
+  "displayName": "VAG 5-biegowa manualna",
+  "type": "mt",
+  "gears": 5,
+  "manufacturer": "Volkswagen Group",
+  "shortDescription": "Pięciobiegowa manualna skrzynia w słabszych silnikach koncernu, np. mniejsze jednostki benzynowe.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

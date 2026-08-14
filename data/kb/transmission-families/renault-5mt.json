@@ -1,0 +1,10 @@
+{
+  "slug": "renault-5mt",
+  "displayName": "Renault 5-biegowa manualna",
+  "type": "mt",
+  "gears": 5,
+  "manufacturer": "Renault",
+  "shortDescription": "Pięciobiegowa manualna skrzynia w słabszych silnikach Renault, np. mniejsze jednostki benzynowe.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,10 @@
+{
+  "slug": "toyota-6mt",
+  "displayName": "Toyota 6-biegowa manualna",
+  "type": "mt",
+  "gears": 6,
+  "manufacturer": "Toyota",
+  "shortDescription": "Sześciobiegowa manualna skrzynia w mocniejszych silnikach Toyoty.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

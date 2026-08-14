@@ -8,6 +8,8 @@ import {
   isTrimPackageName,
   resolveEngineLabel,
 } from './engine-trim.utils';
+import { UpdateGenerationAdminDto } from './dto/update-generation-admin.dto';
+import { UpdateTrimAdminDto } from './dto/update-trim-admin.dto';
 
 type PublicListOptions = {
   includeLegacy?: boolean;
@@ -853,5 +855,90 @@ export class CatalogService {
           })),
       })),
     };
+  }
+
+  /**
+   * Admin-only: same lookup as getGenerationByPath but bypasses the review gate entirely —
+   * an admin must be able to find and un-flag a generation/trim they (or a sync) already
+   * marked draft/rejected, which the public endpoint now hides by design.
+   */
+  async getGenerationByPathAdmin(
+    makeSlug: string,
+    modelSlug: string,
+    generationSlug: string,
+  ) {
+    const generation = await this.prisma.catalogGeneration.findFirst({
+      where: {
+        slug: generationSlug,
+        model: { slug: modelSlug, make: { slug: makeSlug } },
+      },
+      include: {
+        model: { include: { make: true } },
+        trims: { orderBy: { displayName: 'asc' } },
+      },
+    });
+    if (!generation) {
+      throw new NotFoundException('Generation not found');
+    }
+
+    const model = generation.model;
+    const make = model.make;
+    return {
+      id: generation.id,
+      slug: generation.slug,
+      displayName: generation.displayName,
+      yearFrom: generation.yearFrom,
+      yearTo: generation.yearTo,
+      coverImageUrl: generation.coverImageUrl,
+      reviewStatus: generation.reviewStatus,
+      isSupported: generation.isSupported,
+      supportTier: generation.supportTier,
+      make: { id: make.id, slug: make.slug, name: make.name },
+      model: { id: model.id, slug: model.slug, name: model.name },
+      trims: generation.trims.map((t) => ({
+        id: t.id,
+        slug: t.slug,
+        displayName: t.displayName,
+        engine: t.engine,
+        fuelType: t.fuelType,
+        aspiration: t.aspiration,
+        powerHp: t.powerHp,
+        transmission: t.transmission,
+        reviewStatus: t.reviewStatus,
+      })),
+    };
+  }
+
+  /** Admin-only: flag a generation's reviewStatus and/or fix its display data. */
+  async updateGenerationAdmin(id: string, dto: UpdateGenerationAdminDto) {
+    const existing = await this.prisma.catalogGeneration.findUnique({ where: { id } });
+    if (!existing) {
+      throw new NotFoundException('Generation not found');
+    }
+    return this.prisma.catalogGeneration.update({
+      where: { id },
+      data: {
+        ...(dto.reviewStatus != null
+          ? { reviewStatus: dto.reviewStatus, reviewedAt: new Date() }
+          : {}),
+        ...(dto.displayName !== undefined ? { displayName: dto.displayName } : {}),
+        ...(dto.coverImageUrl !== undefined ? { coverImageUrl: dto.coverImageUrl } : {}),
+      },
+    });
+  }
+
+  /** Admin-only: flag a trim's reviewStatus (approved / draft / rejected). */
+  async updateTrimAdmin(id: string, dto: UpdateTrimAdminDto) {
+    const existing = await this.prisma.catalogTrim.findUnique({ where: { id } });
+    if (!existing) {
+      throw new NotFoundException('Trim not found');
+    }
+    return this.prisma.catalogTrim.update({
+      where: { id },
+      data:
+        dto.reviewStatus != null
+          ? { reviewStatus: dto.reviewStatus, reviewedAt: new Date() }
+          : {},
+    });
   }
 }

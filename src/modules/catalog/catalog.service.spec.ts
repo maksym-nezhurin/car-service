@@ -12,8 +12,14 @@ function makePrismaMock() {
       findMany: jest.fn(),
       findFirst: jest.fn(),
       findUnique: jest.fn(),
+      update: jest.fn(),
     },
-    catalogTrim: { findFirst: jest.fn(), findUnique: jest.fn(), findMany: jest.fn() },
+    catalogTrim: {
+      findFirst: jest.fn(),
+      findUnique: jest.fn(),
+      findMany: jest.fn(),
+      update: jest.fn(),
+    },
     catalogEngine: { findMany: jest.fn(), findUnique: jest.fn() },
     catalogTransmission: { findMany: jest.fn(), findUnique: jest.fn() },
   };
@@ -367,6 +373,64 @@ describe('CatalogService', () => {
     });
   });
 
+  describe('getGenerationByPathAdmin', () => {
+    it('throws NotFoundException when no matching generation exists', async () => {
+      prisma.catalogGeneration.findFirst.mockResolvedValue(null);
+      await expect(
+        service.getGenerationByPathAdmin('vw', 'golf', 'golf-viii'),
+      ).rejects.toThrow(NotFoundException);
+    });
+
+    it('surfaces a draft generation and its trims, unlike the public lookup', async () => {
+      prisma.catalogGeneration.findFirst.mockResolvedValue({
+        id: 'g1',
+        slug: 'golf-vii',
+        displayName: 'Golf VII',
+        yearFrom: 2012,
+        yearTo: 2019,
+        coverImageUrl: null,
+        reviewStatus: 'draft',
+        isSupported: true,
+        supportTier: 'active',
+        model: {
+          id: 'm1',
+          slug: 'golf',
+          name: 'Golf',
+          make: { id: 'mk1', slug: 'vw', name: 'Volkswagen' },
+        },
+        trims: [
+          {
+            id: 'tr1',
+            slug: '2-0-tdi-150',
+            displayName: '2.0 TDI 150',
+            engine: '2.0 TDI',
+            fuelType: 'diesel',
+            aspiration: 'turbo',
+            powerHp: 150,
+            transmission: '6MT',
+            reviewStatus: 'rejected',
+          },
+        ],
+      });
+
+      const result = await service.getGenerationByPathAdmin('vw', 'golf', 'golf-vii');
+
+      // No supportedGenerationWhere()/approvedTrimWhere() filter was applied to the query
+      // above, and the mapper doesn't hide anything by status — confirmed by the mock
+      // never being asked for a where clause and the result exposing both statuses as-is.
+      expect(result.reviewStatus).toBe('draft');
+      expect(result.trims[0]).toMatchObject({ id: 'tr1', reviewStatus: 'rejected' });
+      expect(prisma.catalogGeneration.findFirst).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: {
+            slug: 'golf-vii',
+            model: { slug: 'golf', make: { slug: 'vw' } },
+          },
+        }),
+      );
+    });
+  });
+
   describe('getTrimByPath', () => {
     it('throws NotFoundException when no matching trim exists', async () => {
       prisma.catalogTrim.findFirst.mockResolvedValue(null);
@@ -467,6 +531,80 @@ describe('CatalogService', () => {
       await expect(service.getTransmissionBySlug('does-not-exist')).rejects.toThrow(
         NotFoundException,
       );
+    });
+  });
+
+  describe('updateGenerationAdmin', () => {
+    it('throws NotFoundException when the generation does not exist', async () => {
+      prisma.catalogGeneration.findUnique.mockResolvedValue(null);
+      await expect(
+        service.updateGenerationAdmin('does-not-exist', { reviewStatus: 'draft' }),
+      ).rejects.toThrow(NotFoundException);
+      expect(prisma.catalogGeneration.update).not.toHaveBeenCalled();
+    });
+
+    it('stamps reviewedAt when reviewStatus changes', async () => {
+      prisma.catalogGeneration.findUnique.mockResolvedValue({ id: 'g1' });
+      prisma.catalogGeneration.update.mockResolvedValue({ id: 'g1' });
+
+      await service.updateGenerationAdmin('g1', { reviewStatus: 'rejected' });
+
+      expect(prisma.catalogGeneration.update).toHaveBeenCalledWith({
+        where: { id: 'g1' },
+        data: { reviewStatus: 'rejected', reviewedAt: expect.any(Date) },
+      });
+    });
+
+    it('updates displayName/coverImageUrl without touching reviewStatus when unset', async () => {
+      prisma.catalogGeneration.findUnique.mockResolvedValue({ id: 'g1' });
+      prisma.catalogGeneration.update.mockResolvedValue({ id: 'g1' });
+
+      await service.updateGenerationAdmin('g1', {
+        displayName: 'Golf VII (corrected)',
+        coverImageUrl: 'https://example.com/golf.webp',
+      });
+
+      expect(prisma.catalogGeneration.update).toHaveBeenCalledWith({
+        where: { id: 'g1' },
+        data: {
+          displayName: 'Golf VII (corrected)',
+          coverImageUrl: 'https://example.com/golf.webp',
+        },
+      });
+    });
+
+    it('sends an empty update when the DTO carries nothing', async () => {
+      prisma.catalogGeneration.findUnique.mockResolvedValue({ id: 'g1' });
+      prisma.catalogGeneration.update.mockResolvedValue({ id: 'g1' });
+
+      await service.updateGenerationAdmin('g1', {});
+
+      expect(prisma.catalogGeneration.update).toHaveBeenCalledWith({
+        where: { id: 'g1' },
+        data: {},
+      });
+    });
+  });
+
+  describe('updateTrimAdmin', () => {
+    it('throws NotFoundException when the trim does not exist', async () => {
+      prisma.catalogTrim.findUnique.mockResolvedValue(null);
+      await expect(
+        service.updateTrimAdmin('does-not-exist', { reviewStatus: 'draft' }),
+      ).rejects.toThrow(NotFoundException);
+      expect(prisma.catalogTrim.update).not.toHaveBeenCalled();
+    });
+
+    it('stamps reviewedAt when flagging a trim', async () => {
+      prisma.catalogTrim.findUnique.mockResolvedValue({ id: 'tr1' });
+      prisma.catalogTrim.update.mockResolvedValue({ id: 'tr1' });
+
+      await service.updateTrimAdmin('tr1', { reviewStatus: 'draft' });
+
+      expect(prisma.catalogTrim.update).toHaveBeenCalledWith({
+        where: { id: 'tr1' },
+        data: { reviewStatus: 'draft', reviewedAt: expect.any(Date) },
+      });
     });
   });
 });

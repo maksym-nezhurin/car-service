@@ -555,7 +555,9 @@ describe('CatalogService', () => {
       });
     });
 
-    it('updates displayName/coverImageUrl without touching reviewStatus when unset', async () => {
+    it('updates displayName/coverImageUrl (without touching reviewStatus) and still stamps reviewedAt', async () => {
+      // reviewedAt must be stamped on ANY edit, not just reviewStatus — it's the signal
+      // catalog:sync:autoria checks before overwriting displayName on the next sync.
       prisma.catalogGeneration.findUnique.mockResolvedValue({ id: 'g1' });
       prisma.catalogGeneration.update.mockResolvedValue({ id: 'g1' });
 
@@ -569,6 +571,7 @@ describe('CatalogService', () => {
         data: {
           displayName: 'Golf VII (corrected)',
           coverImageUrl: 'https://example.com/golf.webp',
+          reviewedAt: expect.any(Date),
         },
       });
     });

@@ -915,14 +915,18 @@ export class CatalogService {
     if (!existing) {
       throw new NotFoundException('Generation not found');
     }
+    const hasChanges =
+      dto.reviewStatus != null || dto.displayName !== undefined || dto.coverImageUrl !== undefined;
     return this.prisma.catalogGeneration.update({
       where: { id },
       data: {
-        ...(dto.reviewStatus != null
-          ? { reviewStatus: dto.reviewStatus, reviewedAt: new Date() }
-          : {}),
+        ...(dto.reviewStatus != null ? { reviewStatus: dto.reviewStatus } : {}),
         ...(dto.displayName !== undefined ? { displayName: dto.displayName } : {}),
         ...(dto.coverImageUrl !== undefined ? { coverImageUrl: dto.coverImageUrl } : {}),
+        // Also the "manual override" signal catalog:sync:autoria checks before touching
+        // displayName again — stamped on ANY admin edit, not just reviewStatus changes,
+        // so a pure displayName/coverImageUrl fix is protected from the next sync too.
+        ...(hasChanges ? { reviewedAt: new Date() } : {}),
       },
     });
   }

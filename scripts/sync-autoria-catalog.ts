@@ -560,6 +560,17 @@ async function main() {
 
           let generationRecord;
           if (shouldFetchStructure(phase)) {
+            // manual_override > autoria_sync (docs/V1_7_VEHICLE_ENCYCLOPEDIA.md §4.5): an
+            // admin-edited displayName (apps/admin → Katalog / moderacja) must survive the
+            // next sync. reviewedAt is stamped on any admin edit, not just reviewStatus —
+            // that's the only signal we check here, so it must stay in sync with what
+            // CatalogService.updateGenerationAdmin() stamps.
+            const existingGeneration = await prisma.catalogGeneration.findUnique({
+              where: { modelId_slug: { modelId, slug: genSlug } },
+              select: { reviewedAt: true },
+            });
+            const manuallyReviewed = existingGeneration?.reviewedAt != null;
+
             generationRecord = await prisma.catalogGeneration.upsert({
               where: { modelId_slug: { modelId, slug: genSlug } },
               create: {
@@ -575,7 +586,7 @@ async function main() {
               },
               update: {
                 externalModelId: String(modelApiId),
-                displayName: gen.name,
+                ...(manuallyReviewed ? {} : { displayName: gen.name }),
                 yearFrom: gen.yearFrom,
                 yearTo: gen.yearTo,
                 contentKey,

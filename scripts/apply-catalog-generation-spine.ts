@@ -39,6 +39,15 @@ async function applySpine(spine: (typeof CATALOG_GENERATION_SPINE)[number]) {
     const isSupported = isGenerationSupported(gen.yearFrom, gen.yearTo);
     const supportTier = resolveSupportTier(gen.yearTo);
 
+    // manual_override > autoria_sync (docs/V1_7_VEHICLE_ENCYCLOPEDIA.md §4.5): don't clobber
+    // an admin-edited displayName. reviewedAt is stamped on any admin edit — see
+    // CatalogService.updateGenerationAdmin() and the same guard in sync-autoria-catalog.ts.
+    const existingRow = await prisma.catalogGeneration.findUnique({
+      where: { modelId_slug: { modelId: model.id, slug: gen.slug } },
+      select: { reviewedAt: true },
+    });
+    const manuallyReviewed = existingRow?.reviewedAt != null;
+
     const row = await prisma.catalogGeneration.upsert({
       where: { modelId_slug: { modelId: model.id, slug: gen.slug } },
       create: {
@@ -52,7 +61,7 @@ async function applySpine(spine: (typeof CATALOG_GENERATION_SPINE)[number]) {
         supportTier,
       },
       update: {
-        displayName: gen.displayName,
+        ...(manuallyReviewed ? {} : { displayName: gen.displayName }),
         yearFrom: gen.yearFrom,
         yearTo: gen.yearTo,
         contentKey,

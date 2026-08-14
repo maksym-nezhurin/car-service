@@ -39,12 +39,15 @@ describe('CatalogService', () => {
   });
 
   describe('supportedGenerationWhere', () => {
-    it('returns an unfiltered where clause when includeLegacy is true', () => {
-      expect(priv(service, 'supportedGenerationWhere', true)).toEqual({});
+    it('still gates on reviewStatus when includeLegacy is true — vintage is not a quality bypass', () => {
+      expect(priv(service, 'supportedGenerationWhere', true)).toEqual({
+        reviewStatus: 'approved',
+      });
     });
 
-    it('filters to isSupported + the year cutoff by default', () => {
+    it('filters to reviewStatus + isSupported + the year cutoff by default', () => {
       expect(priv(service, 'supportedGenerationWhere')).toEqual({
+        reviewStatus: 'approved',
         isSupported: true,
         OR: [{ yearTo: null }, { yearTo: { gte: CATALOG_YEAR_CUTOFF } }],
       });
@@ -52,9 +55,16 @@ describe('CatalogService', () => {
 
     it('filters the same way when includeLegacy is explicitly false', () => {
       expect(priv(service, 'supportedGenerationWhere', false)).toEqual({
+        reviewStatus: 'approved',
         isSupported: true,
         OR: [{ yearTo: null }, { yearTo: { gte: CATALOG_YEAR_CUTOFF } }],
       });
+    });
+  });
+
+  describe('approvedTrimWhere', () => {
+    it('gates a trim on its own reviewStatus', () => {
+      expect(priv(service, 'approvedTrimWhere')).toEqual({ reviewStatus: 'approved' });
     });
   });
 
@@ -363,6 +373,72 @@ describe('CatalogService', () => {
       await expect(
         service.getTrimByPath('vw', 'golf', 'golf-vii', '2-0-tdi-150'),
       ).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  describe('getTrimById', () => {
+    function fakeTrim(overrides: {
+      trimReviewStatus?: string;
+      generationReviewStatus?: string;
+    }) {
+      return {
+        id: 'tr1',
+        slug: '2-0-tdi-150',
+        displayName: '2.0 TDI 150',
+        engine: '2.0 TDI',
+        fuelType: 'diesel',
+        aspiration: 'turbo',
+        powerHp: 150,
+        transmission: '6MT',
+        engineCode: null,
+        displacementCc: 2000,
+        contentKey: 'vw/golf/golf-vii/2-0-tdi-150',
+        reviewStatus: overrides.trimReviewStatus ?? 'approved',
+        engineFamily: null,
+        transmissionFamily: null,
+        engineUnit: null,
+        transmissionUnit: null,
+        generation: {
+          id: 'g1',
+          slug: 'golf-vii',
+          displayName: 'Golf VII',
+          yearFrom: 2012,
+          yearTo: 2019,
+          contentKey: 'vw/golf/golf-vii',
+          supportTier: 'active',
+          isSupported: true,
+          reviewStatus: overrides.generationReviewStatus ?? 'approved',
+          model: {
+            id: 'm1',
+            slug: 'golf',
+            name: 'Golf',
+            make: { id: 'mk1', slug: 'vw', name: 'Volkswagen', logoUrl: null },
+          },
+        },
+      };
+    }
+
+    it('throws NotFoundException when the trim does not exist', async () => {
+      prisma.catalogTrim.findUnique.mockResolvedValue(null);
+      await expect(service.getTrimById('does-not-exist')).rejects.toThrow(NotFoundException);
+    });
+
+    it('throws NotFoundException when the trim itself is not approved', async () => {
+      prisma.catalogTrim.findUnique.mockResolvedValue(fakeTrim({ trimReviewStatus: 'draft' }));
+      await expect(service.getTrimById('tr1')).rejects.toThrow(NotFoundException);
+    });
+
+    it('throws NotFoundException when the trim is approved but its generation is not', async () => {
+      prisma.catalogTrim.findUnique.mockResolvedValue(
+        fakeTrim({ generationReviewStatus: 'rejected' }),
+      );
+      await expect(service.getTrimById('tr1')).rejects.toThrow(NotFoundException);
+    });
+
+    it('returns the mapped trim when both the trim and its generation are approved', async () => {
+      prisma.catalogTrim.findUnique.mockResolvedValue(fakeTrim({}));
+      const result = await service.getTrimById('tr1');
+      expect(result.slug).toBe('2-0-tdi-150');
     });
   });
 

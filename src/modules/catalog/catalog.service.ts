@@ -19,16 +19,27 @@ type PublicListOptions = {
 export class CatalogService {
   constructor(private readonly prisma: PrismaService) {}
 
+  /**
+   * `includeLegacy` controls vintage (pre-2004 generations), not data quality — an
+   * unapproved generation must stay hidden either way, since this is an unauthenticated
+   * public endpoint and `includeLegacy=true` is just a query param anyone can send.
+   */
   private supportedGenerationWhere(
     includeLegacy?: boolean,
   ): Prisma.CatalogGenerationWhereInput {
     if (includeLegacy) {
-      return {};
+      return { reviewStatus: 'approved' };
     }
     return {
+      reviewStatus: 'approved',
       isSupported: true,
       OR: [{ yearTo: null }, { yearTo: { gte: CATALOG_YEAR_CUTOFF } }],
     };
+  }
+
+  /** Same reviewStatus gate as engine/transmission units, applied to a trim itself. */
+  private approvedTrimWhere(): Prisma.CatalogTrimWhereInput {
+    return { reviewStatus: 'approved' };
   }
 
   async getPublicStats() {
@@ -205,7 +216,7 @@ export class CatalogService {
         shortDescription: true,
         contentKey: true,
         supportTier: true,
-        _count: { select: { trims: true } },
+        _count: { select: { trims: { where: this.approvedTrimWhere() } } },
       },
     });
 
@@ -247,6 +258,7 @@ export class CatalogService {
       include: {
         model: { include: { make: true } },
         trims: {
+          where: this.approvedTrimWhere(),
           orderBy: { displayName: 'asc' },
           include: {
             engineFamily: true,
@@ -273,6 +285,7 @@ export class CatalogService {
     const trim = await this.prisma.catalogTrim.findFirst({
       where: {
         slug: trimSlug,
+        ...this.approvedTrimWhere(),
         generation: {
           slug: generationSlug,
           model: { slug: modelSlug, make: { slug: makeSlug } },
@@ -293,6 +306,9 @@ export class CatalogService {
       include: this.trimDetailInclude(),
     });
     if (!trim) {
+      throw new NotFoundException('Trim not found');
+    }
+    if (trim.reviewStatus !== 'approved' || trim.generation.reviewStatus !== 'approved') {
       throw new NotFoundException('Trim not found');
     }
     if (!trim.generation.isSupported) {
@@ -708,6 +724,7 @@ export class CatalogService {
     const trims = await this.prisma.catalogTrim.findMany({
       where: {
         ...where,
+        ...this.approvedTrimWhere(),
         generation: this.supportedGenerationWhere(),
       },
       select: {

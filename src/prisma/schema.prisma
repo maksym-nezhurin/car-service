@@ -574,6 +574,10 @@ model CatalogGeneration {
   isSupported      Boolean      @default(true) @map("is_supported")
   supportTier      String       @default("active") @map("support_tier")
   contentKey       String?      @unique @map("content_key")
+  /// approved | draft | rejected — same gate as catalog_engine_families/catalog_engines.
+  /// Defaults to "approved" so existing/synced rows keep showing publicly unchanged.
+  reviewStatus     String       @default("approved") @map("review_status")
+  reviewedAt       DateTime?    @map("reviewed_at")
   syncedAt         DateTime     @default(now()) @map("synced_at")
   model            CatalogModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
   trims            CatalogTrim[]
@@ -602,6 +606,10 @@ model CatalogTrim {
   transmissionId       String?                    @map("transmission_id")
   engineFamilyId       String?                    @map("engine_family_id")
   transmissionFamilyId String?                    @map("transmission_family_id")
+  /// approved | draft | rejected — same gate as catalog_engines/catalog_transmissions.
+  /// Defaults to "approved" so existing/synced rows keep showing publicly unchanged.
+  reviewStatus         String                     @default("approved") @map("review_status")
+  reviewedAt           DateTime?                  @map("reviewed_at")
   syncedAt             DateTime                   @default(now()) @map("synced_at")
   generation           CatalogGeneration          @relation(fields: [generationId], references: [id], onDelete: Cascade)
   engineUnit           CatalogEngine?             @relation(fields: [engineId], references: [id], onDelete: SetNull)

@@ -40,6 +40,7 @@ import {
   unanimous,
   validateRule,
 } from '../src/modules/catalog/match-rules.utils';
+import { finishSyncRun, startSyncRun } from '../src/modules/catalog/sync-run.utils';
 
 type LinkOptions = {
   apply?: boolean;
@@ -285,12 +286,47 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
   }
 }
 
+/**
+ * Standalone `pnpm catalog:link:engines` gets its own tracked catalog_sync_runs row.
+ * When linkCatalogEngines() runs embedded inside catalog:sync:autoria instead, that
+ * invocation passes its own prisma/quiet and skips this block entirely — it's already
+ * covered by catalog:sync:autoria's own run, not a second standalone one.
+ */
 if (require.main === module) {
-  linkCatalogEngines({
-    apply: !process.argv.includes('--dry-run'),
-    makeSlug: process.env.MAKE?.trim().toLowerCase() || undefined,
-  }).catch((e) => {
-    console.error(e instanceof Error ? e.message : e);
-    process.exit(1);
-  });
+  const apply = !process.argv.includes('--dry-run');
+  const makeSlug = process.env.MAKE?.trim().toLowerCase() || undefined;
+
+  if (!apply) {
+    // Dry run does no DB writes at all — tracking a run would be the only write.
+    linkCatalogEngines({ apply, makeSlug }).catch((e) => {
+      console.error(e instanceof Error ? e.message : e);
+      process.exit(1);
+    });
+  } else {
+    const prisma = new PrismaClient();
+    (async () => {
+      const runId = await startSyncRun(prisma, 'catalog:link:engines', makeSlug ?? null);
+      try {
+        const result = await linkCatalogEngines({ apply, makeSlug, prisma });
+        await finishSyncRun(prisma, runId, 'success', {
+          stats: {
+            trims: result.trims,
+            linkedEngines: result.linkedEngines,
+            linkedEngineFamilies: result.linkedEngineFamilies,
+            linkedTransmissions: result.linkedTransmissions,
+            linkedTransmissionFamilies: result.linkedTransmissionFamilies,
+            unmatchedCombos: result.unmatched.length,
+          },
+        });
+      } catch (e) {
+        await finishSyncRun(prisma, runId, 'failed', {
+          errorMessage: e instanceof Error ? e.message : String(e),
+        });
+        console.error(e instanceof Error ? e.message : e);
+        process.exitCode = 1;
+      } finally {
+        await prisma.$disconnect();
+      }
+    })();
+  }
 }

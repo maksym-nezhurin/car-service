@@ -625,6 +625,21 @@ model CatalogTrim {
   @@map("catalog_trims")
 }
 
+/// ETL audit log (docs/V1_7_VEHICLE_ENCYCLOPEDIA.md §13.2) — one row per script run.
+model CatalogSyncRun {
+  id            String    @id @default(uuid())
+  script        String    // catalog:sync:autoria | catalog:link:engines | ...
+  status        String    // running | success | failed | partial
+  scopeMakeSlug String?   @map("scope_make_slug")
+  startedAt     DateTime  @default(now()) @map("started_at")
+  finishedAt    DateTime? @map("finished_at")
+  stats         Json?
+  errorMessage  String?   @map("error_message")
+
+  @@index([script, startedAt])
+  @@map("catalog_sync_runs")
+}
+
 /// Curated engine family KB (Phase C) — linked from trims, shared across models.
 model CatalogEngineFamily {
   id               String        @id @default(uuid())

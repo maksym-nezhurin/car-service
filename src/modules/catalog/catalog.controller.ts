@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Header, Param, Patch, Query, UseGuards } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
 import { CatalogAdminGuard } from './catalog-admin.guard';
+import { CatalogInternalSecretGuard } from './catalog-internal.guard';
 import { UpdateGenerationAdminDto } from './dto/update-generation-admin.dto';
 import { UpdateTrimAdminDto } from './dto/update-trim-admin.dto';
 
@@ -127,21 +128,42 @@ export class CatalogController {
     return this.catalogService.getTransmissionBySlug(slug);
   }
 
+  /**
+   * Generic search — same review + year gate as by-path (no draft/rejected leakage).
+   * Prefer by-path routes for encyclopedia pages.
+   */
   @Get('generations')
+  @Header('Cache-Control', LIST_CACHE)
   listGenerations(
     @Query('makeId') makeId?: string,
     @Query('q') q?: string,
+    @Query('includeLegacy') includeLegacy?: string,
   ) {
-    return this.catalogService.listGenerations({ makeId, q });
+    return this.catalogService.listGenerations({
+      makeId,
+      q,
+      includeLegacy: parseIncludeLegacy(includeLegacy),
+    });
   }
 
+  /** By id — approved generation only; trims filtered to approved. */
   @Get('generations/:id')
-  getGeneration(@Param('id') id: string) {
-    return this.catalogService.getGeneration(id);
+  @Header('Cache-Control', DETAIL_CACHE)
+  getGeneration(
+    @Param('id') id: string,
+    @Query('includeLegacy') includeLegacy?: string,
+  ) {
+    return this.catalogService.getGeneration(id, {
+      includeLegacy: parseIncludeLegacy(includeLegacy),
+    });
   }
 
-  /** Used by `community:seed` in user-service — full tree, no live CarQuery. */
+  /**
+   * Ops-only full tree for `community:seed` (user-service).
+   * Guarded by CatalogInternalSecretGuard; gateway also requires auth on this path.
+   */
   @Get('export/community-seed')
+  @UseGuards(CatalogInternalSecretGuard)
   exportForCommunitySeed() {
     return this.catalogService.exportForCommunitySeed();
   }

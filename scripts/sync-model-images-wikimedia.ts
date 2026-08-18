@@ -87,7 +87,7 @@ const OVERRIDES_PATH = path.join(DATA_DIR, 'overrides.json');
 const REJECT_PATH = path.join(DATA_DIR, 'reject.json');
 
 const SKIP_TITLE =
-  /logo|badge|emblem|icon|diagram|engine|cutaway|interior|dashboard|cockpit|wheel|tyre|tire|map|flag|svg|drawing|silhouette|blueprint|schematic|patent|chassis|transmission|gearbox|airport|security|police|policij|polizei|rally|btcc|dtm|wrc|racing|kit car|medical car|tuned by|yaris cross|yaris verso|peugeot rcz|pontiac|solstice|holden|barina|streetview|street view|\.pdf$/i;
+  /logo|badge|emblem|icon|diagram|engine|cutaway|interior|dashboard|cockpit|wheel|tyre|tire|map|flag|svg|drawing|silhouette|blueprint|schematic|patent|chassis|transmission|gearbox|airport|security|police|policij|polizei|rally|btcc|dtm|wrc|racing|kit car|medical car|tuned by|yaris cross|yaris verso|peugeot rcz|pontiac|solstice|holden|barina|streetview|street view|container|shipping|intermodal|graffiti|hawtai|shengdafei|hmm21|train car|scheinwerfer|headlight|intelligent light|crashed|wreck|accident|prototype under test|\.pdf$/i;
 
 function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));

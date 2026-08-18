@@ -610,4 +610,50 @@ describe('CatalogService', () => {
       });
     });
   });
+
+  describe('listGenerations / getGeneration (public gate)', () => {
+    it('listGenerations always ANDs the reviewStatus + year cutoff where', async () => {
+      prisma.catalogGeneration.findMany.mockResolvedValue([]);
+      await service.listGenerations({ q: 'golf' });
+      expect(prisma.catalogGeneration.findMany).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({
+            AND: expect.arrayContaining([
+              expect.objectContaining({ reviewStatus: 'approved' }),
+            ]),
+          }),
+        }),
+      );
+    });
+
+    it('getGeneration 404s when the row is missing or unapproved', async () => {
+      prisma.catalogGeneration.findFirst.mockResolvedValue(null);
+      await expect(service.getGeneration('draft-id')).rejects.toThrow(NotFoundException);
+      expect(prisma.catalogGeneration.findFirst).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({
+            id: 'draft-id',
+            reviewStatus: 'approved',
+          }),
+        }),
+      );
+    });
+  });
+
+  describe('exportForCommunitySeed', () => {
+    it('only loads approved generations and approved trims', async () => {
+      prisma.catalogGeneration.findMany.mockResolvedValue([]);
+      await service.exportForCommunitySeed();
+      expect(prisma.catalogGeneration.findMany).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({ reviewStatus: 'approved' }),
+          include: expect.objectContaining({
+            trims: expect.objectContaining({
+              where: { reviewStatus: 'approved' },
+            }),
+          }),
+        }),
+      );
+    });
+  });
 });

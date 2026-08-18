@@ -12,5 +12,3 @@ generated/
 *.lock
 
 scripts/.cache/
-
-fly.toml

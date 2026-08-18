@@ -780,33 +780,51 @@ export class CatalogService {
     });
   }
 
-  async listGenerations(filters?: { makeId?: string; q?: string }) {
+  async listGenerations(filters?: {
+    makeId?: string;
+    q?: string;
+    includeLegacy?: boolean;
+  }) {
     return this.prisma.catalogGeneration.findMany({
       where: {
-        ...(filters?.makeId
-          ? { model: { makeId: filters.makeId } }
-          : {}),
-        ...(filters?.q
-          ? {
-              displayName: { contains: filters.q, mode: 'insensitive' },
-            }
-          : {}),
+        AND: [
+          this.supportedGenerationWhere(filters?.includeLegacy),
+          ...(filters?.makeId ? [{ model: { makeId: filters.makeId } }] : []),
+          ...(filters?.q
+            ? [
+                {
+                  displayName: {
+                    contains: filters.q,
+                    mode: 'insensitive' as const,
+                  },
+                },
+              ]
+            : []),
+        ],
       },
       include: {
         model: { include: { make: true } },
-        _count: { select: { trims: true } },
+        _count: {
+          select: { trims: { where: this.approvedTrimWhere() } },
+        },
       },
       orderBy: [{ model: { make: { name: 'asc' } } }, { displayName: 'asc' }],
       take: 200,
     });
   }
 
-  async getGeneration(id: string) {
-    const row = await this.prisma.catalogGeneration.findUnique({
-      where: { id },
+  async getGeneration(id: string, options?: { includeLegacy?: boolean }) {
+    const row = await this.prisma.catalogGeneration.findFirst({
+      where: {
+        id,
+        ...this.supportedGenerationWhere(options?.includeLegacy),
+      },
       include: {
         model: { include: { make: true } },
-        trims: { orderBy: { displayName: 'asc' } },
+        trims: {
+          where: this.approvedTrimWhere(),
+          orderBy: { displayName: 'asc' },
+        },
       },
     });
     if (!row) {
@@ -815,12 +833,20 @@ export class CatalogService {
     return row;
   }
 
-  /** Flat export for user-service community seed (no CarQuery at runtime). */
+  /**
+   * Flat export for user-service community seed (no CarQuery at runtime).
+   * Only approved generations/trims — community rooms must not mirror draft/rejected rows.
+   * Access is ops-gated (CatalogInternalSecretGuard); this is not a public dump.
+   */
   async exportForCommunitySeed() {
     const generations = await this.prisma.catalogGeneration.findMany({
+      where: this.supportedGenerationWhere(false),
       include: {
         model: { include: { make: true } },
-        trims: { orderBy: { displayName: 'asc' } },
+        trims: {
+          where: this.approvedTrimWhere(),
+          orderBy: { displayName: 'asc' },
+        },
       },
       orderBy: [{ model: { make: { name: 'asc' } } }, { displayName: 'asc' }],
     });

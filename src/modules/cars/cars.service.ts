@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CarDto, AttributeValueDto } from './dto/car.dto';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
@@ -13,13 +17,17 @@ export class CarsService {
   }
 
   private async getCategoryId() {
-    const category = await this.prisma.category.findUnique({ where: { slug: 'cars' } });
+    const category = await this.prisma.category.findUnique({
+      where: { slug: 'cars' },
+    });
     if (!category) throw new Error('Cars category not found');
     return category.id;
   }
 
   private async getAttributeId(categoryId: string, name: string) {
-    const attr = await this.prisma.attribute.findFirst({ where: { categoryId, name } });
+    const attr = await this.prisma.attribute.findFirst({
+      where: { categoryId, name },
+    });
     if (!attr) throw new Error(`Attribute "${name}" not found`);
     return attr.id;
   }
@@ -227,6 +235,7 @@ export class CarsService {
 
   async update(
     id: string,
+    ownerId: string,
     data: Partial<CarDto>,
     images?: Express.Multer.File[],
   ) {
@@ -234,6 +243,10 @@ export class CarsService {
       where: { id },
       include: { attributes: { include: { attribute: true } } },
     });
+    if (!adWithAttributes) throw new NotFoundException('Car not found');
+    if (adWithAttributes.userId !== ownerId) {
+      throw new ForbiddenException('Not the owner of this listing');
+    }
     const currentVin =
       adWithAttributes?.attributes.find((attr) => attr.attribute?.name === 'VIN')?.value ??
       'unknown-vin';
@@ -272,12 +285,15 @@ export class CarsService {
     return ad;
   }
 
-  async remove(id: string) {
+  async remove(id: string, ownerId: string) {
     const car = await this.prisma.ad.findUnique({
       where: { id },
       include: { media: true },
     });
-    if (!car) throw new Error('Car not found');
+    if (!car) throw new NotFoundException('Car not found');
+    if (car.userId !== ownerId) {
+      throw new ForbiddenException('Not the owner of this listing');
+    }
 
     // Видалення з Cloudinary
     await Promise.all(

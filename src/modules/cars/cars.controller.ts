@@ -59,13 +59,16 @@ export class CarsController {
     @Param('id') id: string,
     @Body() data: Partial<CarDto>,
     @UploadedFiles() images: Express.Multer.File[],
+    @Req() req: Request,
   ) {
-    return this.carsService.update(id, data, images);
+    const ownerId = req.header('x-user-id') as string;
+    return this.carsService.update(id, ownerId, data, images);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.carsService.remove(id);
+  remove(@Param('id') id: string, @Req() req: Request) {
+    const ownerId = req.header('x-user-id') as string;
+    return this.carsService.remove(id, ownerId);
   }
 
   @Get('brands')

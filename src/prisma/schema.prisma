@@ -55,7 +55,7 @@ model Attribute {
   values     AttributeValue[]
   options    AttributeOption[]
 
-  @@unique([categoryId, name], name: "attributes_category_id_name_key")
+  @@unique([categoryId, name], name: "categoryId_name", map: "attributes_category_id_name_key")
   @@map("attributes")
 }
 
@@ -74,7 +74,7 @@ model AttributeOption {
 
   attribute   Attribute @relation(fields: [attributeId], references: [id])
 
-  @@unique([attributeId, value], name: "attribute_options_attribute_id_value_key")
+  @@unique([attributeId, value], name: "attributeId_value", map: "attribute_options_attribute_id_value_key")
   @@map("attribute_options")
 }
 
@@ -218,7 +218,7 @@ model ListingDistribution {
 
   saleListing  VehicleSaleListing        @relation(fields: [saleListingId], references: [id], onDelete: Cascade)
 
-  @@unique([saleListingId, platform], name: "sale_listing_platform_unique")
+  @@unique([saleListingId, platform], name: "sale_listing_platform_unique", map: "listing_distributions_sale_listing_id_platform_key")
   @@index([saleListingId, status], name: "sale_distribution_status_idx")
   @@map("listing_distributions")
 }

@@ -106,19 +106,19 @@ model Vehicle {
   id                String                  @id @default(uuid())
   vin               String                  @unique
   year              Int?
-  plateNumber       String?
-  brandId           String?
-  modelId           String?
-  variantId         String?
-  vehicleType       String?
+  plateNumber       String?                 @map("plate_number")
+  brandId           String?                 @map("brand_id")
+  modelId           String?                 @map("model_id")
+  variantId         String?                 @map("variant_id")
+  vehicleType       String?                 @map("vehicle_type")
   color             String?
   engine            String?
   transmission      String?
-  fuelType          String?
-  currentMileageKm  Int?
-  countryCode       String?                 @default("PL")
-  createdAt         DateTime                @default(now())
-  updatedAt         DateTime                @updatedAt
+  fuelType          String?                 @map("fuel_type")
+  currentMileageKm  Int?                    @map("current_mileage_km")
+  countryCode       String?                 @default("PL") @map("country_code")
+  createdAt         DateTime                @default(now()) @map("created_at")
+  updatedAt         DateTime                @updatedAt @map("updated_at")
 
   ownerships        VehicleOwnership[]
   photos            VehiclePhoto[]
@@ -135,19 +135,21 @@ model Vehicle {
   profileViewLogs   VehicleProfileViewLog[]
 
   @@index([brandId, modelId, variantId], name: "vehicle_brand_model_variant_idx")
+  @@map("vehicles")
 }
 
 model VehiclePhoto {
   id          String   @id @default(uuid())
-  vehicleId   String
-  ownerUserId String
+  vehicleId   String   @map("vehicle_id")
+  ownerUserId String   @map("owner_user_id")
   url         String
-  publicId    String?
-  createdAt   DateTime @default(now())
+  publicId    String?  @map("public_id")
+  createdAt   DateTime @default(now()) @map("created_at")
 
   vehicle     Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([vehicleId, createdAt], name: "vehicle_photo_vehicle_idx")
+  @@map("vehicle_photos")
 }
 
 enum SaleListingStatus {
@@ -281,10 +283,10 @@ model VehicleProfileViewLog {
 
 model OdometerLog {
   id           String   @id @default(uuid())
-  vehicleId    String
-  ownerUserId  String
-  mileageKm    Int
-  recordedAt   DateTime @default(now())
+  vehicleId    String   @map("vehicle_id")
+  ownerUserId  String   @map("owner_user_id")
+  mileageKm    Int      @map("mileage_km")
+  recordedAt   DateTime @default(now()) @map("recorded_at")
   notes        String?
   source       String   @default("manual")
 
@@ -292,25 +294,27 @@ model OdometerLog {
 
   @@index([vehicleId, recordedAt], name: "odometer_vehicle_date_idx")
   @@index([vehicleId, mileageKm], name: "odometer_vehicle_mileage_idx")
+  @@map("odometer_logs")
 }
 
 model VehicleOwnership {
   id          String    @id @default(uuid())
-  vehicleId   String
-  ownerUserId String
-  cloudFolder String?
-  startedAt   DateTime  @default(now())
-  endedAt     DateTime?
-  isCurrent   Boolean   @default(true)
-  isPrimary   Boolean   @default(false)
+  vehicleId   String    @map("vehicle_id")
+  ownerUserId String    @map("owner_user_id")
+  cloudFolder String?   @map("cloud_folder")
+  startedAt   DateTime  @default(now()) @map("started_at")
+  endedAt     DateTime? @map("ended_at")
+  isCurrent   Boolean   @default(true) @map("is_current")
+  isPrimary   Boolean   @default(false) @map("is_primary")
   source      String    @default("manual")
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime  @default(now()) @map("created_at")
 
   vehicle     Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([ownerUserId, isCurrent], name: "ownership_owner_current_idx")
   @@index([ownerUserId, isPrimary], name: "ownership_owner_primary_idx")
   @@index([vehicleId, isCurrent], name: "ownership_vehicle_current_idx")
+  @@map("vehicle_ownerships")
 }
 
 enum MaintenanceType {
@@ -330,40 +334,42 @@ enum MaintenanceType {
 
 model MaintenanceRecord {
   id           String          @id @default(uuid())
-  vehicleId    String
-  ownerUserId  String
+  vehicleId    String          @map("vehicle_id")
+  ownerUserId  String          @map("owner_user_id")
   type         MaintenanceType
   title        String
   details      String?
-  mileageKm    Int
-  performedAt  DateTime
-  costAmount   Decimal?        @db.Decimal(12,2)
-  costCurrency String?         @default("PLN")
+  mileageKm    Int             @map("mileage_km")
+  performedAt  DateTime        @map("performed_at")
+  costAmount   Decimal?        @db.Decimal(12,2) @map("cost_amount")
+  costCurrency String?         @default("PLN") @map("cost_currency")
   source       String          @default("manual")
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @updatedAt @map("updated_at")
 
   vehicle      Vehicle         @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
   attachments  MaintenanceAttachment[]
 
   @@index([vehicleId, mileageKm], name: "maintenance_vehicle_mileage_idx")
   @@index([vehicleId, performedAt], name: "maintenance_vehicle_date_idx")
+  @@map("maintenance_records")
 }
 
 model MaintenanceAttachment {
   id                  String            @id @default(uuid())
-  maintenanceRecordId String
-  ownerUserId         String
+  maintenanceRecordId String            @map("maintenance_record_id")
+  ownerUserId         String            @map("owner_user_id")
   url                 String
-  publicId            String?
-  originalName        String?
-  mimeType            String?
-  sizeBytes           Int?
-  createdAt           DateTime          @default(now())
+  publicId            String?           @map("public_id")
+  originalName        String?           @map("original_name")
+  mimeType            String?           @map("mime_type")
+  sizeBytes           Int?              @map("size_bytes")
+  createdAt           DateTime          @default(now()) @map("created_at")
 
   maintenanceRecord   MaintenanceRecord @relation(fields: [maintenanceRecordId], references: [id], onDelete: Cascade)
 
   @@index([maintenanceRecordId], name: "maintenance_attachment_record_idx")
+  @@map("maintenance_attachments")
 }
 
 enum VisitVerifiedBy {

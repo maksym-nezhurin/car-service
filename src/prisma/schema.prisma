@@ -182,43 +182,45 @@ enum ListingDistributionStatus {
 
 model VehicleSaleListing {
   id          String                  @id @default(uuid())
-  vehicleId   String
-  ownerUserId String
+  vehicleId   String                  @map("vehicle_id")
+  ownerUserId String                  @map("owner_user_id")
   status      SaleListingStatus       @default(DRAFT)
   title       String?
   description String?
   price       Decimal?                @db.Decimal(12,2)
   currency    String?                 @default("PLN")
-  marketRegion String?
-  specsJson   Json?
-  appearanceJson Json?
-  featuresJson Json?
-  contactJson Json?
-  createdAt   DateTime                @default(now())
-  updatedAt   DateTime                @updatedAt
+  marketRegion String?                @map("market_region")
+  specsJson   Json?                   @map("specs_json")
+  appearanceJson Json?                @map("appearance_json")
+  featuresJson Json?                  @map("features_json")
+  contactJson Json?                   @map("contact_json")
+  createdAt   DateTime                @default(now()) @map("created_at")
+  updatedAt   DateTime                @updatedAt @map("updated_at")
 
   vehicle     Vehicle                 @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
   distributions ListingDistribution[]
 
   @@index([vehicleId, ownerUserId], name: "sale_listing_vehicle_owner_idx")
+  @@map("vehicle_sale_listings")
 }
 
 model ListingDistribution {
   id           String                    @id @default(uuid())
-  saleListingId String
+  saleListingId String                   @map("sale_listing_id")
   platform     DistributionPlatform
   status       ListingDistributionStatus @default(PENDING)
-  externalId   String?
-  externalUrl  String?
-  lastError    String?
-  payloadSnapshot Json?
-  createdAt    DateTime                  @default(now())
-  updatedAt    DateTime                  @updatedAt
+  externalId   String?                   @map("external_id")
+  externalUrl  String?                   @map("external_url")
+  lastError    String?                   @map("last_error")
+  payloadSnapshot Json?                  @map("payload_snapshot")
+  createdAt    DateTime                  @default(now()) @map("created_at")
+  updatedAt    DateTime                  @updatedAt @map("updated_at")
 
   saleListing  VehicleSaleListing        @relation(fields: [saleListingId], references: [id], onDelete: Cascade)
 
   @@unique([saleListingId, platform], name: "sale_listing_platform_unique")
   @@index([saleListingId, status], name: "sale_distribution_status_idx")
+  @@map("listing_distributions")
 }
 
 enum VehicleProfileTier {
@@ -236,49 +238,52 @@ enum VehicleReportStatus {
 
 model VehicleReport {
   id         String             @id @default(uuid())
-  vehicleId  String
+  vehicleId  String             @map("vehicle_id")
   provider   String
   tier       VehicleProfileTier @default(PUBLIC)
   status     VehicleReportStatus @default(PENDING)
   summary    Json?
-  rawPayload Json?
-  fetchedAt  DateTime?
-  expiresAt  DateTime?
-  createdAt  DateTime           @default(now())
-  updatedAt  DateTime           @updatedAt
+  rawPayload Json?              @map("raw_payload")
+  fetchedAt  DateTime?          @map("fetched_at")
+  expiresAt  DateTime?          @map("expires_at")
+  createdAt  DateTime           @default(now()) @map("created_at")
+  updatedAt  DateTime           @updatedAt @map("updated_at")
 
   vehicle    Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([vehicleId, provider, tier], name: "vehicle_report_lookup_idx")
+  @@map("vehicle_reports")
 }
 
 model VehicleReportAccessGrant {
   id          String             @id @default(uuid())
-  vehicleId   String
-  userId      String
+  vehicleId   String             @map("vehicle_id")
+  userId      String             @map("user_id")
   provider    String
-  accessLevel VehicleProfileTier @default(PAID)
+  accessLevel VehicleProfileTier @default(PAID) @map("access_level")
   source      String             @default("purchase")
-  validUntil  DateTime?
-  createdAt   DateTime           @default(now())
+  validUntil  DateTime?          @map("valid_until")
+  createdAt   DateTime           @default(now()) @map("created_at")
 
   vehicle     Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([vehicleId, userId, provider], name: "vehicle_report_access_lookup_idx")
+  @@map("vehicle_report_access_grants")
 }
 
 model VehicleProfileViewLog {
   id            String             @id @default(uuid())
-  vehicleId     String
-  viewerUserId  String?
-  requestedTier VehicleProfileTier @default(PUBLIC)
-  resolvedTier  VehicleProfileTier @default(PUBLIC)
+  vehicleId     String             @map("vehicle_id")
+  viewerUserId  String?            @map("viewer_user_id")
+  requestedTier VehicleProfileTier @default(PUBLIC) @map("requested_tier")
+  resolvedTier  VehicleProfileTier @default(PUBLIC) @map("resolved_tier")
   meta          Json?
-  createdAt     DateTime           @default(now())
+  createdAt     DateTime           @default(now()) @map("created_at")
 
   vehicle       Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([vehicleId, createdAt], name: "vehicle_profile_view_log_idx")
+  @@map("vehicle_profile_view_logs")
 }
 
 model OdometerLog {
@@ -469,17 +474,18 @@ enum RegistrationEventType {
 
 model VehicleRegistrationEvent {
   id          String                @id @default(uuid())
-  vehicleId   String
-  ownerUserId String
-  eventType   RegistrationEventType
-  eventDate   DateTime
-  countryCode String?
+  vehicleId   String                @map("vehicle_id")
+  ownerUserId String                @map("owner_user_id")
+  eventType   RegistrationEventType @map("event_type")
+  eventDate   DateTime              @map("event_date")
+  countryCode String?               @map("country_code")
   notes       String?
-  createdAt   DateTime              @default(now())
+  createdAt   DateTime              @default(now()) @map("created_at")
 
   vehicle     Vehicle               @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([vehicleId, eventDate], name: "vehicle_registration_event_idx")
+  @@map("vehicle_registration_events")
 }
 
 enum InsurancePolicyType {
@@ -529,22 +535,23 @@ model VehicleInsurancePolicy {
 
 model VehicleSaleContract {
   id                String    @id @default(uuid())
-  vehicleId         String
-  sellerUserId      String
-  buyerUserId       String?
-  sellerSnapshot    Json
-  buyerSnapshot     Json
-  salePriceAmount   Decimal?  @db.Decimal(12,2)
-  salePriceCurrency String?   @default("PLN")
-  contractDate      DateTime
-  generatedText     String
+  vehicleId         String    @map("vehicle_id")
+  sellerUserId      String    @map("seller_user_id")
+  buyerUserId       String?   @map("buyer_user_id")
+  sellerSnapshot    Json      @map("seller_snapshot")
+  buyerSnapshot     Json      @map("buyer_snapshot")
+  salePriceAmount   Decimal?  @db.Decimal(12,2) @map("sale_price_amount")
+  salePriceCurrency String?   @default("PLN") @map("sale_price_currency")
+  contractDate      DateTime  @map("contract_date")
+  generatedText     String    @map("generated_text")
   status            String    @default("draft")
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
 
   vehicle           Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@index([vehicleId, contractDate], name: "vehicle_sale_contract_idx")
+  @@map("vehicle_sale_contracts")
 }
 
 // ---------------------------------------------------------------------------

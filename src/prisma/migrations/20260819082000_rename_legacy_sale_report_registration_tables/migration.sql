@@ -87,7 +87,13 @@ ALTER TABLE "vehicle_profile_view_logs" RENAME CONSTRAINT "VehicleProfileViewLog
 ALTER TABLE "vehicle_registration_events" RENAME CONSTRAINT "VehicleRegistrationEvent_pkey" TO "vehicle_registration_events_pkey";
 ALTER TABLE "vehicle_sale_contracts" RENAME CONSTRAINT "VehicleSaleContract_pkey" TO "vehicle_sale_contracts_pkey";
 
--- 4. Foreign key constraints
+-- 4. Unique index (@@unique(..., name: "sale_listing_platform_unique") in schema.prisma is
+-- a Prisma Client query alias, not the DB object name — actual name is Prisma's default
+-- compound-unique name, confirmed via pg_indexes against the live DB, same lesson as the
+-- Attribute/AttributeOption fix in 20260819080000)
+ALTER INDEX "ListingDistribution_saleListingId_platform_key" RENAME TO "listing_distributions_sale_listing_id_platform_key";
+
+-- 5. Foreign key constraints
 ALTER TABLE "vehicle_sale_listings" RENAME CONSTRAINT "VehicleSaleListing_vehicleId_fkey" TO "vehicle_sale_listings_vehicle_id_fkey";
 ALTER TABLE "listing_distributions" RENAME CONSTRAINT "ListingDistribution_saleListingId_fkey" TO "listing_distributions_sale_listing_id_fkey";
 ALTER TABLE "vehicle_reports" RENAME CONSTRAINT "VehicleReport_vehicleId_fkey" TO "vehicle_reports_vehicle_id_fkey";

@@ -47,8 +47,12 @@ ALTER TABLE "media" RENAME CONSTRAINT "Media_pkey" TO "media_pkey";
 -- 4. Unique indexes (Prisma implements @unique/@@unique as CREATE UNIQUE INDEX, not a
 -- table constraint — see e.g. catalog_makes_slug_key in 20260605120000_add_vehicle_catalog_mirror)
 ALTER INDEX "Category_slug_key" RENAME TO "categories_slug_key";
-ALTER INDEX "categoryId_name" RENAME TO "attributes_category_id_name_key";
-ALTER INDEX "attributeId_value" RENAME TO "attribute_options_attribute_id_value_key";
+-- The @@unique(..., name: "categoryId_name") / "attributeId_value" params in schema.prisma
+-- are Prisma Client query aliases, not the actual DB object name — without an explicit
+-- map:, Postgres still got Prisma's default compound-unique name. Confirmed via
+-- pg_indexes against the live DB after this migration first failed on the wrong name.
+ALTER INDEX "Attribute_categoryId_name_key" RENAME TO "attributes_category_id_name_key";
+ALTER INDEX "AttributeOption_attributeId_value_key" RENAME TO "attribute_options_attribute_id_value_key";
 
 -- 5. Foreign key constraints
 ALTER TABLE "categories" RENAME CONSTRAINT "Category_parentId_fkey" TO "categories_parent_id_fkey";

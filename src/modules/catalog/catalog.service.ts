@@ -8,6 +8,8 @@ import {
   isTrimPackageName,
   resolveEngineLabel,
 } from './engine-trim.utils';
+import { UpdateGenerationAdminDto } from './dto/update-generation-admin.dto';
+import { UpdateTrimAdminDto } from './dto/update-trim-admin.dto';
 
 type PublicListOptions = {
   includeLegacy?: boolean;
@@ -19,16 +21,27 @@ type PublicListOptions = {
 export class CatalogService {
   constructor(private readonly prisma: PrismaService) {}
 
+  /**
+   * `includeLegacy` controls vintage (pre-2004 generations), not data quality — an
+   * unapproved generation must stay hidden either way, since this is an unauthenticated
+   * public endpoint and `includeLegacy=true` is just a query param anyone can send.
+   */
   private supportedGenerationWhere(
     includeLegacy?: boolean,
   ): Prisma.CatalogGenerationWhereInput {
     if (includeLegacy) {
-      return {};
+      return { reviewStatus: 'approved' };
     }
     return {
+      reviewStatus: 'approved',
       isSupported: true,
       OR: [{ yearTo: null }, { yearTo: { gte: CATALOG_YEAR_CUTOFF } }],
     };
+  }
+
+  /** Same reviewStatus gate as engine/transmission units, applied to a trim itself. */
+  private approvedTrimWhere(): Prisma.CatalogTrimWhereInput {
+    return { reviewStatus: 'approved' };
   }
 
   async getPublicStats() {
@@ -205,7 +218,7 @@ export class CatalogService {
         shortDescription: true,
         contentKey: true,
         supportTier: true,
-        _count: { select: { trims: true } },
+        _count: { select: { trims: { where: this.approvedTrimWhere() } } },
       },
     });
 
@@ -247,6 +260,7 @@ export class CatalogService {
       include: {
         model: { include: { make: true } },
         trims: {
+          where: this.approvedTrimWhere(),
           orderBy: { displayName: 'asc' },
           include: {
             engineFamily: true,
@@ -273,6 +287,7 @@ export class CatalogService {
     const trim = await this.prisma.catalogTrim.findFirst({
       where: {
         slug: trimSlug,
+        ...this.approvedTrimWhere(),
         generation: {
           slug: generationSlug,
           model: { slug: modelSlug, make: { slug: makeSlug } },
@@ -293,6 +308,9 @@ export class CatalogService {
       include: this.trimDetailInclude(),
     });
     if (!trim) {
+      throw new NotFoundException('Trim not found');
+    }
+    if (trim.reviewStatus !== 'approved' || trim.generation.reviewStatus !== 'approved') {
       throw new NotFoundException('Trim not found');
     }
     if (!trim.generation.isSupported) {
@@ -630,10 +648,13 @@ export class CatalogService {
 
     return {
       count: engines.length,
-      engines: engines.map((unit) => ({
-        ...this.mapApprovedEngineUnit(unit),
-        trimCount: unit._count.trims,
-      })),
+      engines: engines
+        .map((unit) => {
+          const mapped = this.mapApprovedEngineUnit(unit);
+          if (!mapped) return null;
+          return { ...mapped, trimCount: unit._count.trims };
+        })
+        .filter((row): row is NonNullable<typeof row> => row != null),
     };
   }
 
@@ -674,10 +695,13 @@ export class CatalogService {
 
     return {
       count: transmissions.length,
-      transmissions: transmissions.map((unit) => ({
-        ...this.mapApprovedTransmissionUnit(unit),
-        trimCount: unit._count.trims,
-      })),
+      transmissions: transmissions
+        .map((unit) => {
+          const mapped = this.mapApprovedTransmissionUnit(unit);
+          if (!mapped) return null;
+          return { ...mapped, trimCount: unit._count.trims };
+        })
+        .filter((row): row is NonNullable<typeof row> => row != null),
     };
   }
 
@@ -702,6 +726,7 @@ export class CatalogService {
     const trims = await this.prisma.catalogTrim.findMany({
       where: {
         ...where,
+        ...this.approvedTrimWhere(),
         generation: this.supportedGenerationWhere(),
       },
       select: {
@@ -755,33 +780,51 @@ export class CatalogService {
     });
   }
 
-  async listGenerations(filters?: { makeId?: string; q?: string }) {
+  async listGenerations(filters?: {
+    makeId?: string;
+    q?: string;
+    includeLegacy?: boolean;
+  }) {
     return this.prisma.catalogGeneration.findMany({
       where: {
-        ...(filters?.makeId
-          ? { model: { makeId: filters.makeId } }
-          : {}),
-        ...(filters?.q
-          ? {
-              displayName: { contains: filters.q, mode: 'insensitive' },
-            }
-          : {}),
+        AND: [
+          this.supportedGenerationWhere(filters?.includeLegacy),
+          ...(filters?.makeId ? [{ model: { makeId: filters.makeId } }] : []),
+          ...(filters?.q
+            ? [
+                {
+                  displayName: {
+                    contains: filters.q,
+                    mode: 'insensitive' as const,
+                  },
+                },
+              ]
+            : []),
+        ],
       },
       include: {
         model: { include: { make: true } },
-        _count: { select: { trims: true } },
+        _count: {
+          select: { trims: { where: this.approvedTrimWhere() } },
+        },
       },
       orderBy: [{ model: { make: { name: 'asc' } } }, { displayName: 'asc' }],
       take: 200,
     });
   }
 
-  async getGeneration(id: string) {
-    const row = await this.prisma.catalogGeneration.findUnique({
-      where: { id },
+  async getGeneration(id: string, options?: { includeLegacy?: boolean }) {
+    const row = await this.prisma.catalogGeneration.findFirst({
+      where: {
+        id,
+        ...this.supportedGenerationWhere(options?.includeLegacy),
+      },
       include: {
         model: { include: { make: true } },
-        trims: { orderBy: { displayName: 'asc' } },
+        trims: {
+          where: this.approvedTrimWhere(),
+          orderBy: { displayName: 'asc' },
+        },
       },
     });
     if (!row) {
@@ -790,12 +833,20 @@ export class CatalogService {
     return row;
   }
 
-  /** Flat export for user-service community seed (no CarQuery at runtime). */
+  /**
+   * Flat export for user-service community seed (no CarQuery at runtime).
+   * Only approved generations/trims — community rooms must not mirror draft/rejected rows.
+   * Access is ops-gated (CatalogInternalSecretGuard); this is not a public dump.
+   */
   async exportForCommunitySeed() {
     const generations = await this.prisma.catalogGeneration.findMany({
+      where: this.supportedGenerationWhere(false),
       include: {
         model: { include: { make: true } },
-        trims: { orderBy: { displayName: 'asc' } },
+        trims: {
+          where: this.approvedTrimWhere(),
+          orderBy: { displayName: 'asc' },
+        },
       },
       orderBy: [{ model: { make: { name: 'asc' } } }, { displayName: 'asc' }],
     });
@@ -830,5 +881,94 @@ export class CatalogService {
           })),
       })),
     };
+  }
+
+  /**
+   * Admin-only: same lookup as getGenerationByPath but bypasses the review gate entirely —
+   * an admin must be able to find and un-flag a generation/trim they (or a sync) already
+   * marked draft/rejected, which the public endpoint now hides by design.
+   */
+  async getGenerationByPathAdmin(
+    makeSlug: string,
+    modelSlug: string,
+    generationSlug: string,
+  ) {
+    const generation = await this.prisma.catalogGeneration.findFirst({
+      where: {
+        slug: generationSlug,
+        model: { slug: modelSlug, make: { slug: makeSlug } },
+      },
+      include: {
+        model: { include: { make: true } },
+        trims: { orderBy: { displayName: 'asc' } },
+      },
+    });
+    if (!generation) {
+      throw new NotFoundException('Generation not found');
+    }
+
+    const model = generation.model;
+    const make = model.make;
+    return {
+      id: generation.id,
+      slug: generation.slug,
+      displayName: generation.displayName,
+      yearFrom: generation.yearFrom,
+      yearTo: generation.yearTo,
+      coverImageUrl: generation.coverImageUrl,
+      reviewStatus: generation.reviewStatus,
+      isSupported: generation.isSupported,
+      supportTier: generation.supportTier,
+      make: { id: make.id, slug: make.slug, name: make.name },
+      model: { id: model.id, slug: model.slug, name: model.name },
+      trims: generation.trims.map((t) => ({
+        id: t.id,
+        slug: t.slug,
+        displayName: t.displayName,
+        engine: t.engine,
+        fuelType: t.fuelType,
+        aspiration: t.aspiration,
+        powerHp: t.powerHp,
+        transmission: t.transmission,
+        reviewStatus: t.reviewStatus,
+      })),
+    };
+  }
+
+  /** Admin-only: flag a generation's reviewStatus and/or fix its display data. */
+  async updateGenerationAdmin(id: string, dto: UpdateGenerationAdminDto) {
+    const existing = await this.prisma.catalogGeneration.findUnique({ where: { id } });
+    if (!existing) {
+      throw new NotFoundException('Generation not found');
+    }
+    const hasChanges =
+      dto.reviewStatus != null || dto.displayName !== undefined || dto.coverImageUrl !== undefined;
+    return this.prisma.catalogGeneration.update({
+      where: { id },
+      data: {
+        ...(dto.reviewStatus != null ? { reviewStatus: dto.reviewStatus } : {}),
+        ...(dto.displayName !== undefined ? { displayName: dto.displayName } : {}),
+        ...(dto.coverImageUrl !== undefined ? { coverImageUrl: dto.coverImageUrl } : {}),
+        // Also the "manual override" signal catalog:sync:autoria checks before touching
+        // displayName again — stamped on ANY admin edit, not just reviewStatus changes,
+        // so a pure displayName/coverImageUrl fix is protected from the next sync too.
+        ...(hasChanges ? { reviewedAt: new Date() } : {}),
+      },
+    });
+  }
+
+  /** Admin-only: flag a trim's reviewStatus (approved / draft / rejected). */
+  async updateTrimAdmin(id: string, dto: UpdateTrimAdminDto) {
+    const existing = await this.prisma.catalogTrim.findUnique({ where: { id } });
+    if (!existing) {
+      throw new NotFoundException('Trim not found');
+    }
+    return this.prisma.catalogTrim.update({
+      where: { id },
+      data:
+        dto.reviewStatus != null
+          ? { reviewStatus: dto.reviewStatus, reviewedAt: new Date() }
+          : {},
+    });
   }
 }

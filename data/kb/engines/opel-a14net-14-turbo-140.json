@@ -1,0 +1,21 @@
+{
+  "slug": "opel-a14net-14-turbo-140",
+  "familySlug": "opel-ecotec-14",
+  "code": "A14NET",
+  "displayName": "1.4 Turbo 140 KM (A14NET)",
+  "displacementCc": 1364,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 140,
+  "powerKw": 103,
+  "torqueNm": 200,
+  "cylinders": 4,
+  "injection": "wtrysk pośredni",
+  "euroStandard": "Euro 5",
+  "yearFrom": 2009,
+  "yearTo": 2018,
+  "shortDescription": "Turbo 1.4 w Astrze J i Mokce — najczęstszy wybór na PL rynku wtórnym w segmencie C.",
+  "reliabilityNotes": "Kontroluj łańcuch rozrządu i stan turbosprężarki przy wyższych przebiegach.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

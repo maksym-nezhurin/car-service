@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m274-200-184",
+  "familySlug": "mercedes-m274",
+  "code": "M274",
+  "displayName": "200 184 KM (M274)",
+  "displacementCc": 1991,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 184,
+  "powerKw": 135,
+  "torqueNm": 300,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2012,
+  "yearTo": 2020,
+  "shortDescription": "Najpopularniejsza odmiana M274 2.0 turbo. Elastyczna od niskich obrotów, dobrze współpracuje z 7G/9G-Tronic.",
+  "reliabilityNotes": "Zwróć uwagę na nagar na zaworach dolotowych i historię wymiany oleju — silnik lubi krótkie interwały.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

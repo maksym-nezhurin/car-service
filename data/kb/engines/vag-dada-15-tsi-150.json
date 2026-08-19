@@ -1,0 +1,20 @@
+{
+  "slug": "vag-dada-15-tsi-150",
+  "familySlug": "vag-ea211-15-tsi",
+  "code": "DADA",
+  "displayName": "1.5 TSI 150 KM (DADA)",
+  "displacementCc": 1498,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 150,
+  "powerKw": 110,
+  "torqueNm": 250,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6d",
+  "yearFrom": 2017,
+  "shortDescription": "Podstawowy 1.5 TSI evo w Golfie VII/VIII, Octavii III/IV i Superb III. ACT (wyłączanie cylindrów) i VGT.",
+  "reliabilityNotes": "Wczesne egzemplarze miały szarpanie przy niskich obrotach — szukaj aktualizacji oprogramowania sterownika.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

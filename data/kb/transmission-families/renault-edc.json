@@ -1,0 +1,9 @@
+{
+  "slug": "renault-edc",
+  "displayName": "Renault EDC (dwusprzęgłowa)",
+  "type": "dct",
+  "manufacturer": "Renault / Getrag",
+  "shortDescription": "Dwusprzęgłowa EDC (Getrag) w Clio, Mégane i Captur. Wczesne mokre/suche wersje wymagały aktualizacji oprogramowania i wymiany oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

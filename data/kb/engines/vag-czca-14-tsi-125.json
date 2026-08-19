@@ -1,0 +1,21 @@
+{
+  "slug": "vag-czca-14-tsi-125",
+  "familySlug": "vag-ea211-14-tsi",
+  "code": "CZCA",
+  "displayName": "1.4 TSI 125 KM (CZCA)",
+  "displacementCc": 1395,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 125,
+  "powerKw": 92,
+  "torqueNm": 200,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2014,
+  "yearTo": 2018,
+  "shortDescription": "Słabsza odmiana EA211 1.4 TSI — Golf VII, Octavia III, A3 8V. Rozrząd na pasku.",
+  "reliabilityNotes": "Wymiana paska rozrządu zgodnie z harmonogramem; sprawdzaj pompę wody.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

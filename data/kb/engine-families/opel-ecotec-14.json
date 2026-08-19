@@ -1,0 +1,12 @@
+{
+  "slug": "opel-ecotec-14",
+  "displayName": "Opel 1.4 EcoTec / SGE",
+  "manufacturer": "Opel / GM",
+  "displacementCc": 1398,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "engineCodes": ["A14XER", "B14XER", "A14NET", "B14NET"],
+  "shortDescription": "Podstawowa benzyna Opel w Corsie, Astrze i Mokce (ok. 2004–2019). Odmiany wolnossące Twinport i turbo (A14NET).",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

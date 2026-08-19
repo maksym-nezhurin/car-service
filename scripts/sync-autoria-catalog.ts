@@ -48,6 +48,8 @@ import {
   plPlanModelNeedles,
 } from './catalog-autoria-pl-plan';
 import { linkCatalogEngines } from './link-catalog-engines';
+import { deriveCatalogAggregates } from './derive-catalog-aggregates';
+import { finishSyncRun, startSyncRun } from '../src/modules/catalog/sync-run.utils';
 import {
   autoriaId,
   autoriaListGenerationsByModel,
@@ -559,6 +561,17 @@ async function main() {
 
           let generationRecord;
           if (shouldFetchStructure(phase)) {
+            // manual_override > autoria_sync (docs/V1_7_VEHICLE_ENCYCLOPEDIA.md §4.5): an
+            // admin-edited displayName (apps/admin → Katalog / moderacja) must survive the
+            // next sync. reviewedAt is stamped on any admin edit, not just reviewStatus —
+            // that's the only signal we check here, so it must stay in sync with what
+            // CatalogService.updateGenerationAdmin() stamps.
+            const existingGeneration = await prisma.catalogGeneration.findUnique({
+              where: { modelId_slug: { modelId, slug: genSlug } },
+              select: { reviewedAt: true },
+            });
+            const manuallyReviewed = existingGeneration?.reviewedAt != null;
+
             generationRecord = await prisma.catalogGeneration.upsert({
               where: { modelId_slug: { modelId, slug: genSlug } },
               create: {
@@ -574,7 +587,7 @@ async function main() {
               },
               update: {
                 externalModelId: String(modelApiId),
-                displayName: gen.name,
+                ...(manuallyReviewed ? {} : { displayName: gen.name }),
                 yearFrom: gen.yearFrom,
                 yearTo: gen.yearTo,
                 contentKey,
@@ -619,6 +632,7 @@ async function main() {
     trims: await prisma.catalogTrim.count(),
   };
   const linked = await linkCatalogEngines({ prisma, quiet: true });
+  const derived = await deriveCatalogAggregates({ prisma });
   const quota = getQuotaStats();
   console.log('Done.', {
     ...counts,
@@ -626,20 +640,58 @@ async function main() {
     syncedTrims: totalTrims,
     linkedEngines: linked.linkedEngines,
     linkedEngineFamilies: linked.linkedEngineFamilies,
+    derivedEngines: derived.enginesUpserted,
+    derivedTransmissions: derived.transmissionsUpserted,
     quota,
   });
 }
 
-main()
-  .catch(async (e) => {
+/**
+ * Thin wrapper around main() — a dedicated function (rather than the previous top-level
+ * main().catch().finally() chain) so a catalog_sync_runs row can be started before main()
+ * and finished from every exit path, without touching main()'s own logic at all. Dry runs
+ * (no API/DB writes at all) are intentionally not tracked.
+ */
+async function run() {
+  if (isDryRun()) {
+    await main();
+    await prisma.$disconnect();
+    return;
+  }
+
+  const runId = await startSyncRun(
+    prisma,
+    'catalog:sync:autoria',
+    process.env.SYNC_MAKE_SLUG?.trim().toLowerCase() || null,
+  );
+
+  try {
+    await main();
+    const stats = {
+      makes: await prisma.catalogMake.count(),
+      models: await prisma.catalogModel.count(),
+      generations: await prisma.catalogGeneration.count(),
+      trims: await prisma.catalogTrim.count(),
+    };
+    await finishSyncRun(prisma, runId, 'success', { stats });
+  } catch (e) {
     if (e instanceof AutoriaBudgetExhaustedError || e instanceof AutoriaHourlyLimitError) {
       // Link what was already written — the next run may be an hour away.
       await linkCatalogEngines({ prisma, quiet: true }).catch(() => undefined);
+      await deriveCatalogAggregates({ prisma }).catch(() => undefined);
       console.error('\n', e.message);
       console.error('Progress saved. Re-run the same command after the next hour.');
+      await finishSyncRun(prisma, runId, 'partial', { errorMessage: e.message });
       process.exit(2);
     }
     console.error(e);
+    await finishSyncRun(prisma, runId, 'failed', {
+      errorMessage: e instanceof Error ? e.message : String(e),
+    });
     process.exit(1);
-  })
-  .finally(() => prisma.$disconnect());
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+run();

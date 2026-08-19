@@ -1,0 +1,12 @@
+{
+  "slug": "mercedes-m264",
+  "displayName": "Mercedes-Benz M264 1.5/2.0 turbo",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1991,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["M264"],
+  "shortDescription": "Następca M274 od ok. 2018 — 2.0 turbo z 48V mild-hybrid w odmianach C/E 300. Lżejszy i mocniejszy, z ISG.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

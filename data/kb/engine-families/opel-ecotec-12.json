@@ -1,0 +1,12 @@
+{
+  "slug": "opel-ecotec-12",
+  "displayName": "Opel 1.2 EcoTec / PureTech",
+  "manufacturer": "Opel / GM / Stellantis",
+  "displacementCc": 1199,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "engineCodes": ["A12XER", "B12XER", "D12XEL", "EB2ADTS"],
+  "shortDescription": "Małe benzyny w Corsie — starsze GM 1.2 oraz nowsze 1.2 turbo z platformy PSA (po 2019).",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

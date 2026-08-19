@@ -1,0 +1,20 @@
+{
+  "slug": "mercedes-m264-300-258",
+  "familySlug": "mercedes-m264",
+  "code": "M264",
+  "displayName": "300 258 KM (M264)",
+  "displacementCc": 1991,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 258,
+  "powerKw": 190,
+  "torqueNm": 370,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6d",
+  "yearFrom": 2018,
+  "shortDescription": "C/E 300 z M264 i wspomaganiem 48V. Szybsza reakcja od niskich obrotów niż poprzedni M274 245 KM.",
+  "reliabilityNotes": "Sprawdź działanie układu 48V (ISG) oraz aktualizacje oprogramowania skrzyni 9G.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

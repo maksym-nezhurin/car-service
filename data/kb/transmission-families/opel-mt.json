@@ -1,0 +1,9 @@
+{
+  "slug": "opel-mt",
+  "displayName": "Opel skrzynia manualna (liczba biegów nieznana)",
+  "type": "mt",
+  "manufacturer": "Opel / GM",
+  "shortDescription": "Manualne pięcio- i sześciobiegowe przekładnie Opel. Przy zakupie sprawdzaj stan synchronizatorów i wycieki oleju.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

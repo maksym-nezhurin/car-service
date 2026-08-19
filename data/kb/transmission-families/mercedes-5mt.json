@@ -1,0 +1,10 @@
+{
+  "slug": "mercedes-5mt",
+  "displayName": "Mercedes-Benz 5-biegowa manualna",
+  "type": "mt",
+  "gears": 5,
+  "manufacturer": "Mercedes-Benz",
+  "shortDescription": "Pięciobiegowa manualna skrzynia w starszych lub słabszych jednostkach Mercedesa.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

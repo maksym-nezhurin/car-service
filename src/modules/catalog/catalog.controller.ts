@@ -1,5 +1,9 @@
-import { Controller, Get, Header, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Header, Param, Patch, Query, UseGuards } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
+import { CatalogAdminGuard } from './catalog-admin.guard';
+import { CatalogInternalSecretGuard } from './catalog-internal.guard';
+import { UpdateGenerationAdminDto } from './dto/update-generation-admin.dto';
+import { UpdateTrimAdminDto } from './dto/update-trim-admin.dto';
 
 const LIST_CACHE = 'public, s-maxage=86400, stale-while-revalidate=3600';
 const DETAIL_CACHE = 'public, s-maxage=3600, stale-while-revalidate=600';
@@ -124,22 +128,74 @@ export class CatalogController {
     return this.catalogService.getTransmissionBySlug(slug);
   }
 
+  /**
+   * Generic search — same review + year gate as by-path (no draft/rejected leakage).
+   * Prefer by-path routes for encyclopedia pages.
+   */
   @Get('generations')
+  @Header('Cache-Control', LIST_CACHE)
   listGenerations(
     @Query('makeId') makeId?: string,
     @Query('q') q?: string,
+    @Query('includeLegacy') includeLegacy?: string,
   ) {
-    return this.catalogService.listGenerations({ makeId, q });
+    return this.catalogService.listGenerations({
+      makeId,
+      q,
+      includeLegacy: parseIncludeLegacy(includeLegacy),
+    });
   }
 
+  /** By id — approved generation only; trims filtered to approved. */
   @Get('generations/:id')
-  getGeneration(@Param('id') id: string) {
-    return this.catalogService.getGeneration(id);
+  @Header('Cache-Control', DETAIL_CACHE)
+  getGeneration(
+    @Param('id') id: string,
+    @Query('includeLegacy') includeLegacy?: string,
+  ) {
+    return this.catalogService.getGeneration(id, {
+      includeLegacy: parseIncludeLegacy(includeLegacy),
+    });
   }
 
-  /** Used by `community:seed` in user-service — full tree, no live CarQuery. */
+  /**
+   * Ops-only full tree for `community:seed` (user-service).
+   * Guarded by CatalogInternalSecretGuard; gateway also requires auth on this path.
+   */
   @Get('export/community-seed')
+  @UseGuards(CatalogInternalSecretGuard)
   exportForCommunitySeed() {
     return this.catalogService.exportForCommunitySeed();
+  }
+
+  /** Admin-only: same as by-path, but bypasses the review gate — see the service for why. */
+  @Get('admin/by-path/:makeSlug/:modelSlug/:generationSlug')
+  @UseGuards(CatalogAdminGuard)
+  getGenerationByPathAdmin(
+    @Param('makeSlug') makeSlug: string,
+    @Param('modelSlug') modelSlug: string,
+    @Param('generationSlug') generationSlug: string,
+  ) {
+    return this.catalogService.getGenerationByPathAdmin(makeSlug, modelSlug, generationSlug);
+  }
+
+  /**
+   * Admin-only: flag a generation's reviewStatus or fix its displayName/coverImageUrl.
+   * Guarded by CatalogAdminGuard — see docs/V1_7_VEHICLE_ENCYCLOPEDIA.md §12 Q8.
+   */
+  @Patch('admin/generations/:id')
+  @UseGuards(CatalogAdminGuard)
+  updateGenerationAdmin(
+    @Param('id') id: string,
+    @Body() dto: UpdateGenerationAdminDto,
+  ) {
+    return this.catalogService.updateGenerationAdmin(id, dto);
+  }
+
+  /** Admin-only: flag a trim's reviewStatus. */
+  @Patch('admin/trims/:id')
+  @UseGuards(CatalogAdminGuard)
+  updateTrimAdmin(@Param('id') id: string, @Body() dto: UpdateTrimAdminDto) {
+    return this.catalogService.updateTrimAdmin(id, dto);
   }
 }

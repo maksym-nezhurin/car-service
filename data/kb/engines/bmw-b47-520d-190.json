@@ -1,0 +1,20 @@
+{
+  "slug": "bmw-b47-520d-190",
+  "familySlug": "bmw-b47",
+  "code": "B47",
+  "displayName": "520d 190 KM (B47)",
+  "displacementCc": 1995,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "powerHp": 190,
+  "powerKw": 140,
+  "torqueNm": 400,
+  "cylinders": 4,
+  "injection": "Common Rail",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2014,
+  "shortDescription": "Najczęściej wybierany diesel Serii 5 (F10/G30). Ten sam blok B47 co w 320d — dobry kompromis dynamiki i spalania.",
+  "reliabilityNotes": "Kontroluj łańcuch rozrządu (wczesne B47) oraz historię DPF/AdBlue.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

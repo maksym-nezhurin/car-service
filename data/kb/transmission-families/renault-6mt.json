@@ -1,0 +1,10 @@
+{
+  "slug": "renault-6mt",
+  "displayName": "Renault 6-biegowa manualna",
+  "type": "mt",
+  "gears": 6,
+  "manufacturer": "Renault",
+  "shortDescription": "Sześciobiegowa manualna skrzynia w mocniejszych silnikach Renault, głównie dieslach dCi.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

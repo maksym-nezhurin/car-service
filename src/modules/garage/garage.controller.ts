@@ -10,10 +10,12 @@ import {
   Post,
   BadRequestException,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
   Query,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { CatalogInternalSecretGuard } from '../catalog/catalog-internal.guard';
 import { GarageService } from './garage.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { AddMaintenanceRecordDto } from './dto/add-maintenance-record.dto';
@@ -30,6 +32,12 @@ import { VehicleProfileTier } from '../../prisma/generated-client';
 import { IncomingHttpHeaders } from 'http';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 
+/**
+ * x-user-id is trusted here only because CatalogInternalSecretGuard confirms the request
+ * came through the gateway (which verifies the JWT and sets this header itself) — without
+ * that guard, anyone reaching car-service directly could forge x-user-id and read/write
+ * any user's garage. See catalog-internal.guard.ts.
+ */
 @ApiTags('garage')
 @ApiHeader({
   name: 'x-user-id',
@@ -37,6 +45,7 @@ import { ApiHeader, ApiTags } from '@nestjs/swagger';
   description:
     'User identifier. Supports x-user-id, x-userid, user-id, userid header keys.',
 })
+@UseGuards(CatalogInternalSecretGuard)
 @Controller('garage')
 export class GarageController {
   constructor(private readonly garageService: GarageService) {}
@@ -142,7 +151,10 @@ export class GarageController {
     @Headers() headers: IncomingHttpHeaders,
     @Param('vehicleId') vehicleId: string,
   ) {
-    return this.garageService.listServiceVisits(this.requireUserId(headers), vehicleId);
+    return this.garageService.listServiceVisits(
+      this.requireUserId(headers),
+      vehicleId,
+    );
   }
 
   @Get('vehicles/:vehicleId/service-visits/:visitId')

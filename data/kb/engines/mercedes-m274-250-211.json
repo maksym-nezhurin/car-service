@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m274-250-211",
+  "familySlug": "mercedes-m274",
+  "code": "M274",
+  "displayName": "250 211 KM (M274)",
+  "displacementCc": 1991,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "powerHp": 211,
+  "powerKw": 155,
+  "torqueNm": 350,
+  "cylinders": 4,
+  "injection": "wtrysk bezpośredni",
+  "euroStandard": "Euro 6",
+  "yearFrom": 2012,
+  "yearTo": 2020,
+  "shortDescription": "Mocniejsza odmiana M274 2.0 — C 250 / E 250. Dobre osiągi bez schodzenia do sześciocylindrówek.",
+  "reliabilityNotes": "Przy dynamicznej jeździe kontroluj temperaturę oleju i stan turbosprężarki.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

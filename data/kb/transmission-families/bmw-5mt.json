@@ -1,0 +1,10 @@
+{
+  "slug": "bmw-5mt",
+  "displayName": "BMW 5-biegowa manualna",
+  "type": "mt",
+  "gears": 5,
+  "manufacturer": "BMW",
+  "shortDescription": "Pięciobiegowa manualna skrzynia, spotykana głównie w słabszych lub starszych silnikach BMW. Prostsza konstrukcja niż 6-biegowa, ale mniej ekonomiczna w trasie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

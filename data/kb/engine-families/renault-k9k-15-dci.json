@@ -1,0 +1,12 @@
+{
+  "slug": "renault-k9k-15-dci",
+  "displayName": "Renault 1.5 dCi / Blue dCi (K9K)",
+  "manufacturer": "Renault-Nissan",
+  "displacementCc": 1461,
+  "fuelType": "diesel",
+  "aspiration": "turbo",
+  "engineCodes": ["K9K"],
+  "shortDescription": "Najpopularniejszy diesel Renault/Nissan/Dacia od 2001 — Clio, Mégane, Captur, Kadjar. Wersje 65–115 KM; późniejsze Blue dCi z AdBlue.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

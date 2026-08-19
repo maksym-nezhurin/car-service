@@ -1,0 +1,10 @@
+{
+  "slug": "opel-5mt",
+  "displayName": "Opel 5-biegowa manualna",
+  "type": "mt",
+  "gears": 5,
+  "manufacturer": "Opel / GM",
+  "shortDescription": "Pięciobiegowa manualna skrzynia w słabszych silnikach Opla.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

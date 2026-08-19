@@ -75,6 +75,9 @@ export function formatEngineDisplaySubtitle(row: CatalogEngineRow): string {
 /**
  * Normalize gearbox tokens from AUTO.RIA (Cyrillic lookalikes → Latin).
  * "АТ" / "МТ" / "7DCT" → AT / MT / 7DCT
+ *
+ * AMG model badges ("63 AT", "45 DCT") must not become 63-/45-speed boxes —
+ * only plausible gear counts are kept.
  */
 export function normalizeTransmissionLabel(
   value: string | null | undefined,
@@ -88,16 +91,63 @@ export function normalizeTransmissionLabel(
     .replace(/\s+/g, '')
     .toUpperCase();
 
-  if (/^\d*DCT$/i.test(raw) || raw === 'DCT') return raw === 'DCT' ? 'DCT' : raw;
-  if (/^\d*DSG$/i.test(raw) || raw === 'DSG') return raw === 'DSG' ? 'DSG' : raw;
-  if (/^\d*MT$/i.test(raw) || raw === 'MT') {
-    return raw === 'MT' ? 'MT' : raw; // 6MT
+  const match = raw.match(/^(\d{0,2})(MT|AT|CVT|DCT|DSG|AMT|IVT)$/);
+  if (!match) {
+    if (raw === 'CVT' || raw === 'IVT' || raw === 'AMT') return raw;
+    return raw;
   }
-  if (/^\d*AT$/i.test(raw) || raw === 'AT') {
-    return raw === 'AT' ? 'AT' : raw;
-  }
-  if (raw === 'CVT' || raw === 'IVT' || raw === 'AMT') return raw;
-  return raw;
+
+  const gears = match[1] ? Number(match[1]) : null;
+  const type = match[2];
+
+  if (gears == null) return type;
+  if (!isPlausibleGearCount(type, gears)) return type;
+  return `${gears}${type}`;
+}
+
+/** Gear counts that real passenger cars use — rejects AMG line numbers (35/43/45/63…). */
+export function isPlausibleGearCount(type: string, gears: number): boolean {
+  const t = type.toUpperCase();
+  if (t === 'MT') return gears >= 4 && gears <= 7;
+  if (t === 'AT') return gears >= 4 && gears <= 10;
+  if (t === 'DCT' || t === 'DSG') return gears >= 6 && gears <= 8;
+  if (t === 'AMT') return gears >= 5 && gears <= 7;
+  // CVT / IVT rarely carry a digit prefix; if they do, ignore it.
+  return false;
+}
+
+/** "7DCT" → "DCT", "6MT" → "MT" — match-rule keys are family-agnostic. */
+export function transmissionKey(raw: string | null | undefined): string | null {
+  const tx = normalizeTransmissionLabel(raw);
+  if (!tx) return null;
+  const match = tx.match(/^(\d*)(MT|AT|CVT|DCT|DSG|AMT|IVT)(\d*)$/);
+  return match ? match[2] : tx;
+}
+
+/** Digit prefix of a normalized label ("6MT" → 6), or null when the label didn't carry one. */
+export function parseGearCount(label: string | null): number | null {
+  if (!label) return null;
+  const match = label.match(/^(\d+)/);
+  return match ? Number(match[1]) : null;
+}
+
+/**
+ * Prefer a gear-count-specific manual-transmission family ("vag-6mt") over the generic
+ * manufacturer-wide one a rule points at ("vag-mt") when the trim's own label confirms the
+ * gear count and that specific family already exists in the KB. Falls back to the base slug
+ * otherwise (gear count unknown on this trim, or nobody has curated that gear count for this
+ * manufacturer yet) — this never invents a family, only picks a more specific one that's
+ * already there. See docs/V1_7_VEHICLE_ENCYCLOPEDIA.md §4.3.2.
+ */
+export function preferGearSpecificSlug(
+  baseSlug: string,
+  gears: number | null,
+  transmissionFamilyBySlug: Map<string, unknown>,
+): string {
+  if (gears == null) return baseSlug;
+  const upgraded = baseSlug.replace(/-mt$/, `-${gears}mt`);
+  if (upgraded === baseSlug) return baseSlug;
+  return transmissionFamilyBySlug.has(upgraded) ? upgraded : baseSlug;
 }
 
 /**

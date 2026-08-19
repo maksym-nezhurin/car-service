@@ -1,0 +1,10 @@
+{
+  "slug": "ford-5mt",
+  "displayName": "Ford 5-biegowa manualna",
+  "type": "mt",
+  "gears": 5,
+  "manufacturer": "Ford",
+  "shortDescription": "Pięciobiegowa manualna skrzynia w słabszych silnikach Forda, głównie starsze roczniki i mniejsze pojemności.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

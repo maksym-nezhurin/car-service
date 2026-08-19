@@ -47,9 +47,9 @@ Generations/trims stored in Postgres (synced from CarQuery via script). Used by 
 
 ```http
 GET /api/cars/catalog/makes
-GET /api/cars/catalog/generations
-GET /api/cars/catalog/generations/:id
-GET /api/cars/catalog/export/community-seed
+GET /api/cars/catalog/generations            # public, review + year gated
+GET /api/cars/catalog/generations/:id        # public, review + year gated
+GET /api/cars/catalog/export/community-seed  # ops-only: x-internal-gateway-secret
 ```
 
 **Gateway:** `/v1/cars/catalog/*` → `/api/cars/catalog/*`

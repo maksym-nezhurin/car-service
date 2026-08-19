@@ -1,0 +1,12 @@
+{
+  "slug": "opel-ecotec-10",
+  "displayName": "Opel 1.0 EcoTec / SGE turbo",
+  "manufacturer": "Opel / GM",
+  "displacementCc": 999,
+  "fuelType": "petrol",
+  "aspiration": "turbo",
+  "engineCodes": ["B10XFL", "B10XFT", "D10XFL"],
+  "shortDescription": "Trzycylindrowy 1.0 turbo z Small Gasoline Engine — Corsa E i Astra K. Dynamiczny przy niskim spalaniu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

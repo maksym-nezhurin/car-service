@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m272-350-272",
+  "familySlug": "mercedes-m272",
+  "code": "M272",
+  "displayName": "350 272 KM (M272)",
+  "displacementCc": 3498,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "powerHp": 272,
+  "powerKw": 200,
+  "torqueNm": 350,
+  "cylinders": 6,
+  "injection": "wtrysk wielopunktowy",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2004,
+  "yearTo": 2011,
+  "shortDescription": "Atmosferyczne V6 w C/E 350. Przyjemne brzmienie i elastyczność, bez turbodziury.",
+  "reliabilityNotes": "Typowa bolączka: koła zębate wałków wyrównoważających — słuchaj grzechotania na zimnym silniku.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

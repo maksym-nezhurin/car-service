@@ -26,24 +26,21 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { PrismaClient } from '../generated/client';
-import { normalizeTransmissionLabel } from '../src/modules/catalog/engine-trim.utils';
-
-type MatchRule = {
-  makes?: string[];
-  models?: string[];
-  yearFrom?: number;
-  yearTo?: number;
-  /** Require the generation to sit fully inside the window instead of merely overlapping it. */
-  yearsStrict?: boolean;
-  enginePattern: string;
-  notEnginePattern?: string;
-  powerHp?: number[];
-  /** Exactly one of the two: a concrete unit, or a family when the code stays unknown. */
-  engineSlug?: string;
-  engineFamilySlug?: string;
-  /** Gearbox key (MT/AT/DCT/…) → transmission unit slug, or a family slug when the unit is unknown. */
-  transmissions?: Record<string, string>;
-};
+import {
+  normalizeTransmissionLabel,
+  parseGearCount,
+  preferGearSpecificSlug,
+  transmissionKey,
+} from '../src/modules/catalog/engine-trim.utils';
+import {
+  MatchRule,
+  ruleInScope,
+  rulePowerMatches,
+  TrimScope,
+  unanimous,
+  validateRule,
+} from '../src/modules/catalog/match-rules.utils';
+import { finishSyncRun, startSyncRun } from '../src/modules/catalog/sync-run.utils';
 
 type LinkOptions = {
   apply?: boolean;
@@ -66,72 +63,7 @@ const RULES_PATH = path.resolve(__dirname, '..', 'data', 'kb', 'match-rules.json
 
 function loadRules(): MatchRule[] {
   const raw = JSON.parse(fs.readFileSync(RULES_PATH, 'utf8')) as MatchRule[];
-  return raw.map((rule, i) => {
-    if (!rule.enginePattern) {
-      throw new Error(`match-rules.json[${i}]: enginePattern is required`);
-    }
-    if (!rule.engineSlug === !rule.engineFamilySlug) {
-      throw new Error(
-        `match-rules.json[${i}]: set exactly one of engineSlug / engineFamilySlug`,
-      );
-    }
-    if (rule.yearFrom != null && rule.yearTo != null && rule.yearFrom > rule.yearTo) {
-      throw new Error(`match-rules.json[${i}]: yearFrom ${rule.yearFrom} is after yearTo ${rule.yearTo}`);
-    }
-    return rule;
-  });
-}
-
-/** "7DCT" → "DCT", "6MT" → "MT" — rule keys are family-agnostic. */
-function transmissionKey(raw: string | null): string | null {
-  const tx = normalizeTransmissionLabel(raw);
-  if (!tx) return null;
-  const match = tx.match(/^(\d*)(MT|AT|CVT|DCT|DSG|AMT|IVT)(\d*)$/);
-  return match ? match[2] : tx;
-}
-
-type TrimScope = {
-  makeSlug: string;
-  modelSlug: string;
-  yearFrom: number | null;
-  yearTo: number | null;
-};
-
-/**
- * Make / model / production-years gate — everything except the engine label itself.
- *
- * Default year check is an overlap. `yearsStrict` demands containment instead, which is
- * what separates engine eras: a 2003–2010 generation belongs to the PD era, while one
- * straddling the 2008 switch to common rail matches neither rule and stays unlinked.
- */
-function ruleInScope(rule: MatchRule, scope: TrimScope): boolean {
-  if (rule.makes && !rule.makes.includes(scope.makeSlug)) return false;
-  if (rule.models && !rule.models.includes(scope.modelSlug)) return false;
-
-  if (rule.yearsStrict) {
-    const genTo = scope.yearTo ?? new Date().getFullYear();
-    if (rule.yearFrom != null && (scope.yearFrom == null || scope.yearFrom < rule.yearFrom)) {
-      return false;
-    }
-    if (rule.yearTo != null && genTo > rule.yearTo) return false;
-    return true;
-  }
-
-  if (rule.yearFrom != null && scope.yearTo != null && scope.yearTo < rule.yearFrom) return false;
-  if (rule.yearTo != null && scope.yearFrom != null && scope.yearFrom > rule.yearTo) return false;
-  return true;
-}
-
-function rulePowerMatches(rule: MatchRule, powerHp: number | null): boolean {
-  if (!rule.powerHp?.length) return true;
-  return powerHp != null && rule.powerHp.includes(powerHp);
-}
-
-/** Single value shared by every entry, or null when they disagree / the list is empty. */
-function unanimous<T>(values: Array<T | null | undefined>): T | null {
-  const first = values[0];
-  if (first == null) return null;
-  return values.every((v) => v === first) ? first : null;
+  return raw.map((rule, i) => validateRule(rule, i));
 }
 
 export async function linkCatalogEngines(options: LinkOptions = {}): Promise<LinkResult> {
@@ -260,23 +192,34 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
         ? (exact ? [exact] : fallback ? candidates : []).map((r) => r.transmissions?.[txKey])
         : [];
       const txSlug = unanimous(txSlugs);
-      const transmission = txSlug ? transmissionBySlug.get(txSlug) : undefined;
+      // Upgrade a generic manufacturer-wide MT family to a gear-count-specific one when this
+      // trim's own label confirms the gear count and that family is already in the KB.
+      const resolvedTxSlug = txSlug
+        ? preferGearSpecificSlug(
+            txSlug,
+            parseGearCount(normalizeTransmissionLabel(trim.transmission)),
+            transmissionFamilyBySlug,
+          )
+        : txSlug;
+      const transmission = resolvedTxSlug ? transmissionBySlug.get(resolvedTxSlug) : undefined;
       const transmissionFamilyId =
         transmission?.familyId ??
-        (txSlug ? transmissionFamilyBySlug.get(txSlug)?.id : undefined) ??
+        (resolvedTxSlug ? transmissionFamilyBySlug.get(resolvedTxSlug)?.id : undefined) ??
         unanimous(txSlugs.map((slug) => (slug ? transmissionBySlug.get(slug)?.familyId : null)));
 
       if (!engineFamilyId) {
         const key = `${makeSlug} | ${trim.engine ?? '—'} | ${trim.powerHp ?? '—'} KM | ${txKey ?? '—'}`;
         unmatched.set(key, (unmatched.get(key) ?? 0) + 1);
+        // No KB rule match — leave FKs alone (may already be filled by catalog:derive:aggregates).
+        continue;
       }
 
-      const family = engineFamilyId ? familyById.get(engineFamilyId) : undefined;
+      const family = familyById.get(engineFamilyId);
       const next = {
         engineId: engine?.id ?? null,
         transmissionId: transmission?.id ?? null,
         engineFamilyId,
-        transmissionFamilyId,
+        transmissionFamilyId: transmissionFamilyId ?? null,
         engineCode: engine?.code ?? null,
         displacementCc: engine?.displacementCc ?? family?.displacementCc ?? null,
       };
@@ -290,7 +233,7 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
         next.displacementCc !== trim.displacementCc;
 
       if (engine) linkedEngines += 1;
-      else if (engineFamilyId) linkedEngineFamilies += 1;
+      else linkedEngineFamilies += 1;
       if (transmission) linkedTransmissions += 1;
       else if (transmissionFamilyId) linkedTransmissionFamilies += 1;
       if (!engine && trim.engineId) cleared += 1;
@@ -343,12 +286,47 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
   }
 }
 
+/**
+ * Standalone `pnpm catalog:link:engines` gets its own tracked catalog_sync_runs row.
+ * When linkCatalogEngines() runs embedded inside catalog:sync:autoria instead, that
+ * invocation passes its own prisma/quiet and skips this block entirely — it's already
+ * covered by catalog:sync:autoria's own run, not a second standalone one.
+ */
 if (require.main === module) {
-  linkCatalogEngines({
-    apply: !process.argv.includes('--dry-run'),
-    makeSlug: process.env.MAKE?.trim().toLowerCase() || undefined,
-  }).catch((e) => {
-    console.error(e instanceof Error ? e.message : e);
-    process.exit(1);
-  });
+  const apply = !process.argv.includes('--dry-run');
+  const makeSlug = process.env.MAKE?.trim().toLowerCase() || undefined;
+
+  if (!apply) {
+    // Dry run does no DB writes at all — tracking a run would be the only write.
+    linkCatalogEngines({ apply, makeSlug }).catch((e) => {
+      console.error(e instanceof Error ? e.message : e);
+      process.exit(1);
+    });
+  } else {
+    const prisma = new PrismaClient();
+    (async () => {
+      const runId = await startSyncRun(prisma, 'catalog:link:engines', makeSlug ?? null);
+      try {
+        const result = await linkCatalogEngines({ apply, makeSlug, prisma });
+        await finishSyncRun(prisma, runId, 'success', {
+          stats: {
+            trims: result.trims,
+            linkedEngines: result.linkedEngines,
+            linkedEngineFamilies: result.linkedEngineFamilies,
+            linkedTransmissions: result.linkedTransmissions,
+            linkedTransmissionFamilies: result.linkedTransmissionFamilies,
+            unmatchedCombos: result.unmatched.length,
+          },
+        });
+      } catch (e) {
+        await finishSyncRun(prisma, runId, 'failed', {
+          errorMessage: e instanceof Error ? e.message : String(e),
+        });
+        console.error(e instanceof Error ? e.message : e);
+        process.exitCode = 1;
+      } finally {
+        await prisma.$disconnect();
+      }
+    })();
+  }
 }

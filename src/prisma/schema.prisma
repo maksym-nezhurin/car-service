@@ -379,7 +379,6 @@ model GarageServiceVisit {
   draftCompanyId   String?           @map("draft_company_id")
   providerSnapshot Json              @map("provider_snapshot")
   verifiedBy       VisitVerifiedBy   @default(OWNER) @map("verified_by")
-  workOrderId      String?           @map("work_order_id")
   createdAt        DateTime          @default(now()) @map("created_at")
   updatedAt        DateTime          @updatedAt @map("updated_at")
 

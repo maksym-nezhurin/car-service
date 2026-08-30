@@ -22,6 +22,8 @@ import { UpsertTechnicalInspectionDto } from './dto/upsert-technical-inspection.
 import { UpsertInsurancePolicyDto } from './dto/upsert-insurance-policy.dto';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { VehicleProfileAccessService } from './vehicle-profile-access.service';
+import { ScanVehicleImportDto } from './dto/scan-vehicle-import.dto';
+import { VehicleImportAdapterRegistry } from './vehicle-import/vehicle-import-adapter.registry';
 
 type RecommendationLevel = 'ok' | 'due_soon' | 'overdue';
 
@@ -59,7 +61,25 @@ export class GarageService {
     private readonly prisma: PrismaService,
     private readonly cloudinaryService: CloudinaryService,
     private readonly vehicleProfileAccessService: VehicleProfileAccessService,
+    private readonly vehicleImportAdapterRegistry: VehicleImportAdapterRegistry,
   ) {}
+
+  async scanVehicleImport(dto: ScanVehicleImportDto) {
+    const countryCode = (dto.countryCode ?? 'PL').toUpperCase();
+    const method = dto.method ?? 'mock';
+
+    const adapter = this.vehicleImportAdapterRegistry.getAdapter(method, countryCode);
+    if (!adapter) {
+      throw new BadRequestException(
+        `No vehicle import method '${method}' available for country '${countryCode}'.`,
+      );
+    }
+
+    return adapter.extractVehicleData({
+      imageBase64: dto.imageBase64,
+      rawText: dto.rawText,
+    });
+  }
 
   async createVehicle(ownerUserId: string, dto: CreateVehicleDto) {
     const vin = dto.vin.trim().toUpperCase();

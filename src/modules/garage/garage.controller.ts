@@ -18,6 +18,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { CatalogInternalSecretGuard } from '../catalog/catalog-internal.guard';
 import { GarageService } from './garage.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
+import { ScanVehicleImportDto } from './dto/scan-vehicle-import.dto';
 import { AddMaintenanceRecordDto } from './dto/add-maintenance-record.dto';
 import { CreateServiceVisitDto } from './dto/create-service-visit.dto';
 import { AddRegistrationEventDto } from './dto/add-registration-event.dto';
@@ -56,6 +57,15 @@ export class GarageController {
     @Body() dto: CreateVehicleDto,
   ) {
     return this.garageService.createVehicle(this.requireUserId(headers), dto);
+  }
+
+  @Post('vehicles/import/scan')
+  scanVehicleImport(
+    @Headers() headers: IncomingHttpHeaders,
+    @Body() dto: ScanVehicleImportDto,
+  ) {
+    this.requireUserId(headers);
+    return this.garageService.scanVehicleImport(dto);
   }
 
   @Get('vehicles')

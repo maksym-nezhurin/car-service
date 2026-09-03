@@ -2,9 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { RequestMethod, ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  // Default Express JSON limit (~100kb) is too small for the garage vehicle-import
+  // scan endpoint, which accepts a base64-encoded photo in the JSON body.
+  app.useBodyParser('json', { limit: '15mb' });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

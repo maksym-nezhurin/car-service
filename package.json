@@ -27,6 +27,7 @@
     "catalog:normalize": "ts-node scripts/normalize-catalog-trims.ts",
     "catalog:import:kb": "ts-node scripts/import-catalog-kb.ts",
     "catalog:derive:aggregates": "ts-node scripts/derive-catalog-aggregates.ts",
+    "catalog:backfill:fuel-type": "ts-node scripts/backfill-canonical-fuel-type.ts",
     "catalog:link:engines": "ts-node scripts/link-catalog-engines.ts",
     "catalog:seed:generations": "ts-node scripts/apply-catalog-generation-spine.ts",
     "catalog:export-browse-index": "ts-node scripts/export-catalog-browse-index.ts",

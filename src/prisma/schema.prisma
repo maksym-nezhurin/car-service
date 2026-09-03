@@ -610,6 +610,27 @@ model CatalogGeneration {
 }
 
 /// Engine subgroup (community VARIANT), e.g. 2.0 CRDi 185 KM — not trim package (Premium).
+/// Derived from the raw fuelType/aspiration strings by scripts/backfill-canonical-fuel-type.ts
+/// (AUT-33) — never written directly by catalog:sync:autoria. The raw String columns stay
+/// permissive on purpose (see that ticket): AUTO.RIA's raw vocabulary isn't fully controlled
+/// (abbreviations, language variants — see formatFuelLabel() in engine-trim.utils.ts), so a
+/// hard enum on the sync-target column would break ingestion on any unrecognized raw value.
+enum FuelType {
+  PETROL
+  DIESEL
+  HYBRID
+  ELECTRIC
+  UNKNOWN
+}
+
+/// Same rationale as FuelType above — derived only, raw `aspiration` column stays String.
+enum Aspiration {
+  TURBO
+  ATMO
+  SUPERCHARGED
+  UNKNOWN
+}
+
 model CatalogTrim {
   id                   String                     @id
   generationId         String                     @map("generation_id")
@@ -618,6 +639,8 @@ model CatalogTrim {
   modelYear            Int?                       @map("model_year")
   engine               String?
   fuelType             String?                    @map("fuel_type")
+  /// Derived canonical value — see FuelType enum doc comment. Null until backfilled.
+  canonicalFuelType    FuelType?                  @map("canonical_fuel_type")
   aspiration           String?
   powerHp              Int?                       @map("power_hp")
   transmission         String?
@@ -670,7 +693,11 @@ model CatalogEngineFamily {
   manufacturer     String?
   displacementCc   Int?          @map("displacement_cc")
   fuelType         String?       @map("fuel_type")
+  /// Derived canonical value — see FuelType enum doc comment. Null until backfilled.
+  canonicalFuelType FuelType?    @map("canonical_fuel_type")
   aspiration       String?
+  /// Derived canonical value — see Aspiration enum doc comment. Null until backfilled.
+  canonicalAspiration Aspiration? @map("canonical_aspiration")
   engineCodes      String[]      @default([]) @map("engine_codes")
   specsJson        Json?         @map("specs_json")
   shortDescription String?       @map("short_description")
@@ -694,6 +721,8 @@ model CatalogEngine {
   displayName      String               @map("display_name")
   displacementCc   Int?                 @map("displacement_cc")
   fuelType         String?              @map("fuel_type")
+  /// Derived canonical value — see FuelType enum doc comment. Null until backfilled.
+  canonicalFuelType FuelType?           @map("canonical_fuel_type")
   aspiration       String?
   powerHp          Int?                 @map("power_hp")
   powerKw          Int?                 @map("power_kw")

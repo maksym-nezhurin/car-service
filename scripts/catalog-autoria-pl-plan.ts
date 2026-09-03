@@ -18,72 +18,77 @@ export type AutoriaPlPlanMake = {
 export const AUTORIA_PL_SYNC_PLAN: AutoriaPlPlanMake[] = [
   {
     makeSlug: 'hyundai',
-    modelSlugs: ['tucson', 'i30', 'kona', 'santa-fe', 'ioniq-5'],
+    modelSlugs: ['tucson', 'i30', 'kona', 'santa-fe', 'ioniq-5', 'i20', 'elantra', 'bayon'],
   },
   {
     makeSlug: 'kia',
-    modelSlugs: ['sportage', 'ceed', 'niro', 'ev6', 'sorento'],
+    modelSlugs: ['sportage', 'ceed', 'niro', 'ev6', 'sorento', 'picanto', 'rio', 'stonic'],
   },
   {
     makeSlug: 'volkswagen',
     makeAliases: ['vw'],
-    modelSlugs: ['golf', 'passat', 'tiguan', 'polo', 't-roc'],
+    modelSlugs: ['golf', 'passat', 'tiguan', 'polo', 't-roc', 'arteon', 'touran', 'id-4', 't-cross'],
+    modelAliases: {
+      'id-4': ['id.4', 'id4'],
+    },
   },
   {
     makeSlug: 'skoda',
-    modelSlugs: ['octavia', 'fabia', 'superb', 'kodiaq', 'kamiq'],
+    modelSlugs: ['octavia', 'fabia', 'superb', 'kodiaq', 'kamiq', 'scala', 'karoq', 'enyaq'],
   },
   {
     makeSlug: 'toyota',
-    modelSlugs: ['corolla', 'yaris', 'rav4', 'c-hr', 'camry'],
+    modelSlugs: ['corolla', 'yaris', 'rav4', 'c-hr', 'camry', 'aygo', 'highlander', 'prius'],
   },
   {
     makeSlug: 'bmw',
-    modelSlugs: ['3-series', '5-series', 'x1', 'x3', 'x5'],
+    modelSlugs: ['3-series', '5-series', 'x1', 'x3', 'x5', '1-series', 'x2', '7-series'],
     makeAliases: ['bmw'],
   },
   {
     makeSlug: 'audi',
-    modelSlugs: ['a3', 'a4', 'a6', 'q3', 'q5'],
+    modelSlugs: ['a3', 'a4', 'a6', 'q3', 'q5', 'a1', 'a5', 'q7'],
   },
   {
     makeSlug: 'mercedes',
     makeAliases: ['mercedes-benz', 'mercedesbenz'],
-    modelSlugs: ['c-class', 'e-class', 'a-class', 'glc', 'gla'],
+    modelSlugs: ['c-class', 'e-class', 'a-class', 'glc', 'gla', 'b-class', 'cla', 'gle'],
     modelAliases: {
       glc: ['glc-class'],
       gla: ['gla-class'],
+      gle: ['gle-class'],
     },
   },
   {
     makeSlug: 'ford',
-    modelSlugs: ['focus', 'fiesta', 'kuga', 'puma', 'mondeo'],
+    modelSlugs: ['focus', 'fiesta', 'kuga', 'puma', 'mondeo', 'ecosport', 'edge'],
   },
   {
     makeSlug: 'opel',
-    modelSlugs: ['corsa', 'astra', 'mokka', 'grandland'],
+    modelSlugs: ['corsa', 'astra', 'mokka', 'grandland', 'insignia', 'crossland'],
   },
   {
     makeSlug: 'renault',
-    modelSlugs: ['clio', 'megane', 'captur', 'kadjar'],
+    modelSlugs: ['clio', 'megane', 'captur', 'kadjar', 'scenic', 'twingo'],
   },
   {
     makeSlug: 'peugeot',
-    modelSlugs: ['208', '308', '3008', '2008'],
+    modelSlugs: ['208', '308', '3008', '2008', '508', '5008'],
   },
   {
     makeSlug: 'seat',
-    modelSlugs: ['leon', 'ibiza', 'arona', 'ateca'],
+    modelSlugs: ['leon', 'ibiza', 'arona', 'ateca', 'tarraco'],
   },
   {
     makeSlug: 'nissan',
-    modelSlugs: ['qashqai', 'juke', 'leaf', 'x-trail'],
+    modelSlugs: ['qashqai', 'juke', 'leaf', 'x-trail', 'micra', 'note'],
   },
   {
     makeSlug: 'mazda',
-    modelSlugs: ['mazda3', 'cx-5', 'cx-30', 'mx-5'],
+    modelSlugs: ['mazda3', 'cx-5', 'cx-30', 'mx-5', 'mazda6', 'cx-3'],
     modelAliases: {
       mazda3: ['3'],
+      mazda6: ['6'],
     },
   },
 ];

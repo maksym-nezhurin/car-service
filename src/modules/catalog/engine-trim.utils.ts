@@ -39,6 +39,11 @@ export function resolveEngineLabel(row: CatalogEngineRow): string {
   return '';
 }
 
+/**
+ * Produces a Polish display string. For a machine-readable canonical value instead, see
+ * deriveCanonicalFuelType()/deriveCanonicalAspiration() in canonical-fuel-type.utils.ts
+ * (AUT-33) — same underlying matching rules, kept in sync intentionally, different output.
+ */
 export function formatFuelLabel(fuelType?: string | null, aspiration?: string | null): string {
   const fuel = (fuelType ?? '').trim().toLowerCase();
   const asp = (aspiration ?? '').trim().toLowerCase();

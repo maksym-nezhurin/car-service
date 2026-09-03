@@ -38,10 +38,13 @@ export class DocumentAiClient {
     const client = this.getClient();
     const name = client.processorPath(projectId, location, processorId);
 
+    // `content` is a protobuf `bytes` field — it needs an actual Buffer, not
+    // the base64 *string* itself (protobufjs does not auto-decode a string
+    // as base64 here; passing the raw string caused a silent INVALID_ARGUMENT).
     const [result] = await client.processDocument({
       name,
       rawDocument: {
-        content: imageBase64,
+        content: Buffer.from(imageBase64, 'base64'),
         mimeType,
       },
     });
@@ -51,7 +54,13 @@ export class DocumentAiClient {
 
   private getClient(): DocumentProcessorServiceClient {
     if (!this.client) {
-      this.client = new DocumentProcessorServiceClient();
+      // Document AI's Node client defaults to a non-regional endpoint, which
+      // fails with a generic INVALID_ARGUMENT (no clearer error) for any
+      // processor outside that default region. Must match DOCUMENT_AI_LOCATION.
+      const location = process.env.DOCUMENT_AI_LOCATION ?? 'eu';
+      this.client = new DocumentProcessorServiceClient({
+        apiEndpoint: `${location}-documentai.googleapis.com`,
+      });
     }
     return this.client;
   }

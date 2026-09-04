@@ -1,6 +1,8 @@
 node_modules
 prisma/dev.db
 .env
+*.key.json
+gcp-*.json
 dist
 generated/
 

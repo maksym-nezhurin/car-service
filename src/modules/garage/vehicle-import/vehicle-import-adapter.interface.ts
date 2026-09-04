@@ -9,6 +9,8 @@ export interface VehicleImportResult {
     vin?: string;
     plateNumber?: string;
     countryCode?: string;
+    brandId?: string;
+    modelId?: string;
   };
   error?: string;
 }

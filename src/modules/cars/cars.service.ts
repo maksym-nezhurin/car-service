@@ -227,6 +227,7 @@ export class CarsService {
       where: { id },
       include: { attributes: { include: { attribute: true } }, media: true },
     });
+    if (!ad) throw new NotFoundException(`Ad ${id} not found`);
     console.log('Single ad:', ad);
     const predaredAd = await this.enrichAds([ad]);
 

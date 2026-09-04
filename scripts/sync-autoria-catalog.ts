@@ -49,7 +49,10 @@ import {
 } from './catalog-autoria-pl-plan';
 import { linkCatalogEngines } from './link-catalog-engines';
 import { deriveCatalogAggregates } from './derive-catalog-aggregates';
-import { finishSyncRun, startSyncRun } from '../src/modules/catalog/sync-run.utils';
+import {
+  finishSyncRun,
+  startSyncRun,
+} from '../src/modules/catalog/sync-run.utils';
 import {
   autoriaId,
   autoriaListGenerationsByModel,

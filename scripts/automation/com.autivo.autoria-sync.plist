@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.autivo.autoria-sync</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/mac/Desktop/projects/may 2025/monorepo/services/car/scripts/automation/run-autoria-sync-hourly.sh</string>
+    </array>
+
+    <!-- Every 3600 seconds (1 hour), measured from the last time the job finished/was loaded. -->
+    <key>StartInterval</key>
+    <integer>3600</integer>
+
+    <!-- Also run once immediately when loaded, so you can verify it works right away. -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- If the Mac was asleep at the scheduled time, run as soon as it wakes. -->
+    <key>StandardOutPath</key>
+    <string>/Users/mac/Desktop/projects/may 2025/monorepo/services/car/logs/launchd-autoria-sync.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/mac/Desktop/projects/may 2025/monorepo/services/car/logs/launchd-autoria-sync.err.log</string>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/mac/Desktop/projects/may 2025/monorepo/services/car</string>
+</dict>
+</plist>

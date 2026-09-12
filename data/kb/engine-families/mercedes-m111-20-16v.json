@@ -1,0 +1,12 @@
+{
+  "slug": "mercedes-m111-20-16v",
+  "displayName": "Mercedes-Benz M111 2.0 16V",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1998,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "engineCodes": ["M111"],
+  "shortDescription": "Atmosferyczna czterocylindrówka z lat 90. (C200/E200 w W124/W202/W210). Solidna, ale wrażliwa na jakość oleju i pasek rozrządu.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

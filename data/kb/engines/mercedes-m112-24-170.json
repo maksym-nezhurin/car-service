@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m112-24-170",
+  "familySlug": "mercedes-m112-24-v6",
+  "code": "M112.912",
+  "displayName": "240 170 KM (M112)",
+  "displacementCc": 2398,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "powerHp": 170,
+  "powerKw": 125,
+  "torqueNm": 225,
+  "cylinders": 6,
+  "injection": "wtrysk wielopunktowy",
+  "euroStandard": "Euro 3",
+  "yearFrom": 1994,
+  "yearTo": 2007,
+  "shortDescription": "Bazowe V6 w C240/E240. Miękka charakterystyka mocy, ciche i kulturalne w porównaniu do R4 z tej generacji.",
+  "reliabilityNotes": "Uszczelka kolektora ssącego (intake manifold gasket) to znana bolączka — objaw to nierówna praca na biegu jałowym.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

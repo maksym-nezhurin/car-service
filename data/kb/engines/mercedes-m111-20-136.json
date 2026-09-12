@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m111-20-136",
+  "familySlug": "mercedes-m111-20-16v",
+  "code": "M111.920",
+  "displayName": "200 136 KM (M111)",
+  "displacementCc": 1998,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "powerHp": 136,
+  "powerKw": 100,
+  "torqueNm": 190,
+  "cylinders": 4,
+  "injection": "wtrysk wielopunktowy",
+  "euroStandard": "Euro 2",
+  "yearFrom": 1993,
+  "yearTo": 2003,
+  "shortDescription": "Bazowa jednostka C200/E200 w W124/W202/W210. Bez turbodoładowania, bez Kompressora — najprostszy i najtańszy w utrzymaniu wariant 2.0 z tej generacji.",
+  "reliabilityNotes": "Pilnuj paska rozrządu (nie łańcuch) i regularnej wymiany oleju — zaniedbany prowadzi do zatarcia.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

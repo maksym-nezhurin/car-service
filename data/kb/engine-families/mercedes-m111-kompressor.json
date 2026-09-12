@@ -1,0 +1,12 @@
+{
+  "slug": "mercedes-m111-kompressor",
+  "displayName": "Mercedes-Benz M111 2.0 Kompressor",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1998,
+  "fuelType": "petrol",
+  "aspiration": "supercharged",
+  "engineCodes": ["M111"],
+  "shortDescription": "Doładowana mechanicznie (Kompressor) wersja M111 z lat 90. — C200/E200 Kompressor w W202/W210. Żywe osiągi, ale sprzęgło Kompressora to typowe źródło kosztów.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

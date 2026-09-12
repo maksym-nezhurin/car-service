@@ -1,0 +1,9 @@
+{
+  "slug": "mercedes-at",
+  "displayName": "Mercedes-Benz skrzynia automatyczna (generacja nieznana)",
+  "type": "at",
+  "manufacturer": "Mercedes-Benz",
+  "shortDescription": "Klasyczne automaty hydrokinetyczne Mercedesa z lat 90./wczesnych 2000 (4- lub 5-biegowe, w zależności od rocznika) — konkretny wariant nie rozróżniony na tym etapie.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

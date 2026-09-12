@@ -1,0 +1,12 @@
+{
+  "slug": "mercedes-m112-24-v6",
+  "displayName": "Mercedes-Benz M112 2.4 V6",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 2398,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "engineCodes": ["M112"],
+  "shortDescription": "Atmosferyczne V6 z końca lat 90./początku 2000 — C240/E240 w W202/S202/W203/S203/W210/S210. Kulturalne V6, znane z problemów z uszczelką kolektora ssącego.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

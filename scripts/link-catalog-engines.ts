@@ -16,7 +16,10 @@
  * The first matching rule wins, so keep unit rules above the broader family rules.
  *
  * Writes by default (it only sets foreign keys). Unmatched engine/gearbox combos are
- * printed grouped by frequency — that list is the backlog for new KB entries.
+ * printed grouped by frequency and the full list is written to
+ * data/kb/UNMATCHED_ENGINES.md (AUT-42) — that file is the backlog for new KB entries,
+ * overwritten fresh on every run (including --dry-run, which is the safe way to
+ * regenerate it without touching the DB).
  *
  * Usage:
  *   npx ts-node scripts/link-catalog-engines.ts
@@ -60,10 +63,39 @@ export type LinkResult = {
 };
 
 const RULES_PATH = path.resolve(__dirname, '..', 'data', 'kb', 'match-rules.json');
+const UNMATCHED_REPORT_PATH = path.resolve(__dirname, '..', 'data', 'kb', 'UNMATCHED_ENGINES.md');
 
 function loadRules(): MatchRule[] {
   const raw = JSON.parse(fs.readFileSync(RULES_PATH, 'utf8')) as MatchRule[];
   return raw.map((rule, i) => validateRule(rule, i));
+}
+
+/**
+ * Persists the full unmatched-combos list so it survives past the terminal
+ * (AUT-42) — previously only the top 25 were printed to stdout and nothing
+ * was written anywhere, so the KB curation backlog was re-derived from
+ * scratch (or forgotten) every time someone ran this script. Overwritten on
+ * every run — always reflects the latest state, not a historical log.
+ */
+function writeUnmatchedReport(
+  unmatched: Array<{ key: string; count: number }>,
+  totalTrims: number,
+): void {
+  const generatedAt = new Date().toISOString();
+  const lines = [
+    '# Unmatched engine / transmission combos',
+    '',
+    `Generated ${generatedAt} by \`pnpm catalog:link:engines\` — overwritten on every run, not a history.`,
+    '',
+    `${unmatched.length} unmatched combos across ${totalTrims} trims. Curate the highest-count rows into` +
+      ' `data/kb/match-rules.json` + engine/transmission family JSON first (AUT-42).',
+    '',
+    '| Count | Make \\| Engine \\| Power \\| Gearbox |',
+    '| ---: | --- |',
+    ...unmatched.map((row) => `| ${row.count} | ${row.key.replace(/\|/g, '\\|')} |`),
+    '',
+  ];
+  fs.writeFileSync(UNMATCHED_REPORT_PATH, lines.join('\n'));
 }
 
 export async function linkCatalogEngines(options: LinkOptions = {}): Promise<LinkResult> {
@@ -271,6 +303,9 @@ export async function linkCatalogEngines(options: LinkOptions = {}): Promise<Lin
         log(`  …+${unmatchedSorted.length - 25} more combos`);
       }
     }
+
+    writeUnmatchedReport(unmatchedSorted, trims.length);
+    log(`\nFull list written to ${path.relative(process.cwd(), UNMATCHED_REPORT_PATH)}`);
 
     return {
       trims: trims.length,

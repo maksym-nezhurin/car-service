@@ -1,0 +1,20 @@
+{
+  "slug": "mercedes-m266-18-136",
+  "familySlug": "mercedes-m266-18",
+  "code": "M266.960",
+  "displayName": "A 200 136 KM (M266)",
+  "displacementCc": 1834,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "powerHp": 136,
+  "powerKw": 100,
+  "torqueNm": 180,
+  "cylinders": 4,
+  "injection": "wtrysk wielopunktowy",
+  "euroStandard": "Euro 4",
+  "yearFrom": 2003,
+  "yearTo": 2012,
+  "shortDescription": "Bazowa benzyna A200 w W169/C169. Ta sama moc co starsze C200/E200 (M111), ale zupełnie inna, znacznie młodsza jednostka.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "mercedes-m111-kompressor-192",
+  "familySlug": "mercedes-m111-kompressor",
+  "code": "M111.946",
+  "displayName": "200 Kompressor 192 KM (M111)",
+  "displacementCc": 1998,
+  "fuelType": "petrol",
+  "aspiration": "supercharged",
+  "powerHp": 192,
+  "powerKw": 141,
+  "torqueNm": 270,
+  "cylinders": 4,
+  "injection": "wtrysk wielopunktowy",
+  "euroStandard": "Euro 2",
+  "yearFrom": 1993,
+  "yearTo": 2003,
+  "shortDescription": "Mocniejsza rewizja M111 Kompressor w C200/E200 Kompressor (W202/W210) — wyraźnie żywsza od atmosferycznego 200 przy podobnym zużyciu paliwa w mieście.",
+  "reliabilityNotes": "Sprzęgło elektromagnetyczne Kompressora zużywa się z czasem — szarpanie przy przyspieszaniu to sygnał do wymiany.",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

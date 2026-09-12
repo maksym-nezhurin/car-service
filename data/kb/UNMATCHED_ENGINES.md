@@ -1,17 +1,13 @@
 # Unmatched engine / transmission combos
 
-Generated 2026-09-12T13:25:18.222Z by `pnpm catalog:link:engines` — overwritten on every run, not a history.
+Generated 2026-09-12T13:58:23.444Z by `pnpm catalog:link:engines` — overwritten on every run, not a history.
 
-3054 unmatched combos across 7608 trims. Curate the highest-count rows into `data/kb/match-rules.json` + engine/transmission family JSON first (AUT-42).
+3048 unmatched combos across 7608 trims. Curate the highest-count rows into `data/kb/match-rules.json` + engine/transmission family JSON first (AUT-42).
 
 | Count | Make \| Engine \| Power \| Gearbox |
 | ---: | --- |
-| 11 | mercedes-benz \| 200 \| 136 KM \| AT |
-| 11 | mercedes-benz \| 200 \| 136 KM \| MT |
 | 10 | renault \| 2.0 \| — KM \| MT |
 | 10 | seat \| 1.4 \| — KM \| MT |
-| 10 | mercedes-benz \| 240 \| 170 KM \| MT |
-| 10 | mercedes-benz \| 240 \| 170 KM \| AT |
 | 9 | ford \| 1.8 \| — KM \| MT |
 | 9 | nissan \| 2.0 \| — KM \| MT |
 | 9 | mazda \| 2.0 \| — KM \| AT |
@@ -22,7 +18,6 @@ Generated 2026-09-12T13:25:18.222Z by `pnpm catalog:link:engines` — overwritte
 | 9 | seat \| 1.6 \| — KM \| MT |
 | 9 | seat \| 3d 1.2 \| — KM \| MT |
 | 9 | bmw \| 520i \| — KM \| MT |
-| 8 | mercedes-benz \| 200 Kompressor \| 192 KM \| MT |
 | 8 | mazda \| 2.0 \| — KM \| MT |
 | 8 | peugeot \| 1.6 \| — KM \| AT |
 | 8 | mercedes-benz \| AMG 63AT 63AT \| 476 KM \| AT |
@@ -49,7 +44,6 @@ Generated 2026-09-12T13:25:18.222Z by `pnpm catalog:link:engines` — overwritte
 | 6 | mercedes-benz \| 200 CGI BE \| 184 KM \| AT |
 | 6 | volkswagen \| 1.3 \| 60 KM \| MT |
 | 6 | volkswagen \| 2.0 \| 115 KM \| MT |
-| 6 | mercedes-benz \| 200 Kompressor \| 192 KM \| AT |
 | 6 | kia \| 2.0 \| — KM \| AT |
 | 6 | renault \| 1.2 \| — KM \| MT |
 | 6 | mazda \| 2.5 \| — KM \| AT |

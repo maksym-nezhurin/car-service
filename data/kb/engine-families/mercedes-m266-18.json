@@ -1,0 +1,12 @@
+{
+  "slug": "mercedes-m266-18",
+  "displayName": "Mercedes-Benz M266 1.8",
+  "manufacturer": "Mercedes-Benz",
+  "displacementCc": 1834,
+  "fuelType": "petrol",
+  "aspiration": "na",
+  "engineCodes": ["M266"],
+  "shortDescription": "Atmosferyczna 1.8 w A200 (W169/C169). Zupełnie inna konstrukcja niż M111/M112 z C/E-Klasy tej samej dekady — nie mylić mimo tej samej etykiety \"200\".",
+  "reviewStatus": "approved",
+  "source": "curated_pl"
+}

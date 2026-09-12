@@ -1386,6 +1386,26 @@
     "models": [
       "a-class"
     ],
+    "yearFrom": 2003,
+    "yearTo": 2012,
+    "enginePattern": "^200$",
+    "notEnginePattern": "kompressor",
+    "powerHp": [
+      136
+    ],
+    "engineSlug": "mercedes-m266-18-136",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-at"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "a-class"
+    ],
     "yearFrom": 2004,
     "yearTo": 2012,
     "yearsStrict": true,
@@ -2764,5 +2784,66 @@
       "DCT": "renault-edc"
     },
     "notEnginePattern": "phev|hybrid|e-tech"
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class"
+    ],
+    "yearFrom": 1991,
+    "yearTo": 2003,
+    "enginePattern": "200\\s*kompressor",
+    "powerHp": [
+      192
+    ],
+    "engineSlug": "mercedes-m111-kompressor-192",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-at"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class"
+    ],
+    "yearFrom": 1991,
+    "yearTo": 2003,
+    "enginePattern": "^200$",
+    "notEnginePattern": "kompressor",
+    "powerHp": [
+      136
+    ],
+    "engineSlug": "mercedes-m111-20-136",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-at"
+    }
+  },
+  {
+    "makes": [
+      "mercedes-benz"
+    ],
+    "models": [
+      "c-class",
+      "e-class"
+    ],
+    "yearFrom": 1994,
+    "yearTo": 2007,
+    "enginePattern": "^240$",
+    "powerHp": [
+      170
+    ],
+    "engineSlug": "mercedes-m112-24-170",
+    "transmissions": {
+      "MT": "mercedes-mt",
+      "AT": "mercedes-at"
+    }
   }
 ]
